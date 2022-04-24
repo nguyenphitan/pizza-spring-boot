@@ -1,17 +1,10 @@
-
-$(document).ready(function() {
-	//admin bill button complete
-	const btnCompletes = document.querySelectorAll('.btn_complete')
-	console.log(btnCompletes.length)
-	
-	btnCompletes.forEach((btnComplete) => {
-		let text = btnComplete.innerText;
-		if( text == "Đã hoàn thành") {
-		    btnComplete.classList.add('complete');
-		}
-	})
-	
-	
+/**
+ * Quản lý tài khoản
+ * Created by: NPTAN (25/04/2022)
+ * Version: 1.0
+ */
+ 
+ $(document).ready(function() {
 	/*
 		Kiểm tra role:
 		1. Nếu là SELLER hoặc ADMIN thì làm mờ nút thêm nhân viên
@@ -54,24 +47,6 @@ $(document).ready(function() {
             }
         });	
 		
-	})
-	
-	
-	// Click xóa nhân viên (chỉ xóa role, không xóa tài khoản):
-	$('.remove_seller').click(function() {
-		// 1. Lấy ra id của account:
-		let id = Number($(e.target).prev().text());
-		
-		// 2. Gọi đến API xóa seller:
-		$.ajax({
-            type: "DELETE",
-            url: `http://localhost:8088/admin/seller/${id}`,
-            success: function (response) {
-                alert("Xóa thành công.");
-                window.location.reload();
-            }
-        });
-        
 	})
 	
 	

@@ -1105,7 +1105,9 @@ th, td{
     font-size: 2.2rem;
     float: right;
 }
-.btn_complete{
+.btn_complete, 
+.add_seller,
+.remove_seller {
     padding: 6px 15px;
     border-radius: 5px;
     background-color: var(--primary-color);
@@ -1113,7 +1115,7 @@ th, td{
     text-decoration: none;
 }
 
-.btn_complete.complete{
+.complete{
     pointer-events: none;
     background-color:#006a3277;
 }

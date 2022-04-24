@@ -3,6 +3,7 @@ package com.docongban.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,7 +105,7 @@ public class LoginController {
 		
 		HttpSession session = request.getSession();
 		
-		//get all category
+		//get all category.
 		List<Category> categoris = categoryRepository.findAll();
 		model.addAttribute("categoris", categoris);
 		
@@ -128,8 +129,8 @@ public class LoginController {
 	}
 	
 	@GetMapping("/logout")
-	public String logout(HttpServletRequest request) {
-		authService.handleLogout(request);
+	public String logout(HttpServletRequest request, HttpServletResponse response) {
+		authService.handleLogout(request, response);
 		return "redirect:/auth/login";
 	}
 }

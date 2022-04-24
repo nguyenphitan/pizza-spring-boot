@@ -2,7 +2,9 @@ package com.docongban.service;
 
 import java.util.Date;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,10 +92,22 @@ public class AuthService {
 	 * Created by: NPTAN (23/04/2022)
 	 * Version: 1.0
 	 */
-	public void handleLogout(HttpServletRequest request) {
+	public void handleLogout(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		// Xóa token khỏi session:
 		session.removeAttribute("token");
+		// Xóa account khỏi session:
+		session.removeAttribute("account");
+		// Xóa fullname khỏi session:
+		session.removeAttribute("fullname");
+		// Xóa tất cả cookies:
+		for (Cookie cookie : request.getCookies()) {
+		    cookie.setValue("");
+		    cookie.setMaxAge(0);
+		    cookie.setPath("/");
+
+		    response.addCookie(cookie);
+		}
 	}
 	
 	
