@@ -101,7 +101,7 @@ public class LoginController {
 			@RequestParam("phone") String phone, 
 			@RequestParam("password") String password,
 			HttpServletRequest request
-		) {
+		) throws Exception {
 		
 		HttpSession session = request.getSession();
 		

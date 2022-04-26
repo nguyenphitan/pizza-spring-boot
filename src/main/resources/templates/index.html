@@ -13,6 +13,7 @@
     <link rel="stylesheet" th:href="@{/fonts/fontawesome-free-5.15.4-web/css/all.min.css}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
     <div class="app">
@@ -25,56 +26,62 @@
                     <a href="/" class="header-logo-link">
                         <div class="header-logo"></div>
                     </a>
-
+					
+					<span id="role" th:text="${session.roleAccount == 'ADMIN' ? session.roleAccount : ''}" style="display: none;"></span>
+					
                     <div class="header-delivery-with-serach">
-                        <div class="header-delivery">
+                        <div class="header-delivery" th:switch="${session.roleAccount}">
                             <div class="header-delivery_item active">
                                 <i class="fas fa-shipping-fast header-delivery_item-logo"></i>
-                                <span class="header-delivery_item-text">Đặt giao hàng</span>
+                                <a class="header-delivery_item-text" th:href="${session.roleAccount == 'ADMIN' ? 'admin/bill' : '#'}" th:text="${session.roleAccount == 'ADMIN' ? 'Quản lý hóa đơn' : 'Đặt giao hàng'}">Đặt giao hàng</a>
                             </div>
                             <div class="header-delivery_item">
                                 <i class="fas fa-store-alt header-delivery_item-logo"></i>
-                                <span class="header-delivery_item-text">Đặt đến lấy</span>
+                                <a class="header-delivery_item-text" th:href="${session.roleAccount == 'ADMIN' ? 'admin/seller' : '#'}" th:text="${session.roleAccount == 'ADMIN' ? 'Quản lý nhân viên' : 'Đặt đến lấy'}">Đặt đến lấy</a>
+                            </div>
+                            <div class="header-delivery_item"  th:case="'ADMIN'">
+                                <a class="header-delivery_item-text" th:href="${session.roleAccount == 'ADMIN' ? 'admin/account' : '#'}">Quản lý tài khoản</a>
                             </div>
                         </div>
 
-                        <div class="header-search block">
-                            <i class="fas fa-map-marker-alt header-search-map"></i>
-                            <input class="header-search_title" placeholder="Nhập địa chỉ của bạn"></input>
-                        </div>
-
-                        <div class="header-search">
-                            <i class="fas fa-store header-search-map"></i>
-                            <input class="header-search_title" placeholder="Nhập cửa hàng"></input>
-
-                            
-                            <div class="header-search_store">
-                                <ul class="header-search_store-item">
-                                    <li class="header-search_store-list">The Pizza Company Cầu Giấy</li>
-                                    <li class="header-search_store-list">The Pizza Company Times City</li>
-                                    <li class="header-search_store-list">The Pizza Company Đoàn Trần Nghiệp</li>
-                                    <li class="header-search_store-list">The Pizza Company Xuân Diệu</li>
-                                    <li class="header-search_store-list">The Pizza Company Vincom Bắc Từ Liêm</li>
-                                    <li class="header-search_store-list">The Pizza Company Vincom Royal City</li>
-                                    <li class="header-search_store-list">The Pizza Company Aeon Mall Long Biên</li>
-                                    <li class="header-search_store-list">The Pizza Company Aeon Mall Hà Đông</li>
-                                    <li class="header-search_store-list">The Pizza Company Linh Đàm</li>
-                                    <li class="header-search_store-list">The Pizza Company Trần Duy Hưng</li>
-                                    <li class="header-search_store-list">The Pizza Company Song Hành</li>
-                                    <li class="header-search_store-list">The Pizza Company Nguyễn Thị Minh Khai</li>
-                                    <li class="header-search_store-list">The Pizza Company 333 Lê Văn Sỹ</li>
-                                    <li class="header-search_store-list">The Pizza Company Bà Hom</li>
-                                    <li class="header-search_store-list">The Pizza Company Crescent Mall</li>
-                                    <li class="header-search_store-list">The Pizza Company Phạm Hùng</li>
-                                    <li class="header-search_store-list">The Pizza Company Hoàng Hoa Thám</li>
-                                    <li class="header-search_store-list">The Pizza Company Thống Nhất</li>
-                                    <li class="header-search_store-list">The Pizza Company AEON Mall Tân Phú</li>
-                                    <li class="header-search_store-list">The Pizza Company Vincom Biên Hòa</li>
-                                    <li class="header-search_store-list">The Pizza Company Pegasus</li>
-                                    <li class="header-search_store-list">The Pizza Company Sense City Bến Tre</li>
-                                    <li class="header-search_store-list">The Pizza Company Vincom Buôn Ma Thuột</li>
-                                </ul>
-                            </div>
+                        <div class="t-search-area">
+                        	<div class="header-search block">
+	                            <i class="fas fa-map-marker-alt header-search-map"></i>
+	                            <input class="header-search_title" placeholder="Nhập địa chỉ của bạn"></input>
+	                        </div>
+							
+	                        <div class="header-search">
+	                            <i class="fas fa-store header-search-map"></i>
+	                            <input class="header-search_title" placeholder="Nhập cửa hàng"></input>
+	
+	                            <div class="header-search_store">
+	                                <ul class="header-search_store-item">
+	                                    <li class="header-search_store-list">The Pizza Company Cầu Giấy</li>
+	                                    <li class="header-search_store-list">The Pizza Company Times City</li>
+	                                    <li class="header-search_store-list">The Pizza Company Đoàn Trần Nghiệp</li>
+	                                    <li class="header-search_store-list">The Pizza Company Xuân Diệu</li>
+	                                    <li class="header-search_store-list">The Pizza Company Vincom Bắc Từ Liêm</li>
+	                                    <li class="header-search_store-list">The Pizza Company Vincom Royal City</li>
+	                                    <li class="header-search_store-list">The Pizza Company Aeon Mall Long Biên</li>
+	                                    <li class="header-search_store-list">The Pizza Company Aeon Mall Hà Đông</li>
+	                                    <li class="header-search_store-list">The Pizza Company Linh Đàm</li>
+	                                    <li class="header-search_store-list">The Pizza Company Trần Duy Hưng</li>
+	                                    <li class="header-search_store-list">The Pizza Company Song Hành</li>
+	                                    <li class="header-search_store-list">The Pizza Company Nguyễn Thị Minh Khai</li>
+	                                    <li class="header-search_store-list">The Pizza Company 333 Lê Văn Sỹ</li>
+	                                    <li class="header-search_store-list">The Pizza Company Bà Hom</li>
+	                                    <li class="header-search_store-list">The Pizza Company Crescent Mall</li>
+	                                    <li class="header-search_store-list">The Pizza Company Phạm Hùng</li>
+	                                    <li class="header-search_store-list">The Pizza Company Hoàng Hoa Thám</li>
+	                                    <li class="header-search_store-list">The Pizza Company Thống Nhất</li>
+	                                    <li class="header-search_store-list">The Pizza Company AEON Mall Tân Phú</li>
+	                                    <li class="header-search_store-list">The Pizza Company Vincom Biên Hòa</li>
+	                                    <li class="header-search_store-list">The Pizza Company Pegasus</li>
+	                                    <li class="header-search_store-list">The Pizza Company Sense City Bến Tre</li>
+	                                    <li class="header-search_store-list">The Pizza Company Vincom Buôn Ma Thuột</li>
+	                                </ul>
+	                            </div>
+	                        </div>
                         </div>
                     </div>
 

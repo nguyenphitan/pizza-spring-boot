@@ -76,12 +76,17 @@ html {
     margin: 0 5px;
 }
 .header-delivery_item-logo{
-    padding-left: 15px;
-    padding-right: 6px;
+    padding-left: 10px;
 }
 .header-delivery_item-text{
     font-size: 1.3rem;
-    padding-right: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.header-delivery_item a {
+	text-decoration: none;
+	color: unset;
 }
 
 .header-search{

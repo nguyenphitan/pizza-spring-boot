@@ -43,26 +43,38 @@ public class AuthService {
 	 * Version: 1.0
 	 */
 	public String handleLogin(String phone, String password, HttpServletRequest request) {
-		// Tạo ra LoginRequest từ username và password nhận được từ client
-		LoginRequest loginRequest = new LoginRequest(phone, password);
-		// Xác thực thông tin người dùng Request lên:
-		Authentication authentication = authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(
-						loginRequest.getPhone(), 
-						loginRequest.getPassword()
-				)
-		);
-		
-		// Nếu không xảy ra exception tức là thông tin hợp lệ
-		// Set thông tin authentication vào Security Context
-		SecurityContextHolder.getContext().setAuthentication(authentication);
-		
-		// Trả về jwt cho người dùng
-		String jwt = tokenProvider.generateToken((CustomUserDetails) authentication.getPrincipal());
-		
-		// Lưu jwt vào session:
-		HttpSession session = request.getSession();
-		session.setAttribute("token", jwt);
+		String jwt = null;
+		try {
+			// Tạo ra LoginRequest từ username và password nhận được từ client
+			LoginRequest loginRequest = new LoginRequest(phone, password);
+			// Xác thực thông tin người dùng Request lên:
+			Authentication authentication = authenticationManager.authenticate(
+					new UsernamePasswordAuthenticationToken(
+							loginRequest.getPhone(), 
+							loginRequest.getPassword()
+					)
+			);
+			
+			// Nếu không xảy ra exception tức là thông tin hợp lệ
+			// Set thông tin authentication vào Security Context
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+			
+			// Trả về jwt cho người dùng
+			jwt = tokenProvider.generateToken((CustomUserDetails) authentication.getPrincipal());
+			
+			// Lưu jwt vào session:
+			HttpSession session = request.getSession();
+			session.setAttribute("token", jwt);
+			
+			// Lấy ra id người dùng -> lấy ra role -> đưa lên session:
+			Integer accountId = tokenProvider.getAccountIdFromJWT(jwt);
+			Account account = accountRepository.getById(accountId);
+			String roleAccount = account.getRole();
+			session.setAttribute("roleAccount", roleAccount);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 		
 		return jwt;
 	}
@@ -100,6 +112,8 @@ public class AuthService {
 		session.removeAttribute("account");
 		// Xóa fullname khỏi session:
 		session.removeAttribute("fullname");
+		// Xóa role:
+		session.removeAttribute("roleAccount");
 		// Xóa tất cả cookies:
 		for (Cookie cookie : request.getCookies()) {
 		    cookie.setValue("");
