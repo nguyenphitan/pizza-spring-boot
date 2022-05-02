@@ -5,11 +5,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.docongban.entity.OrderAccount;
 import com.docongban.entity.OrderDetail;
@@ -34,8 +39,14 @@ public class AdminStatisticalController {
 	@Autowired
 	OrderAccountRepository orderAccountRepository;
 	
+	@GetMapping
+	public ModelAndView statisticalPage() {
+		ModelAndView modelAndView = new ModelAndView("admin/statistical");
+		return modelAndView;
+	}
+	
 	@PostMapping("/{month}")
-	public List<StatisticalResponse> getMonthStatistical(@PathVariable("month") String month) {
+	public List<StatisticalResponse> getMonthStatistical(@PathVariable("month") String month, HttpServletRequest request) {
 		// Mỗi order_account là một hóa đơn.
 		
 		// Lấy ra danh sách order account:
@@ -121,6 +132,10 @@ public class AdminStatisticalController {
 			}
 			
 		}
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("statisticals", listStatisticalResponses);
+		session.setAttribute("month", month);
 		
 		return listStatisticalResponses;
 	}
