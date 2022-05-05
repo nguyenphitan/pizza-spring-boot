@@ -1112,7 +1112,9 @@ th, td{
 }
 .btn_complete, 
 .add_seller,
-.remove_seller {
+.remove_seller,
+.click_timekeeping, 
+.handle_payroll {
     padding: 6px 15px;
     border-radius: 5px;
     background-color: var(--primary-color);

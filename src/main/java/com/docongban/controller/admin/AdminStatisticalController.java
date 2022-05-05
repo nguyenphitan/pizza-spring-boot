@@ -3,7 +3,10 @@ package com.docongban.controller.admin;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -99,11 +102,25 @@ public class AdminStatisticalController {
 				continue;
 			}
 			for(StatisticalResponse statisticalResponse : listStatisticalResponses) {
+
+				// Lấy ra ngày, tháng, năm của totalObj:
+				Calendar cal1 = Calendar.getInstance(TimeZone.getTimeZone("Asia/Ho_Chi_Minh"));
+				cal1.setTime(totalObj.getDate());
+				int totalObjYear = cal1.get(Calendar.YEAR);
+				int totalObjMonth = cal1.get(Calendar.MONTH);
+				int totalObjDay = cal1.get(Calendar.DAY_OF_MONTH);
+				
+				// Lấy ra ngày, tháng, năm của statisticalResponse:
+				Calendar cal2 = Calendar.getInstance(TimeZone.getTimeZone("Asia/Ho_Chi_Minh"));
+				cal2.setTime(statisticalResponse.getDate());
+				int statisticalResponseYear = cal2.get(Calendar.YEAR);
+				int statisticalResponseMonth = cal2.get(Calendar.MONTH);
+				int statisticalResponseDay = cal2.get(Calendar.DAY_OF_MONTH);
+				
 				// Nếu đã có ngày đó -> update:
-				if( totalObj.getDate().getYear() == statisticalResponse.getDate().getYear()
-						&& totalObj.getDate().getMonth() == statisticalResponse.getDate().getMonth() 
-						&& totalObj.getDate().getDate() == statisticalResponse.getDate().getDate() ) {
-					statisticalResponse.setTurnover( statisticalResponse.getTurnover() + totalObj.getTotal() );
+				if( totalObjYear == statisticalResponseYear 
+						&& totalObjMonth == statisticalResponseMonth 
+						&& totalObjDay == statisticalResponseDay) {
 					check = true;
 					break;
 				}
@@ -118,6 +135,7 @@ public class AdminStatisticalController {
 		
 		// Đến đây mình sẽ được một list chứa tổng doanh thu của các ngày: (ngày, tổng doanh thu)
 		List<StatisticalResponse> listClone = new ArrayList<>(listStatisticalResponses);
+		Long totalTurnover = 0L;
 		for(int i = 0 ; i < listClone.size() ; i++) {
 			StatisticalResponse statistical = listClone.get(i);
 			if(statistical.getDate() != null) {
@@ -129,12 +147,53 @@ public class AdminStatisticalController {
 				if( !statisticalMonth.equals(month) ) {
 					listStatisticalResponses.remove(statistical);
 				}
+				else {	// Tính tổng doanh thu:
+					totalTurnover += statistical.getTurnover();
+				}
 			}
 			
 		}
 		
+		
+		// Thêm những ngày không có doanh thu vào danh sách:
+//		switch(month) {
+//			case "01":
+//			case "03":
+//			case "05":
+//			case "07":
+//			case "08":
+//			case "10":
+//			case "12":
+//				for(int i = 1 ; i <= 31 ; i++) {	
+//					// Kiểm tra xem trong list thống kê tháng đó còn thiếu ngày nào (ngày không có doanh thu) thì thêm vào ngày đó với doanh thu là 0.
+//					Boolean check = false;
+//					int year = 0;
+//					for(StatisticalResponse statistical : listStatisticalResponses) {
+//						Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Ho_Chi_Minh"));
+//						cal.setTime(statistical.getDate());
+//						int day = cal.get(Calendar.DAY_OF_MONTH);
+//						year = cal.get(Calendar.YEAR);
+//						if(day == i) {
+//							check = true;
+//						}
+//					}
+//					
+//					if( !check ) {
+//						Date date = new Date(year, Integer.parseInt(month), i);
+//						listStatisticalResponses.add( new StatisticalResponse(date, 0L));
+//					}
+//				}
+//			
+//				
+//			default:
+//				System.out.println("default");
+//				break;
+//		}
+		
+		
 		HttpSession session = request.getSession();
 		session.setAttribute("statisticals", listStatisticalResponses);
+		session.setAttribute("totalTurnover", totalTurnover);
 		session.setAttribute("month", month);
 		
 		return listStatisticalResponses;

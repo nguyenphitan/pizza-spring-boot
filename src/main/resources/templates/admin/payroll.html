@@ -30,6 +30,10 @@
     		padding: 4px 0;
     	}
     	
+    	.t-right-50 {
+    		margin-right: 50px;
+    	}
+    	
     </style>
 </head>
 <body>
@@ -129,7 +133,7 @@
         <div style="margin-bottom: 50px;" class="container">
             <div class="grid fix-wide" style="padding-top: 45px">
                 <div class="container_header">
-                    <span class="container_header-text" >Quản lý nhân viên</span>
+                    <span class="container_header-text" >Chấm công nhân viên</span>
                 </div>
             </div>
 
@@ -138,31 +142,36 @@
                     <thead >
                         <tr style="background-color: rgba(31, 163, 101, 0.4);">
                             <th scope="col" class="bill-index" >STT</th>
-                            <th scope="col" class="bill-information">Thông tin</th>
-                            <th scope="col" class="bill-order-date">Vai trò</th>
+                            <th scope="col" class="bill-information">Thông tin nhân viên</th>
+                            <th scope="col" class="bill-order-date">Tổng số ngày</th>
+                            <th scope="col" class="bill-order-date">Chi tiết</th>
+                            <th scope="col" class="bill-order-date">Tính lương</th>
                         </tr>
                     </thead>
-                    <tbody class="table-bill-title" th:each="i: ${#numbers.sequence(sellers.size() - 1, 0, -1)}" th:with="seller = ${sellers[i]}">
+                    <tbody class="table-bill-title" th:each="payroll, index : ${payrolls}">
                     	<tr class="bill-information-detail">
-                            <th scope="row" class="bill-index" th:text="${i+1}" ></th>
+                            <th scope="row" class="bill-index" th:text="${index.count}" ></th>
                             <td>
                                 Họ và tên:
-                                <span style="width:250px;display:inline-block" th:text="${seller.fullname}"></span>
+                                <span style="width:200px;display:inline-block" th:text="${payroll.seller.fullname}"></span>
                                 SĐT: 
-                                <span style="width:200px;display:inline-block" th:text="${seller.phone}"></span>
+                                <span style="width:180px;display:inline-block" th:text="${payroll.seller.phone}"></span> <br> <br>
                                 Email:
-                                <span th:text="${seller.email}"></span></br><br>
+                                <span style="width:233px; display: inline-block;" th:text="${payroll.seller.email}"></span>
                                 Địa chỉ:
-                                <span th:text="${seller.address}"></span></br>
+                                <span th:text="${payroll.seller.address}"></span></br>
                             </td>
-                            <td th:text="${seller.role}" style="text-align: center;"></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
                             <td style="text-align: center;">
-                                <span th:text="${seller.id}" style="display: none;"></span>
-                                <div class="remove_seller" style="padding: 6px 2px; cursor: pointer;">Xóa nhân viên</div>
+                            	<span th:text="${payroll.totalDate}"></span>
+                            </td>
+                            <td style="text-align: center;">
+                            	<select style="outline: none;" th:each="date : ${payroll.dates}">
+                            		<option th:text="${#calendars.format(date, 'dd / MM / yyyy')}"></option>
+                            	</select>
+                            </td>
+                            <td style="text-align: center;">
+                                <span th:text="${payroll.seller.id}" style="display: none;"></span>
+                                <div class="handle_payroll" style="padding: 6px 2px; cursor: pointer;">Tính lương</div>
                             </td>
                         </tr>
                     </tbody>
@@ -284,7 +293,7 @@
         </div>
     </div>
 
-    <script th:src="@{/js/seller.js}"></script>
+    <script th:src="@{/js/payroll.js}"></script>
 
 </body>
 </html>

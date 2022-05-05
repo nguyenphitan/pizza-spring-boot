@@ -65,7 +65,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         				"/auth/**",
         				"/cart/**").permitAll();
     	http.authorizeRequests()
-        		.antMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN");
+				.antMatchers("/admin/bill/**").hasAnyAuthority("ROLE_SELLER");
+    	http.authorizeRequests()
+        		.antMatchers("/admin/**", "/admin/bill/**").hasAnyAuthority("ROLE_ADMIN");
     	http.authorizeRequests().anyRequest().authenticated();
     }
 }

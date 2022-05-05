@@ -30,6 +30,10 @@
     		padding: 4px 0;
     	}
     	
+    	.t-right-50 {
+    		margin-right: 50px;
+    	}
+    	
     </style>
 </head>
 <body>
@@ -129,7 +133,7 @@
         <div style="margin-bottom: 50px;" class="container">
             <div class="grid fix-wide" style="padding-top: 45px">
                 <div class="container_header">
-                    <span class="container_header-text" >Quản lý nhân viên</span>
+                    <span class="container_header-text" >Chấm công nhân viên</span>
                 </div>
             </div>
 
@@ -138,33 +142,39 @@
                     <thead >
                         <tr style="background-color: rgba(31, 163, 101, 0.4);">
                             <th scope="col" class="bill-index" >STT</th>
-                            <th scope="col" class="bill-information">Thông tin</th>
-                            <th scope="col" class="bill-order-date">Vai trò</th>
+                            <th scope="col" class="bill-information">Thông tin nhân viên</th>
+                            <th scope="col" class="bill-order-date">Ngày</th>
+                            <th scope="col" class="bill-order-date">Chấm công</th>
                         </tr>
                     </thead>
-                    <tbody class="table-bill-title" th:each="i: ${#numbers.sequence(sellers.size() - 1, 0, -1)}" th:with="seller = ${sellers[i]}">
+                    <tbody class="table-bill-title" th:each="i: ${#numbers.sequence(timekeepings.size() - 1, 0, -1)}" th:with="timekeeping = ${timekeepings[i]}">
                     	<tr class="bill-information-detail">
                             <th scope="row" class="bill-index" th:text="${i+1}" ></th>
                             <td>
                                 Họ và tên:
-                                <span style="width:250px;display:inline-block" th:text="${seller.fullname}"></span>
+                                <span style="width:216px;display:inline-block" th:text="${timekeeping.seller.fullname}"></span>
                                 SĐT: 
-                                <span style="width:200px;display:inline-block" th:text="${seller.phone}"></span>
+                                <span style="width:200px;display:inline-block" th:text="${timekeeping.seller.phone}"></span> <br> <br>
                                 Email:
-                                <span th:text="${seller.email}"></span></br><br>
+                                <span style="width: 250px; display: inline-block;" th:text="${timekeeping.seller.email}"></span>
                                 Địa chỉ:
-                                <span th:text="${seller.address}"></span></br>
+                                <span th:text="${timekeeping.seller.address}"></span></br>
                             </td>
-                            <td th:text="${seller.role}" style="text-align: center;"></td>
+                            <td class="t-date" th:text="${#dates.format(#dates.createNow(), 'dd / MM / yyyy')}" style="text-align: center;"></td>
+                            <td style="text-align: center;">
+                                <span th:text="${timekeeping.seller.id}" style="display: none;"></span>
+                                <div th:if="${timekeeping.status == false}" class="click_timekeeping" style="padding: 6px 2px; cursor: pointer;">Chấm công</div>
+                                <div th:if="${timekeeping.status == true}" class="btn_complete complete" style="padding: 6px 2px; cursor: pointer;">Đã chấm công</div>
+                            </td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <td></td>
                             <td></td>
                             <td style="text-align: center;">
                                 <span th:text="${seller.id}" style="display: none;"></span>
-                                <div class="remove_seller" style="padding: 6px 2px; cursor: pointer;">Xóa nhân viên</div>
+                                <div class="remove_seller" style="padding: 6px 2px; cursor: pointer;">Chấm công</div>
                             </td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                   </table>
             </div>
@@ -284,7 +294,7 @@
         </div>
     </div>
 
-    <script th:src="@{/js/seller.js}"></script>
+    <script th:src="@{/js/timekeeping.js}"></script>
 
 </body>
 </html>

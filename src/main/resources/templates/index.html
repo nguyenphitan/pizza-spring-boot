@@ -136,6 +136,11 @@
                                     <span class="navbar-list_item-text" th:text="${category.name}"></span>
                                 </a>
                             </li>
+                            <li class="navbar-list_item" th:if="${session.roleAccount == 'SELLER'}">
+                                <a href="/admin/bill" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Hóa đơn giao hàng</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
 

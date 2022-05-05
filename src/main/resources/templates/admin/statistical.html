@@ -105,12 +105,12 @@
                                 </a>
                             </li>
                             <li class="navbar-list_item">
-                                <a href="" class="navbar-list_item-link">
+                                <a href="/admin/timekeeping" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Chấm công</span>
                                 </a>
                             </li>
                             <li class="navbar-list_item">
-                                <a href="" class="navbar-list_item-link">
+                                <a href="/admin/payroll" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Tính lương</span>
                                 </a>
                             </li>
@@ -161,12 +161,17 @@
                             <th scope="row" class="bill-index" th:text="${index.count}" ></th>
                             <td>
                             	<span style="margin-left: 50px; margin-right: 140px;">Doanh thu The Pizza trong ngày:</span>
-                            	<span th:text="${#numbers.formatInteger(statistical.date.getDate(),2)} + ' / ' + ${#numbers.formatInteger(statistical.date.getMonth(),2)} + ' / '"></span>
-                            	<span th:text="${#numbers.formatInteger(statistical.date.getYear(),4)} + 1900"></span>
+                            	<span th:text="${#calendars.format(statistical.date, 'dd / MM / yyyy')}"></span>
                             	<span style="position: absolute; right: 8px;" th:text=" ${statistical.turnover}"></span>
                             </td>
                         </tr>
                     </tbody>
+                    <tr class="bill-information-detail" style="position: relative;">
+                         <th scope="row" class="bill-index" ></th>
+                         <td style="text-align: right;">
+                         	<span style="font-weight: bold;" th:text="'Tổng: ' + ${session.totalTurnover == null ? '0' : session.totalTurnover}"></span>
+                         </td>
+                     </tr>
                   </table>
             </div>
         </div>
