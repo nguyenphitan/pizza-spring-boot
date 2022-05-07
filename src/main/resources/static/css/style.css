@@ -4,6 +4,7 @@
     box-sizing: inherit;
     --primary-color: #006a31;
     --active-color: #d50e15;
+    --warnning-color: #ffc107
 }
 
 html {
@@ -1121,6 +1122,98 @@ th, td{
     background-color: var(--primary-color);
     color: #fff;
     text-decoration: none;
+}
+
+.btn-warning {
+    padding: 6px 15px;
+    border-radius: 5px;
+    background-color: var(--warnning-color);
+    color: #000000;
+    text-decoration: none;
+}
+
+.btn-success {
+    padding: 6px 15px;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: #000000;
+    text-decoration: none;
+}
+
+.btn {
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.flex {
+    display: flex;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.add-new-text {
+    font-size:2rem;
+    font-weight: 700;
+    color:#fff;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.create-category-form {
+    margin-top: 45px;
+}
+
+.input-wrapper {
+    margin: 20px 0;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+}
+
+.input-label {
+    display: block;
+    width: 100px;
+}
+
+.create-input {
+    width: 50%;
+    border-radius: 5px;
+    padding: 10px;
+    outline: none;
+    border: 1px solid var(--primary-color);
+}
+
+.btn-add {
+    border: none;
+    outline: none;
+    font-size: 1.8rem;
+    background-color: var(--primary-color);
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    cursor: pointer;
+}
+
+.btn-link {
+    outline: none;
+    text-decoration: none;
+}
+
+.product-category {
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    outline: none;
+    padding: 10px 0 10px 10px;
+    width: 25%;
 }
 
 .complete{

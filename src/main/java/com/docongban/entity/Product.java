@@ -1,33 +1,31 @@
 package com.docongban.entity;
 
+import java.time.Instant;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 
 @Entity
 @Table(name = "product")
 @Data
-public class Product {
+public class Product extends BaseAuditSuperClass {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	private String title;
-	private long price;
+	private Long price;
 	private String thumbnail;
+
 	private String content;
-	private Date createdAt;
-	private Date updatedAt;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_category")
 	private Category category;
+
+	@Transient
+	private int catId;
 }

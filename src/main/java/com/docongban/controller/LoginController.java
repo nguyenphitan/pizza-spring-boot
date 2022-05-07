@@ -48,7 +48,6 @@ public class LoginController {
 		//get all category
 		List<Category> categoris = categoryRepository.findAll();
 		model.addAttribute("categoris", categoris);
-		
 		return "register";
 	}
 	
@@ -65,7 +64,7 @@ public class LoginController {
 		//get all category
 		List<Category> categoris = categoryRepository.findAll();
 		model.addAttribute("categoris", categoris);
-		
+
 		boolean accountCheck = accountService.checkAccountExisted(phone);
 		
 		if( !accountCheck ) {
@@ -74,7 +73,7 @@ public class LoginController {
 			model.addAttribute("address", address);
 			model.addAttribute("phone", phone);
 			model.addAttribute("phoneExisted", "Số điện thoại đã được đăng kí vui lòng thử với số khác");
-			
+
 			return "register";
 		}
 		

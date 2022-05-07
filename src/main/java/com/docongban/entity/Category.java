@@ -12,7 +12,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "category")
@@ -28,4 +30,11 @@ public class Category {
 	
 	@OneToMany(mappedBy = "category")
 	private List<Product> products = new ArrayList<>();
+
+	public Category(int id) {
+		this.id = id;
+	}
+
+	public Category() {
+	}
 }
