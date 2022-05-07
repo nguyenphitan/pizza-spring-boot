@@ -16,7 +16,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-    
+
     <div class="app">
 
         <!-- Start header -->
@@ -34,7 +34,7 @@
                     		<i class="far fa-user header-account_login-icon"></i>
                             <a href="#" class="header-account-text" th:text="${session.fullname}"></a>
                         </div>
-                        
+
                         <!-- if not login -->
                         <div class="header-account_login" th:unless="${session.fullname}">
                             <i class="far fa-user header-account_login-icon"></i>
@@ -44,7 +44,7 @@
                         <div class="header-account_register" th:unless="${session.fullname}">
                             <a th:href="@{/auth/register}" class="header-account-text">Tạo tài khoản</a>
                         </div>
-                        
+
                         <!-- logined -->
                         <div class="header-account_login" th:if="${session.fullname}">
                             <a th:href="@{/auth/logout}" class="header-account-text" >Đăng xuất</a>
@@ -58,7 +58,7 @@
                     <div class="navbar-select">
                         <ul class="navbar-list">
                         	<li class="navbar-list_item">
-                                <a href="" class="navbar-list_item-link">
+                                <a th:href="@{/admin/category}" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Quản lý danh mục sản phẩm</span>
                                 </a>
                             </li>
@@ -85,7 +85,7 @@
                         </ul>
                     </div>
 
-                    
+
                 </nav>
                 <!-- Start navbar -->
             </div>
@@ -116,7 +116,7 @@
                             <td>
                                 Họ và tên:
                                 <span style="width:250px;display:inline-block" th:text="${account.fullname}"></span>
-                                SĐT: 
+                                SĐT:
                                 <span style="width:200px;display:inline-block" th:text="${account.phone}"></span>
                                 Email:
                                 <span th:text="${account.email}"></span></br><br>
@@ -207,11 +207,11 @@
                         </div>
                         <div class="footer__block">
                             <h3 class="footer__block-title">Tổng đài hỗ trợ</h3>
-                            <span class="footer__block-option">Đặt hàng: 
+                            <span class="footer__block-option">Đặt hàng:
                                 <a href="tel:19006066" class="footer__block-option-phone">1900 6066 </a>
                                 (9:30-21:30)
                             </span>
-                            <span class="footer__block-option">Tổng đài SCKH: 
+                            <span class="footer__block-option">Tổng đài SCKH:
                                 <a href="tel:1900633606" class="footer__block-option-phone">1900 633 606 </a>
                                 (9:30-21:30)
                             </span>
