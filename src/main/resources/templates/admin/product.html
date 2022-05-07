@@ -99,13 +99,13 @@
     <div style="margin-bottom: 50px;" class="container">
         <div class="grid fix-wide" style="padding-top: 45px">
             <div class="container_header">
-                <span class="container_header-text">Quản lý tài khoản</span>
+                <span class="container_header-text">Quản lý sản phẩm</span>
             </div>
         </div>
 
         <div class="grid fix-wide">
             <button class="btn btn-success mt-20">
-                <a th:href="@{/admin/category/create}" class="btn-link">
+                <a th:href="@{/admin/products/create}" class="btn-link">
                     <span class="add-new-text">Thêm mới</span>
                 </a>
             </button>
@@ -116,29 +116,35 @@
                 <thead>
                 <tr style="background-color: rgba(31, 163, 101, 0.4);">
                     <th scope="col" class="bill-index">STT</th>
+                    <th scope="col" class="bill-information">Ảnh</th>
                     <th scope="col" class="bill-information">Tên</th>
+                    <th scope="col" class="bill-information">Mô tả</th>
+                    <th scope="col" class="bill-information">Giá</th>
                     <th scope="col" class="bill-order-date">Sửa</th>
                     <th scope="col" class="bill-order-date">Xóa</th>
                 </tr>
                 </thead>
-                <tbody class="table-bill-title" th:each="category,iterStat : ${categories}">
-                <tr class="bill-information-detail">
+                <tbody class="table-bill-title" th:each="product,iterStat : ${products}">
+                <tr>
                     <th scope="row" class="bill-index" th:text="${iterStat.count}"></th>
                     <td>
-                        <span style="width:250px;display:inline-block" th:text="${category.name}"></span>
+                        <img th:src="${product.thumbnail}" alt=""/>
                     </td>
+                    <td th:text="${product.title}"></td>
+                    <td th:text="${product.content}"></td>
+                    <td th:text="${product.price} + 'đ'"></td>
                     <td>
                         <div class="w-100 flex justify-center">
-                            <a th:href="@{/admin/category/{id}/update(id=${category.id})}" class="btn-link">
+                            <a th:href="@{/admin/products/{id}/update(id=${product.id})}" class="btn-link">
                                 <button class="btn btn-warning">
                                     Sửa
                                 </button>
                             </a>
                         </div>
                     </td>
-                    <td class="flex justify-center">
+                    <td>
                         <div class="w-100 flex justify-center">
-                            <a th:href="@{/admin/category/{id}/delete(id=${category.id})}" class="btn-link">
+                            <a th:href="@{/admin/products/{id}/delete(id=${product.id})}" class="btn-link">
                                 <button class="btn btn-success">
                                     Xoá
                                 </button>

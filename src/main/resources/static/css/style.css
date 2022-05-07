@@ -1205,6 +1205,14 @@ th, td{
     text-decoration: none;
 }
 
+.product-category {
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    outline: none;
+    padding: 10px 0 10px 10px;
+    width: 25%;
+}
+
 .complete{
     pointer-events: none;
     background-color:#006a3277;

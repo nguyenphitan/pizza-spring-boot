@@ -104,50 +104,65 @@
         </div>
 
         <div class="grid fix-wide">
-            <button class="btn btn-success mt-20">
-                <a th:href="@{/admin/category/create}" class="btn-link">
-                    <span class="add-new-text">Thêm mới</span>
-                </a>
-            </button>
-        </div>
-
-        <div class="grid fix-wide">
-            <table class="table-bill">
-                <thead>
-                <tr style="background-color: rgba(31, 163, 101, 0.4);">
-                    <th scope="col" class="bill-index">STT</th>
-                    <th scope="col" class="bill-information">Tên</th>
-                    <th scope="col" class="bill-order-date">Sửa</th>
-                    <th scope="col" class="bill-order-date">Xóa</th>
-                </tr>
-                </thead>
-                <tbody class="table-bill-title" th:each="category,iterStat : ${categories}">
-                <tr class="bill-information-detail">
-                    <th scope="row" class="bill-index" th:text="${iterStat.count}"></th>
-                    <td>
-                        <span style="width:250px;display:inline-block" th:text="${category.name}"></span>
-                    </td>
-                    <td>
-                        <div class="w-100 flex justify-center">
-                            <a th:href="@{/admin/category/{id}/update(id=${category.id})}" class="btn-link">
-                                <button class="btn btn-warning">
-                                    Sửa
-                                </button>
-                            </a>
-                        </div>
-                    </td>
-                    <td class="flex justify-center">
-                        <div class="w-100 flex justify-center">
-                            <a th:href="@{/admin/category/{id}/delete(id=${category.id})}" class="btn-link">
-                                <button class="btn btn-success">
-                                    Xoá
-                                </button>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <form th:action="@{/admin/products/create}" th:object="${newProduct}" th:if="${updateProduct==null}" method="post"
+                  class="create-category-form">
+                <div class="input-wrapper">
+                    <label for="title" class="input-label">Tên sản phẩm: </label>
+                    <input type="text" class="create-input" id="title" name="title" th:field="*{title}"/>
+                </div>
+                <div class="input-wrapper">
+                    <label for="contentCreate" class="input-label">Mô tả: </label>
+                    <textarea type="text" class="create-input" id="contentCreate" name="content"
+                              th:field="*{content}"></textarea>
+                </div>
+                <div class="input-wrapper">
+                    <label for="priceCreate" class="input-label">Giá: </label>
+                    <input type="text" class="create-input" id="priceCreate" name="price" th:field="*{price}"/>
+                </div>
+                <div class="input-wrapper">
+                    <label for="thumbnailCreate" class="input-label">Ảnh: </label>
+                    <input type="text" class="create-input" id="thumbnailCreate" name="thumbnail"
+                           th:field="*{thumbnail}"/>
+                </div>
+                <div class="input-wrapper">
+                    <label for="categoryCreate" class="input-label">Mục: </label>
+                    <select class="product-category" id="categoryCreate" name="category.id">
+                        <option th:each="categoryI : ${categories}" th:value="${categoryI.id}"
+                                th:text="${categoryI.name}"></option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-add">Thêm</button>
+            </form>
+            <form th:action="@{/admin/products/{id}/update(id=${updateProduct.id})}" th:object="${updateProduct}" th:if="${updateProduct}" method="post"
+                  class="form-add">
+                <input type="hidden" th:field="*{id}"/>
+                <div class="input-wrapper">
+                    <label for="titleUpdate" class="input-label">Tên sản phẩm: </label>
+                    <input type="text" class="create-input" id="titleUpdate" name="title" th:field="*{title}"/>
+                </div>
+                <div class="input-wrapper">
+                    <label for="contentUpdate" class="input-label">Mô tả: </label>
+                    <textarea type="text" class="create-input" id="contentUpdate" name="content"
+                              th:field="*{content}"></textarea>
+                </div>
+                <div class="input-wrapper">
+                    <label for="priceUpdate" class="input-label">Giá: </label>
+                    <input type="text" class="create-input" id="priceUpdate" name="price" th:field="*{price}"/>
+                </div>
+                <div class="input-wrapper">
+                    <label for="thumbnailUpdate" class="input-label">Ảnh: </label>
+                    <input type="text" class="create-input" id="thumbnailUpdate" name="thumbnail"
+                           th:field="*{thumbnail}"/>
+                </div>
+                <div class="input-wrapper">
+                    <label for="categoryUpdate" class="input-label">Mục: </label>
+                    <select class="product-category" id="categoryUpdate" name="category.id">
+                        <option th:each="categoryI : ${categories}" th:value="${categoryI.id}"
+                                th:text="${categoryI.name}"></option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-add">Cập nhật </button>
+            </form>
         </div>
     </div>
     <!-- End container -->

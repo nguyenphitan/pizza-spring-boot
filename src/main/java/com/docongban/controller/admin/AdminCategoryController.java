@@ -46,7 +46,6 @@ public class AdminCategoryController {
     public ModelAndView updateCategoryView(@PathVariable int id) {
         ModelAndView modelAndView = new ModelAndView("admin/formCategory");
         Category foundedCategory = categoryRepository.getById(id);
-
         modelAndView.addObject("category", foundedCategory);
         return modelAndView;
     }
