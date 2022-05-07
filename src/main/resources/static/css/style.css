@@ -1114,7 +1114,8 @@ th, td{
 .add_seller,
 .remove_seller,
 .click_timekeeping, 
-.handle_payroll {
+.handle_payroll,
+.t-button {
     padding: 6px 15px;
     border-radius: 5px;
     background-color: var(--primary-color);

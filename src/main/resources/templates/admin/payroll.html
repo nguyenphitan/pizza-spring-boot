@@ -143,9 +143,8 @@
                         <tr style="background-color: rgba(31, 163, 101, 0.4);">
                             <th scope="col" class="bill-index" >STT</th>
                             <th scope="col" class="bill-information">Thông tin nhân viên</th>
-                            <th scope="col" class="bill-order-date">Tổng số ngày</th>
+                            <th scope="col" class="bill-order-date">Tống số ngày</th>
                             <th scope="col" class="bill-order-date">Chi tiết</th>
-                            <th scope="col" class="bill-order-date">Tính lương</th>
                         </tr>
                     </thead>
                     <tbody class="table-bill-title" th:each="payroll, index : ${payrolls}">
@@ -153,25 +152,33 @@
                             <th scope="row" class="bill-index" th:text="${index.count}" ></th>
                             <td>
                                 Họ và tên:
-                                <span style="width:200px;display:inline-block" th:text="${payroll.seller.fullname}"></span>
+                                <span style="width:230px;display:inline-block" th:text="${payroll.seller.fullname}"></span>
                                 SĐT: 
-                                <span style="width:180px;display:inline-block" th:text="${payroll.seller.phone}"></span> <br> <br>
+                                <span style="width:230px;display:inline-block" th:text="${payroll.seller.phone}"></span> 
+                                <br> <br>
                                 Email:
-                                <span style="width:233px; display: inline-block;" th:text="${payroll.seller.email}"></span>
+                                <span style="width:263px; display: inline-block;" th:text="${payroll.seller.email}"></span>
                                 Địa chỉ:
                                 <span th:text="${payroll.seller.address}"></span></br>
                             </td>
+                            <td style="text-align: center;" th:text="${payroll.totalDate}"></td>
                             <td style="text-align: center;">
-                            	<span th:text="${payroll.totalDate}"></span>
-                            </td>
-                            <td style="text-align: center;">
-                            	<select style="outline: none;" th:each="date : ${payroll.dates}">
-                            		<option th:text="${#calendars.format(date, 'dd / MM / yyyy')}"></option>
+                            	<select style="outline: none;">
+                            		<option th:each="date : ${payroll.dates}" th:text="${#calendars.format(date, 'dd / MM / yyyy')}"></option>
                             	</select>
+                            </td>
+                        </tr>
+                        <tr>
+                        	<td></td>
+                        	<td style="text-align: right;" class="t-salary"></td>
+                        	<td style="text-align: center;">
+                                <span th:text="${payroll.seller.id}" style="display: none;"></span>
+                                <div class="handle_payroll" style="padding: 6px 2px; cursor: pointer;">Tính lương</div>
+                                <span th:text="${payroll.totalDate}" style="display: none;"></span>
                             </td>
                             <td style="text-align: center;">
                                 <span th:text="${payroll.seller.id}" style="display: none;"></span>
-                                <div class="handle_payroll" style="padding: 6px 2px; cursor: pointer;">Tính lương</div>
+                                <div class="payment_payroll t-button" style="padding: 6px 2px; cursor: pointer;">Đã trả lương</div>
                             </td>
                         </tr>
                     </tbody>

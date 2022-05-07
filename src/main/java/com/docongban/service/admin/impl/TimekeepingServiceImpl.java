@@ -85,5 +85,16 @@ public class TimekeepingServiceImpl implements TimekeepingService {
 	public Timekeeping save(Timekeeping timekeeping) {
 		return timekeepingRepository.save(timekeeping);
 	}
+
+
+	/*
+	 * Xóa chấm công
+	 * Created by: NPTAN (05/05/2022)
+	 * Version: 1.0
+	 */
+	@Override
+	public void delete(Integer accountId) {
+		timekeepingRepository.deleteByAccountId(accountId);
+	}
 	
 }

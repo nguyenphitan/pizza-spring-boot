@@ -10,4 +10,7 @@ public interface TimekeepingService {
 	
 	// Lưu chấm công:
 	Timekeeping save(Timekeeping timekeeping);
+	
+	// Xóa chấm công:
+	void delete(Integer accountId);
 }
