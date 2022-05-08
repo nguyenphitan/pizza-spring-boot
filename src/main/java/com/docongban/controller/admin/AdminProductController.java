@@ -46,7 +46,6 @@ public class AdminProductController {
 
     @PostMapping("/create")
     ModelAndView createProduct(@ModelAttribute("newProduct") Product newProduct) {
-        System.out.println(newProduct);
         productRepository.save(newProduct);
         return new ModelAndView("redirect:" + "/admin/products");
     }

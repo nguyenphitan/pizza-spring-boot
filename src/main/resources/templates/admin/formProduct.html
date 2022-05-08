@@ -104,6 +104,12 @@
         </div>
 
         <div class="grid fix-wide">
+            <button class="btn btn-success mt-20">
+                <input onclick='javascript:window.history.back()' value='Back' type='button'  class="w-100 btn btn-back"/>
+            </button>
+        </div>
+
+        <div class="grid fix-wide">
             <form th:action="@{/admin/products/create}" th:object="${newProduct}" th:if="${updateProduct==null}" method="post"
                   class="create-category-form">
                 <div class="input-wrapper">

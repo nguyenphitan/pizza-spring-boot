@@ -1125,7 +1125,7 @@ th, td{
     padding: 6px 15px;
     border-radius: 5px;
     background-color: var(--warnning-color);
-    color: #000000;
+    color: '#fff';
     text-decoration: none;
 }
 
@@ -1133,7 +1133,7 @@ th, td{
     padding: 6px 15px;
     border-radius: 5px;
     background-color: var(--primary-color);
-    color: #000000;
+    color: #ffffff;
     text-decoration: none;
 }
 
@@ -1178,7 +1178,7 @@ th, td{
 
 .input-label {
     display: block;
-    width: 100px;
+    width: 150px;
 }
 
 .create-input {
@@ -1203,6 +1203,13 @@ th, td{
 .btn-link {
     outline: none;
     text-decoration: none;
+}
+
+.btn-back {
+    font-size:2rem;
+    font-weight: 700;
+    color:#fff;
+    background-color: var(--primary-color);
 }
 
 .product-category {
