@@ -43,10 +43,10 @@ public class AdminCategoryController {
     }
 
     @GetMapping("/category/{id}/update")
-    public ModelAndView updateCategoryView(@PathVariable int id) {
+    public ModelAndView updateCategoryView(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView("admin/formCategory");
         Category foundedCategory = categoryRepository.getById(id);
-        modelAndView.addObject("category", foundedCategory);
+        modelAndView.addObject("updateCategory", foundedCategory);
         return modelAndView;
     }
 
