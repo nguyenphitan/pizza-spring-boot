@@ -75,12 +75,17 @@
                     <div class="navbar-select">
                         <ul class="navbar-list">
                         	<li class="navbar-list_item">
-                                <a th:href="@{/admin/category}" class="navbar-list_item-link">
+                                <a href="/" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Trang chủ</span>
+                                </a>
+                            </li>
+                        	<li class="navbar-list_item">
+                                <a href="/admin/category" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Quản lý danh mục sản phẩm</span>
                                 </a>
                             </li>
                             <li class="navbar-list_item">
-                                <a th:href="@{/admin/products}" class="navbar-list_item-link">
+                                <a href="/admin/products" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Quản lý sản phẩm</span>
                                 </a>
                             </li>
@@ -90,7 +95,7 @@
                                 </a>
                             </li>
                             <li class="navbar-list_item">
-                                <a th:href="@{/admin/seller}" class="navbar-list_item-link">
+                                <a th:href="@{/admin/seller}" class="navbar-list_item-link" style="background-color: #005226;">
                                     <span class="navbar-list_item-text">Quản lý nhân viên</span>
                                 </a>
                             </li>

@@ -2,36 +2,17 @@ $(document).ready(function() {
 	//Toggle delivery
 	const deliverys = document.querySelectorAll('.header-delivery_item')
 	const searchs = document.querySelectorAll('.header-search')
-	const role = $('#role').text();
-	
-	if(role == 'ADMIN') {
-		$('.t-search-area').css('display', 'none');
-		let listIcons = $('.header-delivery_item-logo');
-		for(let icon of listIcons) {
-			$(icon).css('display', 'none');
-		}
-	}
 	
 	deliverys.forEach((delivery,index) => {
 	    const search = searchs[index]
 	    
-	    $(delivery).click(function(e) {
-			console.log(e.target);
-			$('.header-delivery_item.active').removeClass('active');
-			$('.header-search.block').removeClass('block');
-			$(e.target).parent().addClass('active');
-			if(role != 'ADMIN') {
-				$(search).addClass('block');
-			}
-		})
-	    
-	    /*delivery.onclick = (e) => {
+	    delivery.onclick = (e) => {
 	        document.querySelector('.header-delivery_item.active').classList.remove('active')
 	        document.querySelector('.header-search.block').classList.remove('block')
 	
 	        delivery.classList.add('active')
 	        search.classList.add('block')
-	    }*/
+	    }
 	})
 	
 	

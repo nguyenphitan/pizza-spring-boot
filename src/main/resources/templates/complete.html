@@ -121,18 +121,23 @@
                     <div class="navbar-select">
                         <ul class="navbar-list">
                             <li class="navbar-list_item">
-                                <a href="khai-vi.html" class="navbar-list_item-link">
-                                    <span class="navbar-list_item-text">Khuyến mãi</span>
+                                <a href="/" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Trang chủ</span>
+                                </a>
+                            </li>
+                            <li class="navbar-list_item" th:if="${session.roleAccount == 'ADMIN'}">
+                                <a th:href="${session.roleAccount == 'ADMIN' ? '/admin/products' : '#'}" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Quản lý gian hàng</span>
+                                </a>
+                            </li>
+                            <li class="navbar-list_item" th:if="${session.roleAccount == 'SELLER'}">
+                                <a th:href="${session.roleAccount == 'SELLER' ? '/admin/bill' : '#'}" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Quản lý hóa đơn</span>
                                 </a>
                             </li>
                             <li class="navbar-list_item" th:each="category : ${categoris}">
                                 <a th:href="@{/category/{id}(id=${category.id}) }" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text" th:text="${category.name}"></span>
-                                </a>
-                            </li>
-                            <li class="navbar-list_item" th:if="${session.roleAccount == 'SELLER'}">
-                                <a href="/admin/bill" class="navbar-list_item-link">
-                                    <span class="navbar-list_item-text">Hóa đơn giao hàng</span>
                                 </a>
                             </li>
                         </ul>
@@ -193,7 +198,7 @@
 		            <span class="delecious">Chúc quý khách ngon miệng</span>
 		        </div>
 		        <div >
-		            <a href="./" class="product-btn__return btnreturn">
+		            <a href="/" class="product-btn__return btnreturn">
 		                <!-- <i class="fas fa-arrow-left"></i> -->
 		                <span class="product-btn__return-title">Quay lại màn hình chính</span>
 		            </a>

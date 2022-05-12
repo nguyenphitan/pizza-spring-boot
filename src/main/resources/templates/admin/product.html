@@ -16,6 +16,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap"
           rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style type="text/css">
+    	
+    	.navbar {
+    		height: 60px !important;
+    	}
+    	
+    	.navbar-list {
+    		flex-wrap: wrap;
+    		justify-content: center;
+    	}
+    
+    	.navbar-list_item {
+    		flex-wrap: wrap;
+    		padding: 4px 0;
+    	}
+    	
+    </style>
 </head>
 <body>
 
@@ -59,32 +76,52 @@
             <nav class="navbar">
                 <div class="navbar-select">
                     <ul class="navbar-list">
-                        <li class="navbar-list_item">
-                            <a th:href="@{/admin/category}" class="navbar-list_item-link">
-                                <span class="navbar-list_item-text">Quản lý danh mục sản phẩm</span>
-                            </a>
-                        </li>
-                        <li class="navbar-list_item">
-                            <a th:href="@{/admin/products}" class="navbar-list_item-link">
-                                <span class="navbar-list_item-text">Quản lý sản phẩm</span>
-                            </a>
-                        </li>
-                        <li class="navbar-list_item">
-                            <a th:href="@{/admin/bill}" class="navbar-list_item-link">
-                                <span class="navbar-list_item-text">Quản lý hóa đơn</span>
-                            </a>
-                        </li>
-                        <li class="navbar-list_item">
-                            <a th:href="@{/admin/seller}" class="navbar-list_item-link">
-                                <span class="navbar-list_item-text">Quản lý nhân viên</span>
-                            </a>
-                        </li>
-                        <li class="navbar-list_item">
-                            <a th:href="@{/admin/account}" class="navbar-list_item-link">
-                                <span class="navbar-list_item-text">Quản lý tài khoản</span>
-                            </a>
-                        </li>
-                    </ul>
+                        	<li class="navbar-list_item">
+                                <a href="/" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Trang chủ</span>
+                                </a>
+                            </li>
+                        	<li class="navbar-list_item">
+                                <a href="/admin/category" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Quản lý danh mục sản phẩm</span>
+                                </a>
+                            </li>
+                            <li class="navbar-list_item">
+                                <a href="/admin/products" class="navbar-list_item-link" style="background-color: #005226;">
+                                    <span class="navbar-list_item-text">Quản lý sản phẩm</span>
+                                </a>
+                            </li>
+                            <li class="navbar-list_item">
+                                <a th:href="@{/admin/bill}" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Quản lý hóa đơn</span>
+                                </a>
+                            </li>
+                            <li class="navbar-list_item">
+                                <a th:href="@{/admin/seller}" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Quản lý nhân viên</span>
+                                </a>
+                            </li>
+                            <li class="navbar-list_item">
+                                <a th:href="@{/admin/account}" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Quản lý tài khoản</span>
+                                </a>
+                            </li>
+                            <li class="navbar-list_item">
+                                <a href="/admin/statistical" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Thống kê doanh thu</span>
+                                </a>
+                            </li>
+                            <li class="navbar-list_item">
+                                <a href="/admin/timekeeping" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Chấm công</span>
+                                </a>
+                            </li>
+                            <li class="navbar-list_item">
+                                <a href="/admin/payroll" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Tính lương</span>
+                                </a>
+                            </li>
+                        </ul>
                 </div>
 
 

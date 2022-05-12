@@ -16,6 +16,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap"
           rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style type="text/css">
+    	
+    	.navbar {
+    		height: 60px !important;
+    	}
+    	
+    	.navbar-list {
+    		flex-wrap: wrap;
+    		justify-content: center;
+    	}
+    
+    	.navbar-list_item {
+    		flex-wrap: wrap;
+    		padding: 4px 0;
+    	}
+    	
+    </style>
 </head>
 <body>
 
@@ -59,32 +76,52 @@
             <nav class="navbar">
                 <div class="navbar-select">
                     <ul class="navbar-list">
-                        <li class="navbar-list_item">
-                            <a th:href="@{/admin/category}" class="navbar-list_item-link">
-                                <span class="navbar-list_item-text">Quản lý danh mục sản phẩm</span>
-                            </a>
-                        </li>
-                        <li class="navbar-list_item">
-                            <a th:href="@{/admin/products}" class="navbar-list_item-link">
-                                <span class="navbar-list_item-text">Quản lý sản phẩm</span>
-                            </a>
-                        </li>
-                        <li class="navbar-list_item">
-                            <a th:href="@{/admin/bill}" class="navbar-list_item-link">
-                                <span class="navbar-list_item-text">Quản lý hóa đơn</span>
-                            </a>
-                        </li>
-                        <li class="navbar-list_item">
-                            <a th:href="@{/admin/seller}" class="navbar-list_item-link">
-                                <span class="navbar-list_item-text">Quản lý nhân viên</span>
-                            </a>
-                        </li>
-                        <li class="navbar-list_item">
-                            <a th:href="@{/admin/account}" class="navbar-list_item-link">
-                                <span class="navbar-list_item-text">Quản lý tài khoản</span>
-                            </a>
-                        </li>
-                    </ul>
+                        	<li class="navbar-list_item">
+                                <a href="/" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Trang chủ</span>
+                                </a>
+                            </li>
+                        	<li class="navbar-list_item">
+                                <a href="/admin/category" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Quản lý danh mục sản phẩm</span>
+                                </a>
+                            </li>
+                            <li class="navbar-list_item">
+                                <a href="/admin/products" class="navbar-list_item-link" style="background-color: #005226;">
+                                    <span class="navbar-list_item-text">Quản lý sản phẩm</span>
+                                </a>
+                            </li>
+                            <li class="navbar-list_item">
+                                <a th:href="@{/admin/bill}" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Quản lý hóa đơn</span>
+                                </a>
+                            </li>
+                            <li class="navbar-list_item">
+                                <a th:href="@{/admin/seller}" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Quản lý nhân viên</span>
+                                </a>
+                            </li>
+                            <li class="navbar-list_item">
+                                <a th:href="@{/admin/account}" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Quản lý tài khoản</span>
+                                </a>
+                            </li>
+                            <li class="navbar-list_item">
+                                <a href="/admin/statistical" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Thống kê doanh thu</span>
+                                </a>
+                            </li>
+                            <li class="navbar-list_item">
+                                <a href="/admin/timekeeping" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Chấm công</span>
+                                </a>
+                            </li>
+                            <li class="navbar-list_item">
+                                <a href="/admin/payroll" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Tính lương</span>
+                                </a>
+                            </li>
+                        </ul>
                 </div>
 
 
@@ -104,70 +141,66 @@
         </div>
 
         <div class="grid fix-wide">
-            <button class="btn btn-success mt-20">
-                <input onclick='javascript:window.history.back()' value='Back' type='button'  class="w-100 btn btn-back"/>
-            </button>
-        </div>
-
-        <div class="grid fix-wide">
             <form th:action="@{/admin/products/create}" th:object="${newProduct}" th:if="${updateProduct==null}" method="post"
                   class="create-category-form">
                 <div class="input-wrapper">
                     <label for="title" class="input-label">Tên sản phẩm: </label>
-                    <input type="text" class="create-input" id="title" name="title" th:field="*{title}"/>
+                    <input type="text" class="create-input" id="title" name="title" th:field="*{title}" required/>
                 </div>
                 <div class="input-wrapper">
                     <label for="contentCreate" class="input-label">Mô tả: </label>
                     <textarea type="text" class="create-input" id="contentCreate" name="content"
-                              th:field="*{content}"></textarea>
+                              th:field="*{content}" required></textarea>
                 </div>
                 <div class="input-wrapper">
                     <label for="priceCreate" class="input-label">Giá: </label>
-                    <input type="text" class="create-input" id="priceCreate" name="price" th:field="*{price}"/>
+                    <input type="text" class="create-input" id="priceCreate" name="price" th:field="*{price}" required/>
                 </div>
                 <div class="input-wrapper">
                     <label for="thumbnailCreate" class="input-label">Ảnh: </label>
                     <input type="text" class="create-input" id="thumbnailCreate" name="thumbnail"
-                           th:field="*{thumbnail}"/>
+                           th:field="*{thumbnail}" required/>
                 </div>
                 <div class="input-wrapper">
                     <label for="categoryCreate" class="input-label">Mục: </label>
-                    <select class="product-category" id="categoryCreate" name="category.id">
+                    <select class="product-category" id="categoryCreate" name="category.id" required>
                         <option th:each="categoryI : ${categories}" th:value="${categoryI.id}"
                                 th:text="${categoryI.name}"></option>
                     </select>
                 </div>
                 <button type="submit" class="btn-add">Thêm</button>
+                <button class="btn btn-success mt-20 btn-add" onclick='javascript:window.history.back()'>Hủy</button>
             </form>
             <form th:action="@{/admin/products/{id}/update(id=${updateProduct.id})}" th:object="${updateProduct}" th:if="${updateProduct}" method="post"
                   class="form-add">
                 <input type="hidden" th:field="*{id}"/>
                 <div class="input-wrapper">
                     <label for="titleUpdate" class="input-label">Tên sản phẩm: </label>
-                    <input type="text" class="create-input" id="titleUpdate" name="title" th:field="*{title}"/>
+                    <input type="text" class="create-input" id="titleUpdate" name="title" th:field="*{title}" required/>
                 </div>
                 <div class="input-wrapper">
                     <label for="contentUpdate" class="input-label">Mô tả: </label>
                     <textarea type="text" class="create-input" id="contentUpdate" name="content"
-                              th:field="*{content}"></textarea>
+                              th:field="*{content}" required></textarea>
                 </div>
                 <div class="input-wrapper">
                     <label for="priceUpdate" class="input-label">Giá: </label>
-                    <input type="text" class="create-input" id="priceUpdate" name="price" th:field="*{price}"/>
+                    <input type="text" class="create-input" id="priceUpdate" name="price" th:field="*{price}" required/>
                 </div>
                 <div class="input-wrapper">
                     <label for="thumbnailUpdate" class="input-label">Ảnh: </label>
                     <input type="text" class="create-input" id="thumbnailUpdate" name="thumbnail"
-                           th:field="*{thumbnail}"/>
+                           th:field="*{thumbnail}" required/>
                 </div>
                 <div class="input-wrapper">
                     <label for="categoryUpdate" class="input-label">Mục: </label>
-                    <select class="product-category" id="categoryUpdate" name="category.id">
+                    <select class="product-category" id="categoryUpdate" name="category.id" required>
                         <option th:each="categoryI : ${categories}" th:value="${categoryI.id}"
                                 th:text="${categoryI.name}"></option>
                     </select>
                 </div>
                 <button type="submit" class="btn-add">Cập nhật </button>
+                <button class="btn btn-success mt-20 btn-add" onclick='javascript:window.history.back()'>Hủy</button>
             </form>
         </div>
     </div>

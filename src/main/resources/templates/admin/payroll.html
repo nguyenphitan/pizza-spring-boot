@@ -79,12 +79,17 @@
                     <div class="navbar-select">
                         <ul class="navbar-list">
                         	<li class="navbar-list_item">
-                                <a href="" class="navbar-list_item-link">
+                                <a href="/" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Trang chủ</span>
+                                </a>
+                            </li>
+                        	<li class="navbar-list_item">
+                                <a href="/admin/category" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Quản lý danh mục sản phẩm</span>
                                 </a>
                             </li>
                             <li class="navbar-list_item">
-                                <a href="" class="navbar-list_item-link">
+                                <a href="/admin/products" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Quản lý sản phẩm</span>
                                 </a>
                             </li>
@@ -114,7 +119,7 @@
                                 </a>
                             </li>
                             <li class="navbar-list_item">
-                                <a href="/admin/payroll" class="navbar-list_item-link">
+                                <a href="/admin/payroll" class="navbar-list_item-link" style="background-color: #005226;">
                                     <span class="navbar-list_item-text">Tính lương</span>
                                 </a>
                             </li>
@@ -133,7 +138,7 @@
         <div style="margin-bottom: 50px;" class="container">
             <div class="grid fix-wide" style="padding-top: 45px">
                 <div class="container_header">
-                    <span class="container_header-text" >Chấm công nhân viên</span>
+                    <span class="container_header-text" >Tính lương nhân viên</span>
                 </div>
             </div>
 
@@ -143,7 +148,6 @@
                         <tr style="background-color: rgba(31, 163, 101, 0.4);">
                             <th scope="col" class="bill-index" >STT</th>
                             <th scope="col" class="bill-information">Thông tin nhân viên</th>
-                            <th scope="col" class="bill-order-date">Tống số ngày</th>
                             <th scope="col" class="bill-order-date">Chi tiết</th>
                         </tr>
                     </thead>
@@ -159,9 +163,10 @@
                                 Email:
                                 <span style="width:263px; display: inline-block;" th:text="${payroll.seller.email}"></span>
                                 Địa chỉ:
-                                <span th:text="${payroll.seller.address}"></span></br>
+                                <span th:text="${payroll.seller.address}" style="margin-right: 80px;"></span> <br><br>
+                                Số ngày làm việc:
+                                <span th:text="${payroll.totalDate}"></span>
                             </td>
-                            <td style="text-align: center;" th:text="${payroll.totalDate}"></td>
                             <td style="text-align: center;">
                             	<select style="outline: none;">
                             		<option th:each="date : ${payroll.dates}" th:text="${#calendars.format(date, 'dd / MM / yyyy')}"></option>
@@ -170,12 +175,17 @@
                         </tr>
                         <tr>
                         	<td></td>
-                        	<td style="text-align: right;" class="t-salary"></td>
-                        	<td style="text-align: center;">
+                        	<td style="text-align: right;" class="t-salary">
+                        		<span style="font-size: 2.2rem;"> 
+                        			<strong>Lương:</strong> 
+                        			<strong style="color: red;" th:text="'40000 x 8 x ' + ${payroll.totalDate} + ' = ' + ${40000*8*payroll.totalDate} + 'đ'"></strong>  
+                        		</span>
+                        	</td>
+                        	<!-- <td style="text-align: center;">
                                 <span th:text="${payroll.seller.id}" style="display: none;"></span>
                                 <div class="handle_payroll" style="padding: 6px 2px; cursor: pointer;">Tính lương</div>
                                 <span th:text="${payroll.totalDate}" style="display: none;"></span>
-                            </td>
+                            </td> -->
                             <td style="text-align: center;">
                                 <span th:text="${payroll.seller.id}" style="display: none;"></span>
                                 <div class="payment_payroll t-button" style="padding: 6px 2px; cursor: pointer;">Đã trả lương</div>

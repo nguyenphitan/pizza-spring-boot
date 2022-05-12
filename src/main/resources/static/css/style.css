@@ -9,10 +9,10 @@
 
 html {
     font-size: 62.5%;
-    line-height: 1.6rem;/*độ cao chữ 16px*/
+    line-height: 1.6rem;/*Ä‘á»™ cao chá»¯ 16px*/
     font-family: 'Nunito', sans-serif;
     box-sizing: border-box;
-    scroll-behavior: smooth;/*cuộn mượt*/
+    scroll-behavior: smooth;/*cuá»™n mÆ°á»£t*/
 }
 
 .pd-bottom{
@@ -222,6 +222,18 @@ html {
     font-weight: 620;
 }
 
+::-webkit-scrollbar {
+    width: 2px;
+}
+::-webkit-scrollbar-button {
+    background: #ccc
+}
+::-webkit-scrollbar-track-piece {
+    background: #888
+}
+::-webkit-scrollbar-thumb {
+    background: #eee
+}​
 .navbar-list_item-text_list{
     list-style: none;
     position: absolute;

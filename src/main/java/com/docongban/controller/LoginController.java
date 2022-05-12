@@ -43,11 +43,20 @@ public class LoginController {
 	JwtTokenProvider jwtTokenProvider;
 	
 	@GetMapping("/register")
-	public String register(Model model) {
+	public String register(Model model, HttpServletRequest request) {
 		
 		//get all category
 		List<Category> categoris = categoryRepository.findAll();
 		model.addAttribute("categoris", categoris);
+		
+		// Kiểm tra token:
+		HttpSession session = request.getSession();
+		String token = (String) session.getAttribute("token");
+		// 1. Nếu đã đăng nhập -> quay về trang chủ
+		if( token != null ) {
+			return "redirect:/";
+		}
+		// 2. Nếu chưa đăng nhập -> vào trang đăng ký
 		return "register";
 	}
 	
@@ -85,12 +94,20 @@ public class LoginController {
 	}
 	
 	@GetMapping("/login")
-	public String login(Model model) {
+	public String login(Model model, HttpServletRequest request) {
 		
 		//get all category
 		List<Category> categoris = categoryRepository.findAll();
 		model.addAttribute("categoris", categoris);
 		
+		// Kiểm tra token:
+		HttpSession session = request.getSession();
+		String token = (String) session.getAttribute("token");
+		// 1. Nếu đã đăng nhập -> quay về trang chủ
+		if( token != null ) {
+			return "redirect:/";
+		}
+		// 2. Nếu chưa đăng nhập -> vào trang đăng nhập
 		return "login";
 	}
 	
@@ -123,7 +140,7 @@ public class LoginController {
 			model.addAttribute("phone", phone);
 			model.addAttribute("error", "Vui lòng kiểm tra lại số điện thoại hoặc mật khẩu");
 		}
-		
+		 
 		return "login";
 	}
 	
