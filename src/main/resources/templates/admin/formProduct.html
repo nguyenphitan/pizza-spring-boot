@@ -141,37 +141,35 @@
         </div>
 
         <div class="grid fix-wide">
-            <form th:action="@{/admin/products/create}" th:object="${newProduct}" th:if="${updateProduct==null}" method="post"
+            <form th:action="@{/admin/products/create}" enctype = "Multipart/form-data" th:if="${updateProduct==null}" method="post"
                   class="create-category-form">
                 <div class="input-wrapper">
                     <label for="title" class="input-label">Tên sản phẩm: </label>
-                    <input type="text" class="create-input" id="title" name="title" th:field="*{title}" required/>
+                    <input type="text" class="create-input" id="title" name="title"required/>
                 </div>
                 <div class="input-wrapper">
                     <label for="contentCreate" class="input-label">Mô tả: </label>
-                    <textarea type="text" class="create-input" id="contentCreate" name="content"
-                              th:field="*{content}" required></textarea>
+                    <textarea type="text" class="create-input" id="contentCreate" name="content"required></textarea>
                 </div>
                 <div class="input-wrapper">
                     <label for="priceCreate" class="input-label">Giá: </label>
-                    <input type="text" class="create-input" id="priceCreate" name="price" th:field="*{price}" required/>
-                </div>
-                <div class="input-wrapper">
-                    <label for="thumbnailCreate" class="input-label">Ảnh: </label>
-                    <input type="text" class="create-input" id="thumbnailCreate" name="thumbnail"
-                           th:field="*{thumbnail}" required/>
+                    <input type="text" class="create-input" id="priceCreate" name="price" required/>
                 </div>
                 <div class="input-wrapper">
                     <label for="categoryCreate" class="input-label">Mục: </label>
-                    <select class="product-category" id="categoryCreate" name="category.id" required>
+                    <select class="product-category" id="categoryCreate" name="categoryId" required>
                         <option th:each="categoryI : ${categories}" th:value="${categoryI.id}"
                                 th:text="${categoryI.name}"></option>
                     </select>
                 </div>
+                <div class="input-wrapper">
+                    <label for="thumbnailCreate" class="input-label">Ảnh: </label>
+                    <input class="t-input t-none-border" type="file" name="thumbnail" required/>
+                </div>
                 <button type="submit" class="btn-add">Thêm</button>
                 <button class="btn btn-success mt-20 btn-add" onclick='javascript:window.history.back()'>Hủy</button>
             </form>
-            <form th:action="@{/admin/products/{id}/update(id=${updateProduct.id})}" th:object="${updateProduct}" th:if="${updateProduct}" method="post"
+            <form th:action="@{/admin/products/{id}/update(id=${updateProduct.id})}" enctype = "Multipart/form-data" th:object="${updateProduct}" th:if="${updateProduct}" method="post"
                   class="form-add">
                 <input type="hidden" th:field="*{id}"/>
                 <div class="input-wrapper">
@@ -188,16 +186,16 @@
                     <input type="text" class="create-input" id="priceUpdate" name="price" th:field="*{price}" required/>
                 </div>
                 <div class="input-wrapper">
-                    <label for="thumbnailUpdate" class="input-label">Ảnh: </label>
-                    <input type="text" class="create-input" id="thumbnailUpdate" name="thumbnail"
-                           th:field="*{thumbnail}" required/>
-                </div>
-                <div class="input-wrapper">
                     <label for="categoryUpdate" class="input-label">Mục: </label>
                     <select class="product-category" id="categoryUpdate" name="category.id" required>
                         <option th:each="categoryI : ${categories}" th:value="${categoryI.id}"
                                 th:text="${categoryI.name}"></option>
                     </select>
+                </div>
+                <div class="input-wrapper">
+                    <label for="thumbnailUpdate" class="input-label">Ảnh: </label>
+                    <input type="text" class="create-input" id="thumbnailUpdate" name="thumbnail"
+                           th:field="*{thumbnail}" readonly/>
                 </div>
                 <button type="submit" class="btn-add">Cập nhật </button>
                 <button class="btn btn-success mt-20 btn-add" onclick='javascript:window.history.back()'>Hủy</button>

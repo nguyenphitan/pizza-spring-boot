@@ -1,16 +1,19 @@
 package com.docongban.entity;
 
-import java.time.Instant;
-import java.util.Date;
-
-import javax.persistence.*;
-import javax.validation.constraints.Size;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "product")
-@Data
 public class Product extends BaseAuditSuperClass {
 
 	@Id
