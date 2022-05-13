@@ -19,6 +19,15 @@ html {
     padding-bottom: 25px;
 }
 
+.t-flex-center{
+	display: flex;
+	align-items: center;
+}
+
+.t-right-16 {
+	margin-right: 16px;
+}
+
 /* header */
 .header{
     height:115px;

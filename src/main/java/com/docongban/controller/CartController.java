@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.docongban.entity.Account;
@@ -197,7 +198,7 @@ public class CartController {
 		if(item_list!=null && accountSession!=null) {
 			
 			items = cartService.getItemProduct(item_list);
-			
+			 
 			OrderAccount orderAccount = new OrderAccount();
 			orderAccount.setAccountFullname(accountSession.getFullname());
 			orderAccount.setAccountPhone(accountSession.getPhone());
@@ -239,5 +240,17 @@ public class CartController {
 				return "cart";
 			}
 		}
+	}
+	
+	/*
+	 * Hiển thị trang thanh toán online
+	 * Created by: NPTAN (13/05/2022)
+	 * Version: 1.0
+	 */
+	@GetMapping("/payment/{amount}")
+	public ModelAndView payment(@PathVariable("amount") Long amount) {
+		ModelAndView modelAndView = new ModelAndView("vnpay");
+		modelAndView.addObject("amount", amount);
+		return modelAndView;
 	}
 }

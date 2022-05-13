@@ -41,7 +41,7 @@ public class LoginController {
 	
 	@Autowired
 	JwtTokenProvider jwtTokenProvider;
-	
+	 
 	@GetMapping("/register")
 	public String register(Model model, HttpServletRequest request) {
 		
