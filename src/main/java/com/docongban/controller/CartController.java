@@ -248,7 +248,13 @@ public class CartController {
 	 * Version: 1.0
 	 */
 	@GetMapping("/payment/{amount}")
-	public ModelAndView payment(@PathVariable("amount") Long amount) {
+	public ModelAndView payment(@PathVariable("amount") Long amount, HttpSession session) {
+		// Check token khi thanh toán:
+		String token = (String) session.getAttribute("token");
+		if( token == null ) {
+			return new ModelAndView("redirect:/auth/login");
+		}
+		
 		ModelAndView modelAndView = new ModelAndView("vnpay");
 		modelAndView.addObject("amount", amount);
 		return modelAndView;
