@@ -18,12 +18,13 @@ public class AccountServiceImpl implements AccountService {
 	@Autowired
 	AccountRepository accountRepository;
 	
+	
 	// Check số điện thoại đã đăng ký hay chưa?
+	@Override
 	public boolean checkAccountExisted(String phone) {
-		if(accountRepository.findAccountByPhone(phone).isEmpty()) {
+		if(accountRepository.findAccountByPhone(phone)!=null) {
 			return true;
 		}
-		
 		return false;
 	}
 	
