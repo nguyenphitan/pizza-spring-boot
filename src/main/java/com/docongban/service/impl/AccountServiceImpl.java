@@ -20,7 +20,7 @@ public class AccountServiceImpl implements AccountService {
 	
 	// Check số điện thoại đã đăng ký hay chưa?
 	public boolean checkAccountExisted(String phone) {
-		if(accountRepository.findAccountByPhone(phone).isEmpty()) {
+		if(accountRepository.findAccountByPhone(phone) == null) {
 			return true;
 		}
 		
