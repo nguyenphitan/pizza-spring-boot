@@ -224,7 +224,7 @@ public class CartController {
 				orderDetail.setProductTitle(i.getTitle());
 				orderDetail.setProductThumbnail(i.getThumbnail());
 				orderDetail.setProductContent(i.getContent());
-				orderDetail.setProductPrice(i.getPrices());
+				orderDetail.setProductPrice(i.getPrice());
 				orderDetail.setOrderQuantity(i.getQuantity());
 				orderDetail.setOrderAccountId(orderAccountRepository.getMaxId());
 				orderDetailRepository.save(orderDetail);
