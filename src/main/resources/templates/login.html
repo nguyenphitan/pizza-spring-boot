@@ -192,7 +192,14 @@
 
                 <div class="form-group">
                     <label for="password" class="form-label">Mật khẩu</label>
-                    <input id="password" name="password" rules="required|min:6" type="password" placeholder="" class="form-control">
+                    <input id="password" name="password" rules="required|min:6" type="password" placeholder="" class="form-control inputPassword">
+                   
+                   	<div class="eye eye-open active">
+                    	<i class="fas fa-eye"></i>                   	
+                   	</div>
+                   	<div class="eye eye-close active">
+                    	<i class="fas fa-slash"></i>
+                   	</div>
                     <span class="form-message"></span>
                 </div>
 
@@ -324,6 +331,7 @@
         <div class="footer__copyright">
             <span class="footer__copyright-text">Copyright © 2021 The Pizza Company. Cloned by BanDC</span>
         </div>
+        <script th:src="@{/js/passwordShow.js}"></script>
     </div>
 
     <script th:src="@{/js/main.js}"></script>

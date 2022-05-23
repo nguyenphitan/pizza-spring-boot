@@ -35,6 +35,7 @@ input::placeholder{
     display: flex;
     flex-direction: column;
     margin-bottom: 16px;
+    position: relative;
 }
 .form-label,
 .form-message {
@@ -115,4 +116,28 @@ input::placeholder{
     color: #ff4f60;
     font-weight: 700;
     line-height: 23px;
+}
+
+.form-group.invalid .eye{
+    transform: translateY(-50%);
+}
+.eye{
+	font-size: 1.6rem;
+    width: 20px;
+    height: auto;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(0);
+    cursor: pointer;
+}
+.eye-open,
+.eye-close{
+    display: none;
+}
+.eye-open.active{
+    display: block;
+}
+.eye-close.active{
+    display: block;
 }

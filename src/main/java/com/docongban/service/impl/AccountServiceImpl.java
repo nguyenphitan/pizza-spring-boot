@@ -20,14 +20,15 @@ public class AccountServiceImpl implements AccountService {
 	@Autowired
 	AccountRepository accountRepository;
 	
+	
 	// Check số điện thoại đã đăng ký hay chưa?
+	@Override
 	public boolean checkAccountExisted(String phone) {
 		Optional<Account> accountOptional = accountRepository.findAccountByPhone(phone);
 		String account = accountOptional.toString();
 		if(account.equals("Optional.empty")) {
 			return true;
 		}
-		
 		return false;
 	}
 	

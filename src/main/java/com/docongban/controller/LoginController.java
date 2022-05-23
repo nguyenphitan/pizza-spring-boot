@@ -76,13 +76,13 @@ public class LoginController {
 
 		boolean accountCheck = accountService.checkAccountExisted(phone);
 		
-		if( !accountCheck ) {
+		if(!accountCheck ) {
 			model.addAttribute("fullname", fullname);
 			model.addAttribute("email", email);
 			model.addAttribute("address", address);
 			model.addAttribute("phone", phone);
 			model.addAttribute("phoneExisted", "Số điện thoại đã được đăng kí vui lòng thử với số khác");
-
+			
 			return "register";
 		}
 		
