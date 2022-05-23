@@ -1,31 +1,27 @@
 package com.docongban.controller.admin;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
-import com.docongban.entity.Category;
-import com.docongban.service.admin.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.docongban.entity.Account;
+import com.docongban.entity.Discount;
 import com.docongban.entity.OrderAccount;
 import com.docongban.entity.OrderDetail;
 import com.docongban.repository.AccountRepository;
 import com.docongban.repository.OrderAccountRepository;
 import com.docongban.repository.OrderDetailRepository;
 import com.docongban.service.admin.AdminAccountService;
+import com.docongban.service.admin.DiscountService;
 import com.docongban.service.admin.SellerService;
 
 @RestController
@@ -47,25 +43,40 @@ public class AdminController {
 
     @Autowired
     SellerService sellerService;
+    
+    @Autowired
+    private DiscountService discountService;
 
     @GetMapping("/bill")
     public ModelAndView getBill() {
         ModelAndView modelAndView = new ModelAndView("admin/bill");
 
-        DecimalFormat df = new DecimalFormat(",###");
+        List<Discount> discounts = discountService.getAlls();
 
         List<OrderAccount> orderAccounts = orderAccountRepository.findAll();
         List<OrderDetail> orderDetails = orderDetailRepository.findAll();
-        List<String> totalPrice = new ArrayList<>();
+        List<Double> totalPrice = new ArrayList<>();
 
         for (OrderAccount oc : orderAccounts) {
-            long total = 0;
+            Double total = 0D;
             for (OrderDetail od : orderDetails) {
                 if (oc.getId() == od.getOrderAccountId()) {
-                    total += od.getProductPrice();
+                    total += (od.getProductPrice() * od.getOrderQuantity());
                 }
             }
-            totalPrice.add(df.format(total));
+            for(int i = 0 ; i < discounts.size() ; i++) {
+				Double nextValue = discounts.get(i).getValue();
+				if( total < nextValue ) {
+					if( i > 0 ) {
+						total -= (total * discounts.get(i-1).getDiscount()/100);
+						break;						
+					}
+					else {
+						break;
+					}
+				}
+			}
+            totalPrice.add(total);
         }
 
         modelAndView.addObject("orderAccounts", orderAccounts);

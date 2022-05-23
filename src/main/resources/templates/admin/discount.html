@@ -15,7 +15,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style type="text/css">
-    	
     	.navbar {
     		height: 60px !important;
     	}
@@ -29,11 +28,7 @@
     		flex-wrap: wrap;
     		padding: 4px 0;
     	}
-    	
-    	.t-right-50 {
-    		margin-right: 50px;
-    	}
-    	
+    
     </style>
 </head>
 <body>
@@ -51,24 +46,24 @@
 
                     <div class="header-account">
                     	<!-- logined -->
-                    	<div class="header-account_login" th:if="${session.fullname}">
+                    	<div class="header-account_login" th:if="${session.username}">
                     		<i class="far fa-user header-account_login-icon"></i>
-                            <a href="#" class="header-account-text" th:text="${session.fullname}"></a>
+                            <a href="#" class="header-account-text" th:text="${session.username}"></a>
                         </div>
                         
                         <!-- if not login -->
-                        <div class="header-account_login" th:unless="${session.fullname}">
+                        <div class="header-account_login" th:unless="${session.username}">
                             <i class="far fa-user header-account_login-icon"></i>
                             <a th:href="@{/auth/login}" class="header-account-text">Đăng nhập</a>
                         </div>
                         <span>/</span>
-                        <div class="header-account_register" th:unless="${session.fullname}">
+                        <div class="header-account_register" th:unless="${session.username}">
                             <a th:href="@{/auth/register}" class="header-account-text">Tạo tài khoản</a>
                         </div>
                         
                         <!-- logined -->
-                        <div class="header-account_login" th:if="${session.fullname}">
-                            <a th:href="@{/auth/logout}" class="header-account-text" >Đăng xuất</a>
+                        <div class="header-account_login" th:if="${session.username}">
+                            <a th:href="@{/api/v1/auth/logout}" class="header-account-text" >Đăng xuất</a>
                         </div>
                     </div>
                 </div>
@@ -99,7 +94,7 @@
                                 </a>
                             </li>
                             <li class="navbar-list_item">
-		                       <a href="/admin-discount" class="navbar-list_item-link">
+		                       <a href="/admin-discount" class="navbar-list_item-link" style="background-color: #005226;">
 		                           <span class="navbar-list_item-text">Quản lí mã giảm giá</span>
 		                       </a>
 		                   </li>
@@ -124,7 +119,7 @@
                                 </a>
                             </li>
                             <li class="navbar-list_item">
-                                <a href="/admin/payroll" class="navbar-list_item-link" style="background-color: #005226;">
+                                <a href="/admin/payroll" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Tính lương</span>
                                 </a>
                             </li>
@@ -143,57 +138,69 @@
         <div style="margin-bottom: 50px;" class="container">
             <div class="grid fix-wide" style="padding-top: 45px">
                 <div class="container_header">
-                    <span class="container_header-text" >Tính lương nhân viên</span>
+                    <span class="container_header-text" >Quản lý mã giảm giá</span>
                 </div>
             </div>
 
             <div class="grid fix-wide">
+            
+            	<!-- Add product -->
+		        <div class="t-add-area">
+		        	<a href="/admin/add-discount">Thêm mã giảm giá</a>
+		        </div>
+		        
+		        <!-- End add product -->
+		        
                 <table class="table-bill">
                     <thead >
                         <tr style="background-color: rgba(31, 163, 101, 0.4);">
                             <th scope="col" class="bill-index" >STT</th>
-                            <th scope="col" class="bill-information">Thông tin nhân viên</th>
-                            <th scope="col" class="bill-order-date">Chi tiết</th>
+                            <th scope="col" class="bill-information">Thông tin</th>
+                            <th scope="col" class="bill-order-date">Chức năng</th>
                         </tr>
                     </thead>
-                    <tbody class="table-bill-title" th:each="payroll, index : ${payrolls}">
-                    	<tr class="bill-information-detail">
+                    <tbody class="table-bill-title" th:each="discount, index : ${discounts}">
+                    	<tr>
                             <th scope="row" class="bill-index" th:text="${index.count}" ></th>
-                            <td>
-                                Họ và tên:
-                                <span style="width:230px;display:inline-block" th:text="${payroll.seller.fullname}"></span>
-                                SĐT: 
-                                <span style="width:230px;display:inline-block" th:text="${payroll.seller.phone}"></span> 
-                                <br> <br>
-                                Email:
-                                <span style="width:263px; display: inline-block;" th:text="${payroll.seller.email}"></span>
-                                Địa chỉ:
-                                <span th:text="${payroll.seller.address}" style="margin-right: 80px;"></span> <br><br>
-                                Số ngày làm việc:
-                                <span th:text="${payroll.totalDate}"></span>
+                            <td class="t-info-col">
+                                <div>
+                                	<div>
+                                		Số tiền cần để đạt được discount:
+		                                <span class="t-title-1 t-w-100 t-text-right t-m-right-150" th:text="${discount.value}"></span>
+		                                <input hide class="t-hide t-outline-none input-name-update" type="text" th:value="${discount.value}">
+		                                Giá trị discount:
+		                                <span class="t-title-2" th:text="${discount.discount}"></span>
+		                                <input hide class="t-hide t-outline-none input-price-update t-text-right" type="text" th:value="${discount.discount}">
+		                                %
+                                	</div>
+                                </div>
                             </td>
-                            <td style="text-align: center;">
-                            	<select style="outline: none;">
-                            		<option th:each="date : ${payroll.dates}" th:text="${#calendars.format(date, 'dd / MM / yyyy')}"></option>
-                            	</select>
-                            </td>
-                        </tr>
-                        <tr>
-                        	<td></td>
-                        	<td style="text-align: right;" class="t-salary">
-                        		<span style="font-size: 2.2rem;"> 
-                        			<strong>Lương:</strong> 
-                        			<strong style="color: red;" th:text="'40000 x 8 x ' + ${payroll.totalDate} + ' = ' + ${40000*8*payroll.totalDate} + 'đ'"></strong>  
-                        		</span>
-                        	</td>
-                        	<!-- <td style="text-align: center;">
-                                <span th:text="${payroll.seller.id}" style="display: none;"></span>
-                                <div class="handle_payroll" style="padding: 6px 2px; cursor: pointer;">Tính lương</div>
-                                <span th:text="${payroll.totalDate}" style="display: none;"></span>
+                            <!-- <td style="text-align: center;">
+                            	<span class="product_id" style="display: none;" th:text="${product.id}"></span>
+                                <a href="#" class="delete_product t-btn-common t-m-w-134" style="padding: 6px 2px;">Xóa sản phẩm</a>
+                                <span class="account_role" th:text="${session.role}" style="display: none"></span>
                             </td> -->
-                            <td style="text-align: center;">
-                                <span th:text="${payroll.seller.id}" style="display: none;"></span>
-                                <div class="payment_payroll t-button" style="padding: 6px 2px; cursor: pointer;">Đã trả lương</div>
+                            
+                            <td class="t-func-col">
+                            	<div class="t-div-function">
+                            		<span class="t-no-click"> 
+                            			<svg style="width: 13px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                            				<path d="M311.9 335.1l-132.4 136.8C174.1 477.3 167.1 480 160 480c-7.055 0-14.12-2.702-19.47-8.109l-132.4-136.8C-9.229 317.8 3.055 288 27.66 288h264.7C316.9 288 329.2 317.8 311.9 335.1z"/>
+                            			</svg>
+                            		</span>
+                            		<div class="t-function-box">
+                            			<div>
+                            				<a class="t-function-item t-update">Sửa</a>
+	                            			<span class="t-hide" th:text="${discount.id}"></span>
+	                            			<a class="t-function-item t-delete">Xóa</a>	
+                            			</div>
+                            			<div class="t-hide">
+                            				<a class="t-function-item t-save-update">Lưu</a>
+	                            			<span class="t-hide" th:text="${discount.id}"></span>
+	                            			<a class="t-function-item t-cancel-update">Hủy</a>	
+                            			</div>
+                            		</div>
+                            	</div>
                             </td>
                         </tr>
                     </tbody>
@@ -283,7 +290,7 @@
                         <div class="footer__block">
                             <h3 class="footer__block-title">Liên kết với chúng tôi</h3>
                             <div class="footer__block-social">
-                                <a href="https://www.facebook.com/docongban" target="_blank" class="footer__block-social-link">
+                                <a href="https://www.facebook.com/PhiTan2001.Com.Vn" target="_blank" class="footer__block-social-link">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
                                 <a href="" class="footer__block-social-link">
@@ -311,11 +318,11 @@
         </footer>
         <!-- End footer -->
         <div class="footer__copyright">
-            <span class="footer__copyright-text">Copyright © 2021 The Pizza Company. Cloned by BanDC</span>
+            <span class="footer__copyright-text">Copyright © 2021 The Pizza Company.</span>
         </div>
     </div>
 
-    <script th:src="@{/js/payroll.js}"></script>
+    <script th:src="@{/js/discount.js}"></script>
 
 </body>
 </html>

@@ -1,5 +1,7 @@
 package com.docongban.service.impl;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,9 @@ public class AccountServiceImpl implements AccountService {
 	
 	// Check số điện thoại đã đăng ký hay chưa?
 	public boolean checkAccountExisted(String phone) {
-		if(accountRepository.findAccountByPhone(phone) == null) {
+		Optional<Account> accountOptional = accountRepository.findAccountByPhone(phone);
+		String account = accountOptional.toString();
+		if(account.equals("Optional.empty")) {
 			return true;
 		}
 		
