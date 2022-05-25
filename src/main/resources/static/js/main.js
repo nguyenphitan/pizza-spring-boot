@@ -1,4 +1,4 @@
-$(document).ready(function() {
+
 	//Toggle delivery
 	const deliverys = document.querySelectorAll('.header-delivery_item')
 	const searchs = document.querySelectorAll('.header-search')
@@ -79,23 +79,8 @@ $(document).ready(function() {
 	
 	
 	//Scroll type pizza
-	const menu = document.querySelector('.container_type')
 	
-	const sectionOneOptions = {}
-	
-	const sectionOneObServer = new IntersectionObserver(function(entries, callback) {
-	    entries.forEach(entry => {
-	        if(!entry.isIntersecting) {
-	            menu.classList.add('scroll')
-	        } else {
-	            menu.classList.remove('scroll')
-	        }
-	    })
-	},sectionOneOptions)
-	
-	sectionOneObServer.observe(slider)
 	
 	
 	//Change active when scroll
 
-})
