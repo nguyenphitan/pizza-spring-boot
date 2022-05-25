@@ -20,6 +20,7 @@ import com.docongban.entity.Account;
 import com.docongban.jwt.JwtTokenProvider;
 import com.docongban.payload.LoginRequest;
 import com.docongban.payload.RegisterRequest;
+import com.docongban.payload.UpdateAccountRequest;
 import com.docongban.repository.AccountRepository;
 
 @Service
@@ -95,6 +96,21 @@ public class AuthService {
 		account.setEmail(registerRequest.getEmail());
 		account.setPhone(registerRequest.getPhone());
 		account.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+		account.setRole("USER");
+		accountRepository.save(account);
+	}
+	
+	public void handleUpdateAccount(UpdateAccountRequest updateAccountRequest) {
+		Date d=new Date();
+		Account account = new Account();
+		account.setId(updateAccountRequest.getId());
+		account.setCreatedAt(new java.sql.Timestamp(d.getTime()));
+		account.setUpdatedAt(new java.sql.Timestamp(d.getTime()));
+		account.setFullname(updateAccountRequest.getFullname());
+		account.setAddress(updateAccountRequest.getAddress());
+		account.setEmail(updateAccountRequest.getEmail());
+		account.setPhone(updateAccountRequest.getPhone());
+		account.setPassword(passwordEncoder.encode(updateAccountRequest.getPassword()));
 		account.setRole("USER");
 		accountRepository.save(account);
 	}

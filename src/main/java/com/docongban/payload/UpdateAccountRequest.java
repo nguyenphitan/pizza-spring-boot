@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class RegisterRequest {
+public class UpdateAccountRequest {
 	// Đánh dấu phone không được trống
 	@NotBlank
 	private String phone;
@@ -15,6 +15,7 @@ public class RegisterRequest {
 	// Đánh dấu password không được trống
 	@NotBlank
 	private String password;
+	private Integer id;
 	private String fullname;
 	private String email;
 	private String address;
