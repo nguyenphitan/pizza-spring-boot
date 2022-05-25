@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.docongban.entity.Banner;
 import com.docongban.entity.Category;
 import com.docongban.entity.Product;
+import com.docongban.repository.BannerRepository;
 import com.docongban.repository.CategoryRepository;
 import com.docongban.repository.ProductRepository;
 import com.docongban.service.ProductService;
@@ -32,12 +34,19 @@ public class HomeController {
 	@Autowired
 	VNPayService vnPayService;
 	
+	@Autowired
+	BannerRepository bannerRepository;
+	
 	@GetMapping("/")
 	public String home(Model model) {
 		
 		//get all category
 		List<Category> categoris = categoryRepository.findAll();
 		model.addAttribute("categoris", categoris);
+		
+		//get banner
+		List<Banner> banners = bannerRepository.getViewBanner();
+		model.addAttribute("banners", banners);
 		
 		//get all product
 		List<Product> products = productRepository.findAll();

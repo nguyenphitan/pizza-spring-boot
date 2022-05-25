@@ -146,20 +146,22 @@
 
     <div class="grid fix-wide">
       <!-- create  -->
-      <form th:action="@{/admin/category/create}" th:object="${category}" method="post" class="create-category-form" th:if="${updateCategory==null}">
+      <form th:action="@{/admin/banner/save}" th:object="${banner}" th:if="${banner==null}" method="post" class="create-category-form">
         <div class="input-wrapper">
-          <label for="nameCategory" class="input-label">Tên danh mục: </label>
-          <input type="text" class="create-input" id="nameCategory" name="name" required/>
+          <label for="image" class="input-label">Ảnh: </label>
+          <input type="text" class="create-input" id="image" name="image" required/>
         </div>
         <button type="submit" class="btn-add">Thêm</button>
         <button class="btn btn-success mt-20 btn-add" onclick='javascript:window.history.back()'>Hủy</button>
       </form>
-      <form th:action="@{/admin/category/{id}/update(id=${updateCategory.id})}" method="post" class="create-category-form" th:object="${updateCategory}" th:if="${updateCategory}">
+      <!-- update  -->
+      <form th:action="@{/admin/banner/save}" th:object="${banner}" th:if="${banner!=null}" method="post" class="create-category-form">
         <div class="input-wrapper">
-          <label for="updateCategoryName" class="input-label">Tên danh mục: </label>
-          <input type="text" class="create-input" id="updateCategoryName" name="updateCategoryName" th:filed="*{name}" th:value="*{name}" required/>
+        	<input type="hidden" th:field="*{id}"/>
+          <label for="image" class="input-label">Ảnh: </label>
+          <input type="text" class="create-input" th:field="*{image}" id="image" name="image" required/>
         </div>
-        <button type="submit" class="btn-add">Cập nhật</button>
+        <button type="submit" class="btn-add">Thêm</button>
         <button class="btn btn-success mt-20 btn-add" onclick='javascript:window.history.back()'>Hủy</button>
       </form>
     </div>

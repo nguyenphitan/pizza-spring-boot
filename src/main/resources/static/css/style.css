@@ -1248,3 +1248,9 @@ th, td{
     pointer-events: none;
     background-color:#006a3277;
 }
+
+.banner-img{
+	margin: 0 auto;
+	width: auto;
+	height: 150px;
+}

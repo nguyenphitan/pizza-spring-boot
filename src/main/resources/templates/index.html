@@ -196,8 +196,12 @@
                 <i class="fas fa-long-arrow-alt-left slider-prev"></i>
 
                 <div class="slider-wrapper">
-                    <div class="slider-main">
-                        <div class="slider-item active">
+                    <div class="slider-main" >
+                    	
+                        <div class="slider-item" th:each="banner : ${banners}">
+                            <img th:src="${banner.image}" alt="" class="slider-img">
+                        </div>
+                        <!-- <div class="slider-item active">
                             <img th:src="@{/img/1.jpeg}" alt="" class="slider-img">
                         </div>
                         <div class="slider-item">
@@ -214,7 +218,7 @@
                         </div>
                         <div class="slider-item">
                             <img th:src="@{/img/6.jpeg}" alt="" class="slider-img">
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
