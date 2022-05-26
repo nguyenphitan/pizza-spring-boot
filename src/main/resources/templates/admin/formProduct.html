@@ -102,6 +102,11 @@
                                 </a>
                             </li>
                             <li class="navbar-list_item">
+		                        <a href="/admin-discount" class="navbar-list_item-link">
+		                            <span class="navbar-list_item-text">Quản lí mã giảm giá</span>
+		                        </a>
+		                    </li>
+                            <li class="navbar-list_item">
                                 <a th:href="@{/admin/seller}" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Quản lý nhân viên</span>
                                 </a>
@@ -192,15 +197,14 @@
                 </div>
                 <div class="input-wrapper">
                     <label for="categoryUpdate" class="input-label">Mục: </label>
-                    <select class="product-category" id="categoryUpdate" name="category.id" required>
+                    <select class="product-category" id="categoryUpdate" name="categoryId" required>
                         <option th:each="categoryI : ${categories}" th:value="${categoryI.id}"
                                 th:text="${categoryI.name}"></option>
                     </select>
                 </div>
                 <div class="input-wrapper">
-                    <label for="thumbnailUpdate" class="input-label">Ảnh: </label>
-                    <input type="text" class="create-input" id="thumbnailUpdate" name="thumbnail"
-                           th:field="*{thumbnail}" readonly/>
+                    <label for="thumbnailCreate" class="input-label">Ảnh: </label>
+                    <input class="t-input t-none-border" type="file" name="thumbnail" required/>
                 </div>
                 <button type="submit" class="btn-add">Cập nhật </button>
                 <button class="btn btn-success mt-20 btn-add" onclick='javascript:window.history.back()'>Hủy</button>

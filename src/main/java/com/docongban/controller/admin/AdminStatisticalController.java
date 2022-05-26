@@ -19,12 +19,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.docongban.entity.Discount;
 import com.docongban.entity.OrderAccount;
 import com.docongban.entity.OrderDetail;
 import com.docongban.payload.StatisticalResponse;
 import com.docongban.payload.TotalEachOrderAccount;
 import com.docongban.repository.OrderAccountRepository;
 import com.docongban.repository.OrderDetailRepository;
+import com.docongban.service.admin.DiscountService;
 
 /*
  * Thống kê doanh thu
@@ -42,6 +44,9 @@ public class AdminStatisticalController {
 	@Autowired
 	OrderAccountRepository orderAccountRepository;
 	
+	@Autowired
+	DiscountService discountService;
+	
 	@GetMapping
 	public ModelAndView statisticalPage() {
 		ModelAndView modelAndView = new ModelAndView("admin/statistical");
@@ -50,6 +55,8 @@ public class AdminStatisticalController {
 	
 	@PostMapping("/{month}")
 	public List<StatisticalResponse> getMonthStatistical(@PathVariable("month") String month, HttpServletRequest request) {
+		List<Discount> discounts = discountService.getAlls();
+		
 		// Mỗi order_account là một hóa đơn.
 		
 		// Lấy ra danh sách order account:
@@ -66,6 +73,8 @@ public class AdminStatisticalController {
 			Integer orderAccountId = orderDetail.getOrderAccountId();
 			Long totalPrice = orderDetail.getOrderQuantity() * orderDetail.getProductPrice();
 			Boolean check = false;
+			
+			// Tính tổng tiền của mỗi hóa đơn (mỗi order_account là một hóa đơn)
 			for(TotalEachOrderAccount totalObj : listTotals) {
 				// Nếu đã tồn tại order account id -> update total
 				if(totalObj.getId() == orderAccountId) {
@@ -88,6 +97,24 @@ public class AdminStatisticalController {
 				if( orderAccount.getId() == totalObj.getId() && orderAccount.getOrderStatus() == 1 ) {
 					totalObj.setDate(orderAccount.getOrderDate());
 					break;
+				}
+			}
+		}
+		
+		// Tính toán tổng giá trị sau khi trừ discount:
+		for(TotalEachOrderAccount totalObj : listTotals) {
+			Long totalPrice = totalObj.getTotal();
+			for(int i = 0 ; i < discounts.size() ; i++) {
+				Double nextValue = discounts.get(i).getValue();
+				if( totalPrice < nextValue ) {
+					if( i > 0 ) {
+						totalPrice -= Math.round((totalPrice * discounts.get(i-1).getDiscount()/100));
+						totalObj.setTotal(totalPrice);
+						break;						
+					}
+					else {
+						break;
+					}
 				}
 			}
 		}
@@ -122,6 +149,8 @@ public class AdminStatisticalController {
 						&& totalObjMonth == statisticalResponseMonth 
 						&& totalObjDay == statisticalResponseDay) {
 					check = true;
+					// Update:
+					statisticalResponse.setTurnover( statisticalResponse.getTurnover() + totalObj.getTotal() );
 					break;
 				}
 			}

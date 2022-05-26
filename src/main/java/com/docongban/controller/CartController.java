@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ import com.docongban.entity.Item;
 import com.docongban.entity.Order;
 import com.docongban.entity.OrderAccount;
 import com.docongban.entity.OrderDetail;
+import com.docongban.entity.Product;
+import com.docongban.payload.CartResponse;
 import com.docongban.repository.CategoryRepository;
 import com.docongban.repository.OrderAccountRepository;
 import com.docongban.repository.OrderDetailRepository;
@@ -99,11 +102,12 @@ public class CartController {
 	}
 	
 	@GetMapping()
-	public String cartProduct(Model model, HttpSession session) {
-		
+	public ModelAndView cartProduct(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView("cart");
+		HttpSession session = request.getSession();
 		//get all category 
 		List<Category> categoris = categoryRepository.findAll();
-		model.addAttribute("categoris", categoris);
+		modelAndView.addObject("categoris", categoris);
 		
 		ArrayList<Item> item_list = (ArrayList<Item>) session.getAttribute("item-list");
 		List<Item> items = null;
@@ -113,8 +117,8 @@ public class CartController {
 			items=cartService.getItemProduct(item_list);
 			long totalPrice = cartService.getTotalCart(item_list);
 			
-			model.addAttribute("items", items);
-			model.addAttribute("totalPrice", totalPrice);
+			modelAndView.addObject("items", items);
+			modelAndView.addObject("totalPrice", totalPrice);
 			
 			cartSize = items.size();
 			session.setAttribute("itemsSession", items);
@@ -122,7 +126,18 @@ public class CartController {
 			cartSize = 0;
 		}
 		session.setAttribute("cartSize", cartSize);
-		return "cart";
+		List<CartResponse> cartResponses = new ArrayList<CartResponse>();
+		if( items != null ) {
+			for(Item item : items) {
+				Product product = new Product(item.getId(), item.getTitle(), item.getPrice(), 
+						item.getThumbnail(), item.getContent(), item.getCategory(), item.getId());
+				CartResponse cartResponse = new  CartResponse(product, item.getQuantity());
+				cartResponses.add(cartResponse);
+			}
+			
+			cartService.handleDiscount(modelAndView, cartResponses, request);
+		}
+		return modelAndView;
 	}
 	
 	@GetMapping("/quantity-dec/{id}")
@@ -248,7 +263,13 @@ public class CartController {
 	 * Version: 1.0
 	 */
 	@GetMapping("/payment/{amount}")
-	public ModelAndView payment(@PathVariable("amount") Long amount) {
+	public ModelAndView payment(@PathVariable("amount") Long amount, HttpSession session) {
+		// Check token khi thanh toán:
+		String token = (String) session.getAttribute("token");
+		if( token == null ) {
+			return new ModelAndView("redirect:/auth/login");
+		}
+		
 		ModelAndView modelAndView = new ModelAndView("vnpay");
 		modelAndView.addObject("amount", amount);
 		return modelAndView;

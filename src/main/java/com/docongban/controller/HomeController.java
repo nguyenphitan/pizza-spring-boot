@@ -2,6 +2,8 @@ package com.docongban.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,21 +20,25 @@ import com.docongban.repository.CategoryRepository;
 import com.docongban.repository.ProductRepository;
 import com.docongban.service.ProductService;
 import com.docongban.service.VNPayService;
+import com.docongban.service.admin.DiscountService;
 
 @Controller
 public class HomeController {
 	
 	@Autowired
-	CategoryRepository categoryRepository;
+	private CategoryRepository categoryRepository;
 	
 	@Autowired
-	ProductRepository productRepository;
+	private ProductRepository productRepository;
 	
 	@Autowired
-	ProductService productService;
+	private ProductService productService;
 	
 	@Autowired
-	VNPayService vnPayService;
+	private VNPayService vnPayService;
+	
+	@Autowired
+	private DiscountService discountService;
 	
 	@Autowired
 	BannerRepository bannerRepository;
@@ -85,6 +91,31 @@ public class HomeController {
 		
 		return "search";
 	}
+	
+	
+	/*
+	 * Hiển thị trang quản lý mã giảm giá
+	 * Created by: NPTAN (19/05/2022)
+	 * Version: 1.0
+	 */
+	@GetMapping("/admin-discount")
+	public ModelAndView discountPage(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView("admin/discount");
+		modelAndView.addObject("discounts", discountService.getAlls());
+		return modelAndView;
+	}
+	
+	
+	/*
+	 * Hiển thị trang thêm mới mã giảm giá
+	 * Created by: NPTAN
+	 * Version: 1.0
+	 */
+	@GetMapping("/admin/add-discount")
+	public ModelAndView createDiscount() {
+		return new ModelAndView("admin/add-discount");
+	}
+	
 	
 	/*
 	 * Hiển thị thông tin sau khi thanh toán cho khách hàng
