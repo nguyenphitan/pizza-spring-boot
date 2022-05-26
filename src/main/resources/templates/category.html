@@ -224,7 +224,7 @@
                     <div class="col l-3" th:each="product : ${products}">
                         <a href="#" class="product-item">
                             <div class="product-item-show">
-                                <img th:src="${product.thumbnail}" th:alt="${product.title}" class="product-item__img"/>
+                                <img th:src="'../' + ${product.thumbnail}" th:alt="${product.title}" class="product-item__img"/>
                                 <div class="product-item__name" th:text="${product.title}"></div>
                                 <div class="product-item__decrip" th:text="${product.content}"></div>
                             </div>

@@ -50,7 +50,7 @@
                     	<!-- logined -->
                     	<div class="header-account_login" th:if="${session.fullname}">
                     		<i class="far fa-user header-account_login-icon"></i>
-                            <a href="#" class="header-account-text" th:text="${session.fullname}"></a>
+                            <a th:href="@{/auth/account/{id}(id=${session.account.id})}" class="header-account-text" th:text="${session.fullname}"></a>
                         </div>
                         
                         <!-- if not login -->

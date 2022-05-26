@@ -29,8 +29,8 @@ public class AdminBannerController {
 		List<Banner> banners = bannerRepository.findAll();
 		model.addAttribute("banners", banners);
 		
-		return "/admin/banner";
-	}
+		return "/admin/banner"; 
+	} 
 	
 	@GetMapping("/banner/create")
 	public String createBanner() {

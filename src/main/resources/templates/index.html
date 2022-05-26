@@ -201,7 +201,8 @@
                         <div class="slider-item" th:each="banner : ${banners}">
                             <img th:src="${banner.image}" alt="" class="slider-img">
                         </div>
-                        <!-- <div class="slider-item active">
+                        
+                        <div class="slider-item active" th:if="banners == null">
                             <img th:src="@{/img/1.jpeg}" alt="" class="slider-img">
                         </div>
                         <div class="slider-item">
@@ -218,7 +219,7 @@
                         </div>
                         <div class="slider-item">
                             <img th:src="@{/img/6.jpeg}" alt="" class="slider-img">
-                        </div> -->
+                        </div>
                     </div>
                 </div>
 

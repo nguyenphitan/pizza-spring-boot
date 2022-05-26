@@ -1,6 +1,5 @@
 package com.docongban.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,166 +32,160 @@ public class LoginController {
 
 	@Autowired
 	CategoryRepository categoryRepository;
-	
+
 	@Autowired
 	AccountRepository accountRepository;
-	
+
 	@Autowired(required = true)
 	AccountService accountService;
-	
+
 	@Autowired
 	AuthService authService;
-	
+
 	@Autowired
 	JwtTokenProvider jwtTokenProvider;
-	 
+
 	@GetMapping("/register")
 	public String register(Model model, HttpServletRequest request) {
-		
-		//get all category
+
+		// get all category
 		List<Category> categoris = categoryRepository.findAll();
 		model.addAttribute("categoris", categoris);
-		
+
 		// Kiểm tra token:
 		HttpSession session = request.getSession();
 		String token = (String) session.getAttribute("token");
 		// 1. Nếu đã đăng nhập -> quay về trang chủ
-		if( token != null ) {
+		if (token != null) {
 			return "redirect:/";
 		}
 		// 2. Nếu chưa đăng nhập -> vào trang đăng ký
 		return "register";
 	}
-	
+
 	@PostMapping("/register")
-	public String createAccount(
-			Model model, 
-			@RequestParam("fullname") String fullname,
-			@RequestParam("email") String email, 
-			@RequestParam("address") String address, 
-			@RequestParam("phone") String phone,
-			@RequestParam("password") String password
-		) {
-		
-		//get all category
+	public String createAccount(Model model, @RequestParam("fullname") String fullname,
+			@RequestParam("email") String email, @RequestParam("address") String address,
+			@RequestParam("phone") String phone, @RequestParam("password") String password) {
+
+		// get all category
 		List<Category> categoris = categoryRepository.findAll();
 		model.addAttribute("categoris", categoris);
 
 		boolean accountCheck = accountService.checkAccountExisted(phone);
-		
-		if(!accountCheck ) {
+
+		if (!accountCheck) {
 			model.addAttribute("fullname", fullname);
 			model.addAttribute("email", email);
 			model.addAttribute("address", address);
 			model.addAttribute("phone", phone);
 			model.addAttribute("phoneExisted", "Số điện thoại đã được đăng kí vui lòng thử với số khác");
-			
+
 			return "register";
 		}
-		
+
 		// Xử lý service liên quan đến đăng ký.
 		RegisterRequest registerRequest = new RegisterRequest(phone, password, fullname, email, address, password);
 		authService.handleRegister(registerRequest);
-		
+
 		return "redirect:/auth/login";
 	}
-	
+
 	@GetMapping("/login")
 	public String login(Model model, HttpServletRequest request) {
-		
-		//get all category
+
+		// get all category
 		List<Category> categoris = categoryRepository.findAll();
 		model.addAttribute("categoris", categoris);
-		
+
 		// Kiểm tra token:
 		HttpSession session = request.getSession();
 		String token = (String) session.getAttribute("token");
 		// 1. Nếu đã đăng nhập -> quay về trang chủ
-		if( token != null ) {
+		if (token != null) {
 			return "redirect:/";
 		}
 		// 2. Nếu chưa đăng nhập -> vào trang đăng nhập
 		return "login";
 	}
-	
+
 	@PostMapping("/login")
-	public String checkLogin(
-			Model model, 
-			@RequestParam("phone") String phone, 
-			@RequestParam("password") String password,
-			HttpServletRequest request
-		) throws Exception {
-		
+	public String checkLogin(Model model, @RequestParam("phone") String phone,
+			@RequestParam("password") String password, HttpServletRequest request) throws Exception {
+
 		HttpSession session = request.getSession();
-		
-		//get all category.
+
+		// get all category.
 		List<Category> categoris = categoryRepository.findAll();
 		model.addAttribute("categoris", categoris);
-		
+
 		// Xử lý service liên quan đến đăng nhập.
 		String token = authService.handleLogin(phone, password, request);
-		
+
 		// Nếu đăng nhập thành công -> lấy ra Account từ jwt:
-		if(token != null) {
+		if (token != null) {
 			Integer accountId = jwtTokenProvider.getAccountIdFromJWT(token);
 			Account account = accountRepository.getById(accountId);
 			session.setAttribute("account", account);
 			session.setAttribute("fullname", account.getFullname());
-			session.setMaxInactiveInterval(60*60*24);
+			session.setMaxInactiveInterval(60 * 60 * 24);
 			return "redirect:/";
 		} else {
 			model.addAttribute("phone", phone);
 			model.addAttribute("error", "Vui lòng kiểm tra lại số điện thoại hoặc mật khẩu");
 		}
-		 
+
 		return "login";
 	}
-	
+
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
 		authService.handleLogout(request, response);
 		return "redirect:/auth/login";
 	}
-	
+
 	@GetMapping("/account/{id}")
 	public String accountDetail(Model model, @PathVariable int id) {
-		
-		//get all category.
+
+		// get all category.
 		List<Category> categoris = categoryRepository.findAll();
 		model.addAttribute("categoris", categoris);
-		
+
 		model.addAttribute("updateAccount", accountRepository.findById(id).get());
-		
+
 		return "accountDetail";
 	}
-	
+
 	@GetMapping("/updateAccount/{id}")
 	public String updateAccount(Model model, @PathVariable int id) {
-		
-		//get all category.
+
+		// get all category.
 		List<Category> categoris = categoryRepository.findAll();
 		model.addAttribute("categoris", categoris);
-		
+
 		model.addAttribute("updateAccount", accountRepository.findById(id).get());
-		
+
 		return "updateAccount";
 	}
-	
+
 	@PostMapping("/updateAccount/save")
-	public String handleUpdateAccount(@ModelAttribute("updateAccount") Account account, HttpServletRequest request, HttpServletResponse response) {
-		
+	public String handleUpdateAccount(@ModelAttribute("updateAccount") Account account, HttpServletRequest request,
+			HttpServletResponse response) {
+
 //		//get datetime now 
 //		Date d=new Date();
 //		account.setCreatedAt(new java.sql.Timestamp(d.getTime()));
 //		account.setUpdatedAt(new java.sql.Timestamp(d.getTime()));
 //		accountRepository.save(account);
 //		
-		UpdateAccountRequest updateAccountRequest = new UpdateAccountRequest(account.getPhone(), account.getPassword(),account.getId(),account.getFullname(), account.getEmail(), account.getAddress(), account.getPassword());
+		UpdateAccountRequest updateAccountRequest = new UpdateAccountRequest(account.getPhone(), account.getPassword(),
+				account.getId(), account.getFullname(), account.getEmail(), account.getAddress(),
+				account.getPassword());
 		authService.handleUpdateAccount(updateAccountRequest);
-		
+
 		authService.handleLogout(request, response);
-		
+
 		return "redirect:/auth/login";
 	}
-		
-	}
+
+}
