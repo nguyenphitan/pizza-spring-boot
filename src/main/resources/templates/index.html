@@ -95,7 +95,7 @@
                     	<!-- logined -->
                     	<div class="header-account_login" th:if="${session.fullname}">
                     		<i class="far fa-user header-account_login-icon"></i>
-                            <a href="#" class="header-account-text" th:text="${session.fullname}"></a>
+                            <a th:href="@{/auth/account/{id}(id=${session.account.id})}" class="header-account-text" th:text="${session.fullname}"></a>
                         </div>
                         
                         <!-- if not login -->
@@ -196,8 +196,12 @@
                 <i class="fas fa-long-arrow-alt-left slider-prev"></i>
 
                 <div class="slider-wrapper">
-                    <div class="slider-main">
-                        <div class="slider-item active">
+                    <div class="slider-main" >
+                    	
+                        <div class="slider-item" th:each="banner : ${banners}">
+                            <img th:src="${banner.image}" alt="" class="slider-img">
+                        </div>
+                        <!-- <div class="slider-item active">
                             <img th:src="@{/img/1.jpeg}" alt="" class="slider-img">
                         </div>
                         <div class="slider-item">
@@ -214,7 +218,7 @@
                         </div>
                         <div class="slider-item">
                             <img th:src="@{/img/6.jpeg}" alt="" class="slider-img">
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 

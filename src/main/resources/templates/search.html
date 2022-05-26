@@ -26,7 +26,7 @@
                     <a href="/" class="header-logo-link">
                         <div class="header-logo"></div>
                     </a>
-
+					
                     <div class="header-delivery-with-serach">
                         <div class="header-delivery">
                             <div class="header-delivery_item active">
@@ -95,7 +95,7 @@
                     	<!-- logined -->
                     	<div class="header-account_login" th:if="${session.fullname}">
                     		<i class="far fa-user header-account_login-icon"></i>
-                            <a href="#" class="header-account-text" th:text="${session.fullname}"></a>
+                            <a th:href="@{/auth/account/{id}(id=${session.account.id})}" class="header-account-text" th:text="${session.fullname}"></a>
                         </div>
                         
                         <!-- if not login -->
@@ -126,7 +126,7 @@
                                 </a>
                             </li>
                             <li class="navbar-list_item" th:if="${session.roleAccount == 'ADMIN'}">
-                                <a th:href="${session.roleAccount == 'ADMIN' ? '/admin/products' : '#'}" class="navbar-list_item-link">
+                                <a th:href="${session.roleAccount == 'ADMIN' ? '/admin/category' : '#'}" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Quản lý gian hàng</span>
                                 </a>
                             </li>
@@ -161,11 +161,12 @@
                             <a href="" class="navbar_cart-icon-link">
                                 <i class="fas fa-shopping-cart navbar_cart-icon"></i>
                             </a>
-                            <a href="/cart" class="navbar_cart-link">
+                            <a th:href="@{/cart}" class="navbar_cart-link">
                                 <span class="navbar_cart-text">Giỏ hàng</span>
                             </a>
-                            <div class="navbar_cart-amount">
-                                <span class="navbar_cart-count" th:text="${(session.cartSize == 0 || session.itemsSession == null) ? '0' : session.cartSize}"></span>
+                            
+                            <div class="navbar_cart-amount" >
+                                <span class="navbar_cart-count" th:text="${(session.cartSize == null || session.cartSize == 0) ? '0' : session.cartSize}"></span>
                             </div>
 
                             <div class="navbar_cart-list" style="min-height: 125px" th:if="${session.cartSize}">

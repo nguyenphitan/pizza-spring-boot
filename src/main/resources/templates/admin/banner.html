@@ -82,17 +82,17 @@
                                 </a>
                             </li>
                         	<li class="navbar-list_item">
-                                <a href="/admin/category" class="navbar-list_item-link">
+                                <a href="/admin/category" class="navbar-list_item-link" >
                                     <span class="navbar-list_item-text">Quản lý danh mục sản phẩm</span>
                                 </a>
                             </li>
                             <li class="navbar-list_item">
-                                <a href="/admin/products" class="navbar-list_item-link" style="background-color: #005226;">
+                                <a href="/admin/products" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Quản lý sản phẩm</span>
                                 </a>
                             </li>
                             <li class="navbar-list_item">
-                                <a th:href="@{/admin/banner}" class="navbar-list_item-link">
+                                <a class="navbar-list_item-link" style="background-color: #005226;">
                                     <span class="navbar-list_item-text">Quản lý banner</span>
                                 </a>
                             </li>
@@ -101,11 +101,6 @@
                                     <span class="navbar-list_item-text">Quản lý hóa đơn</span>
                                 </a>
                             </li>
-                            <li class="navbar-list_item">
-		                       <a href="/admin-discount" class="navbar-list_item-link">
-		                           <span class="navbar-list_item-text">Quản lí mã giảm giá</span>
-		                       </a>
-		                   </li>
                             <li class="navbar-list_item">
                                 <a th:href="@{/admin/seller}" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Quản lý nhân viên</span>
@@ -146,13 +141,13 @@
     <div style="margin-bottom: 50px;" class="container">
         <div class="grid fix-wide" style="padding-top: 45px">
             <div class="container_header">
-                <span class="container_header-text">Quản lý sản phẩm</span>
+                <span class="container_header-text">Quản lý banner</span>
             </div>
         </div>
 
         <div class="grid fix-wide">
             <button class="btn btn-success mt-20">
-                <a th:href="@{/admin/products/create}" class="btn-link">
+                <a th:href="@{/admin/banner/create}" class="btn-link">
                     <span class="add-new-text">Thêm mới</span>
                 </a>
             </button>
@@ -164,34 +159,46 @@
                 <tr style="background-color: rgba(31, 163, 101, 0.4);">
                     <th scope="col" class="bill-index">STT</th>
                     <th scope="col" class="bill-information">Ảnh</th>
-                    <th scope="col" class="bill-information">Tên</th>
-                    <th scope="col" class="bill-information">Mô tả</th>
-                    <th scope="col" class="bill-information">Giá</th>
+                    <th scope="col" class="bill-order-date">Trạng thái</th>
                     <th scope="col" class="bill-order-date">Sửa</th>
                     <th scope="col" class="bill-order-date">Xóa</th>
                 </tr>
                 </thead>
-                <tbody class="table-bill-title" th:each="product,iterStat : ${products}">
-                <tr>
+                <tbody class="table-bill-title" th:each="banner,iterStat : ${banners}">
+                <tr class="bill-information-detail">
                     <th scope="row" class="bill-index" th:text="${iterStat.count}"></th>
                     <td>
-                        <img th:src="@{'../' + ${product.thumbnail}}" alt=""/>
+                    	<img th:src="${banner.image}" class="banner-img" alt=""/>
+                       <!--  <span style="width:250px;display:inline-block" th:text="${banner.image}"></span> -->
                     </td>
-                    <td th:text="${product.title}"></td>
-                    <td th:text="${product.content}"></td>
-                    <td th:text="${product.price} + 'đ'"></td>
                     <td>
-                        <div class="w-100 flex justify-center">
-                            <a th:href="@{/admin/products/{id}/update(id=${product.id})}" class="btn-link">
+                        <div class="flex" style="flex-direction: column; align-items: center;">
+                        	<div th:text="${banner.usedStatus}" style="font-weight: 700; margin-bottom: 30px;"></div>
+                        
+                            <a th:href="@{/admin/banner/{id}/usedstatus(id=${banner.id})}" class="btn-link" th:if="${banner.usedStatus=='NONE'}">
+                                <button class="btn btn-success" style="background-color: #005226">
+                                    Thêm
+                                </button>
+                            </a>
+                            <a th:href="@{/admin/banner/{id}/nonestatus(id=${banner.id})}" class="btn-link" th:if="${banner.usedStatus=='USED'}">
+                                <button class="btn btn-success" style="background-color: #dc3545">
+                                    Bỏ
+                                </button>
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="flex justify-center">
+                            <a th:href="@{/admin/banner/{id}/update(id=${banner.id})}" class="btn-link">
                                 <button class="btn btn-warning">
                                     Sửa
                                 </button>
                             </a>
                         </div>
                     </td>
-                    <td>
-                        <div class="w-100 flex justify-center">
-                            <a th:href="@{/admin/products/{id}/delete(id=${product.id})}" class="btn-link">
+                    <td >
+                        <div class="flex justify-center">
+                            <a th:href="@{/admin/banner/{id}/delete(id=${banner.id})}" class="btn-link">
                                 <button class="btn btn-success">
                                     Xoá
                                 </button>

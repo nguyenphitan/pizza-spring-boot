@@ -1,5 +1,6 @@
 package com.docongban.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +21,7 @@ import com.docongban.entity.Account;
 import com.docongban.entity.Category;
 import com.docongban.jwt.JwtTokenProvider;
 import com.docongban.payload.RegisterRequest;
+import com.docongban.payload.UpdateAccountRequest;
 import com.docongban.repository.AccountRepository;
 import com.docongban.repository.CategoryRepository;
 import com.docongban.service.AccountService;
@@ -149,4 +153,46 @@ public class LoginController {
 		authService.handleLogout(request, response);
 		return "redirect:/auth/login";
 	}
-}
+	
+	@GetMapping("/account/{id}")
+	public String accountDetail(Model model, @PathVariable int id) {
+		
+		//get all category.
+		List<Category> categoris = categoryRepository.findAll();
+		model.addAttribute("categoris", categoris);
+		
+		model.addAttribute("updateAccount", accountRepository.findById(id).get());
+		
+		return "accountDetail";
+	}
+	
+	@GetMapping("/updateAccount/{id}")
+	public String updateAccount(Model model, @PathVariable int id) {
+		
+		//get all category.
+		List<Category> categoris = categoryRepository.findAll();
+		model.addAttribute("categoris", categoris);
+		
+		model.addAttribute("updateAccount", accountRepository.findById(id).get());
+		
+		return "updateAccount";
+	}
+	
+	@PostMapping("/updateAccount/save")
+	public String handleUpdateAccount(@ModelAttribute("updateAccount") Account account, HttpServletRequest request, HttpServletResponse response) {
+		
+//		//get datetime now 
+//		Date d=new Date();
+//		account.setCreatedAt(new java.sql.Timestamp(d.getTime()));
+//		account.setUpdatedAt(new java.sql.Timestamp(d.getTime()));
+//		accountRepository.save(account);
+//		
+		UpdateAccountRequest updateAccountRequest = new UpdateAccountRequest(account.getPhone(), account.getPassword(),account.getId(),account.getFullname(), account.getEmail(), account.getAddress(), account.getPassword());
+		authService.handleUpdateAccount(updateAccountRequest);
+		
+		authService.handleLogout(request, response);
+		
+		return "redirect:/auth/login";
+	}
+		
+	}
