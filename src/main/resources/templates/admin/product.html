@@ -170,7 +170,7 @@
                 <tr>
                     <th scope="row" class="bill-index" th:text="${iterStat.count}"></th>
                     <td>
-                        <img th:src="${product.thumbnail}" alt=""/>
+                        <img th:src="@{'../' + ${product.thumbnail}}" alt=""/>
                     </td>
                     <td th:text="${product.title}"></td>
                     <td th:text="${product.content}"></td>
