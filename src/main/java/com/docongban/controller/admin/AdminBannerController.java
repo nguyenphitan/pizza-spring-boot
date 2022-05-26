@@ -2,6 +2,8 @@ package com.docongban.controller.admin;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,5 +60,35 @@ public class AdminBannerController {
 		
 		bannerRepository.delete(banner);
 		return "redirect:/admin/banner";
+	}
+	
+	//set used status
+	@Transactional
+	@GetMapping("/banner/{id}/usedstatus")
+	public String changeUsedStatus(@PathVariable int id) {
+		
+		bannerRepository.updateUsedStatus(id);
+		
+		return "redirect:/admin/banner";
+	}
+	
+	//set used status
+	@Transactional
+	@GetMapping("/banner/{id}/nonestatus")
+	public String changeNoneStatus(@PathVariable int id) {
+		
+		bannerRepository.updateNoneStatus(id);
+		
+		return "redirect:/admin/banner";
+	}
+	
+	//get view usedstatus
+	@GetMapping("/banner/view")
+	public String getViewBanner(Model model) {
+		
+		List<Banner> banners = bannerRepository.getViewBanner();
+		model.addAttribute("banners", banners);
+		
+		return "/admin/banner/view";
 	}
 }

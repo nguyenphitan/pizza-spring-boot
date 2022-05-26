@@ -151,11 +151,6 @@
                     <span class="add-new-text">Thêm mới</span>
                 </a>
             </button>
-            <button class="btn btn-success mt-20">
-                <a th:href="@{/admin/banner/view}" class="btn-link">
-                    <span class="add-new-text">Danh sách banner hiển thị</span>
-                </a>
-            </button>
         </div>
 
         <div class="grid fix-wide">
@@ -164,6 +159,7 @@
                 <tr style="background-color: rgba(31, 163, 101, 0.4);">
                     <th scope="col" class="bill-index">STT</th>
                     <th scope="col" class="bill-information">Ảnh</th>
+                    <th scope="col" class="bill-order-date">Trạng thái</th>
                     <th scope="col" class="bill-order-date">Sửa</th>
                     <th scope="col" class="bill-order-date">Xóa</th>
                 </tr>
@@ -176,7 +172,23 @@
                        <!--  <span style="width:250px;display:inline-block" th:text="${banner.image}"></span> -->
                     </td>
                     <td>
-                        <div class="w-100 flex justify-center">
+                        <div class="flex" style="flex-direction: column; align-items: center;">
+                        	<div th:text="${banner.usedStatus}" style="font-weight: 700; margin-bottom: 30px;"></div>
+                        
+                            <a th:href="@{/admin/banner/{id}/usedstatus(id=${banner.id})}" class="btn-link" th:if="${banner.usedStatus=='NONE'}">
+                                <button class="btn btn-success" style="background-color: #005226">
+                                    Thêm
+                                </button>
+                            </a>
+                            <a th:href="@{/admin/banner/{id}/nonestatus(id=${banner.id})}" class="btn-link" th:if="${banner.usedStatus=='USED'}">
+                                <button class="btn btn-success" style="background-color: #dc3545">
+                                    Bỏ
+                                </button>
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="flex justify-center">
                             <a th:href="@{/admin/banner/{id}/update(id=${banner.id})}" class="btn-link">
                                 <button class="btn btn-warning">
                                     Sửa
@@ -185,7 +197,7 @@
                         </div>
                     </td>
                     <td >
-                        <div class="w-100 flex justify-center">
+                        <div class="flex justify-center">
                             <a th:href="@{/admin/banner/{id}/delete(id=${banner.id})}" class="btn-link">
                                 <button class="btn btn-success">
                                     Xoá
