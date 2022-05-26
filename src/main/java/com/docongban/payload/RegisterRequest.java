@@ -1,7 +1,5 @@
 package com.docongban.payload;
 
-import java.util.Date;
-
 import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
