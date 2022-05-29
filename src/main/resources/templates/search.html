@@ -197,23 +197,8 @@
 
                 <div class="slider-wrapper">
                     <div class="slider-main">
-                        <div class="slider-item active">
-                            <img th:src="@{/img/1.jpeg}" alt="" class="slider-img">
-                        </div>
-                        <div class="slider-item">
-                            <img th:src="@{/img/2.jpeg}" alt="" class="slider-img">
-                        </div>
-                        <div class="slider-item">
-                            <img th:src="@{/img/3.jpeg}" alt="" class="slider-img">
-                        </div>
-                        <div class="slider-item">
-                            <img th:src="@{/img/4.jpeg}" alt="" class="slider-img">
-                        </div>
-                        <div class="slider-item">
-                            <img th:src="@{/img/5.jpeg}" alt="" class="slider-img">
-                        </div>
-                        <div class="slider-item">
-                            <img th:src="@{/img/6.jpeg}" alt="" class="slider-img">
+                        <div class="slider-item" th:each="banner : ${banners}">
+                            <img th:src="${banner.image}" alt="" class="slider-img">
                         </div>
                     </div>
                 </div>
@@ -235,7 +220,7 @@
             <div class="grid fix-wide">
                 <div class="row">
                     <div class="col l-3" th:each="product : ${products}">
-                        <a href="#" class="product-item">
+                        <a th:href="@{/cart/addToCart/{id}(id=${product.id}) }" class="product-item">
                             <div class="product-item-show">
                                 <img th:src="${product.thumbnail}" th:alt="${product.title}" class="product-item__img"/>
                                 <div class="product-item__name" th:text="${product.title}"></div>
@@ -371,9 +356,12 @@
         <div class="footer__copyright">
             <span class="footer__copyright-text">Copyright © 2021 The Pizza Company. Cloned by BanDC</span>
         </div>
+        <div class="zalo-chat-widget" data-oaid="524847969944307860" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="0" data-width="" data-height=""></div>
     </div>
 
     <script th:src="@{/js/main.js}"></script>
+    
+    <script src="https://sp.zalo.me/plugins/sdk.js"></script>
 
 </body>
 </html>

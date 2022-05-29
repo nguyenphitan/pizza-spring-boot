@@ -25,5 +25,4 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
 	@Transactional
 	@Query(value = "UPDATE account SET role = ?1 WHERE id = ?2 ", nativeQuery = true)
 	public Integer addSeller(String role , Integer accountId);
-
 }
