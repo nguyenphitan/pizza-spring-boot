@@ -3,6 +3,7 @@ package com.docongban.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,7 +45,7 @@ public class HomeController {
 	BannerRepository bannerRepository;
 	
 	@GetMapping("/")
-	public String home(Model model) {
+	public String home(Model model, HttpServletRequest request) {
 		
 		//get all category
 		List<Category> categoris = categoryRepository.findAll();
@@ -52,7 +53,9 @@ public class HomeController {
 		
 		//get banner
 		List<Banner> banners = bannerRepository.getViewBanner();
-		model.addAttribute("banners", banners);
+//		model.addAttribute("banners", banners);
+		HttpSession session = request.getSession();
+		session.setAttribute("banners", banners);
 		
 		//get all product
 		List<Product> products = productRepository.findAll();
