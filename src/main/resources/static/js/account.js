@@ -13,6 +13,7 @@
 		Created by: NPTAN (24/04/2022)
 		Version: 1.0
 	*/
+	
 	let roles = $('.account_role');
 	console.log(roles);
 	for(let role of roles) {
