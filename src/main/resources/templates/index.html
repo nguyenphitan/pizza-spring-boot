@@ -127,12 +127,12 @@
                             </li>
                             <li class="navbar-list_item" th:if="${session.roleAccount == 'ADMIN'}">
                                 <a th:href="${session.roleAccount == 'ADMIN' ? '/admin/category' : '#'}" class="navbar-list_item-link">
-                                    <span class="navbar-list_item-text">Quản lý gian hàng</span>
+                                    <span class="navbar-list_item-text">Quản lý cửa hàng</span>
                                 </a>
                             </li>
                             <li class="navbar-list_item" th:if="${session.roleAccount == 'SELLER'}">
                                 <a th:href="${session.roleAccount == 'SELLER' ? '/admin/bill' : '#'}" class="navbar-list_item-link">
-                                    <span class="navbar-list_item-text">Quản lý hóa đơn</span>
+                                    <span class="navbar-list_item-text">Quản lý gian hàng</span>
                                 </a>
                             </li>
                             <li class="navbar-list_item" th:each="category : ${categoris}">

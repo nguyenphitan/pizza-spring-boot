@@ -82,7 +82,7 @@
                                 </a>
                             </li>
                         	<li class="navbar-list_item">
-                                <a href="/admin/category" class="navbar-list_item-link" >
+                                <a href="/admin/category" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Quản lý danh mục sản phẩm</span>
                                 </a>
                             </li>
@@ -92,7 +92,7 @@
                                 </a>
                             </li>
                             <li class="navbar-list_item">
-                                <a class="navbar-list_item-link" style="background-color: #005226;">
+                                <a th:href="@{/admin/banner}" class="navbar-list_item-link" style="background-color: #005226;">
                                     <span class="navbar-list_item-text">Quản lý banner</span>
                                 </a>
                             </li>
@@ -102,31 +102,31 @@
                                 </a>
                             </li>
                             <li class="navbar-list_item">
-                                <a href="/admin-discount" class="navbar-list_item-link">
+                                <a href="/admin-discount" class="navbar-list_item-link" th:unless="${session.roleAccount == 'SELLER'}">
                                     <span class="navbar-list_item-text">Quản lí mã giảm giá</span>
                                 </a>
                             </li>
-                            <li class="navbar-list_item">
+                            <li class="navbar-list_item" th:unless="${session.roleAccount == 'SELLER'}">
                                 <a th:href="@{/admin/seller}" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Quản lý nhân viên</span>
                                 </a>
                             </li>
-                            <li class="navbar-list_item">
+                            <li class="navbar-list_item" th:unless="${session.roleAccount == 'SELLER'}">
                                 <a th:href="@{/admin/account}" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Quản lý tài khoản</span>
                                 </a>
                             </li>
-                            <li class="navbar-list_item">
+                            <li class="navbar-list_item" th:unless="${session.roleAccount == 'SELLER'}">
                                 <a href="/admin/statistical" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Thống kê doanh thu</span>
                                 </a>
                             </li>
-                            <li class="navbar-list_item">
+                            <li class="navbar-list_item" th:unless="${session.roleAccount == 'SELLER'}">
                                 <a href="/admin/timekeeping" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Chấm công</span>
                                 </a>
                             </li>
-                            <li class="navbar-list_item">
+                            <li class="navbar-list_item" th:unless="${session.roleAccount == 'SELLER'}">
                                 <a href="/admin/payroll" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Tính lương</span>
                                 </a>
