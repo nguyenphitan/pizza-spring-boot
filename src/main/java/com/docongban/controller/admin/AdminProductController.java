@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -107,13 +106,34 @@ public class AdminProductController {
     }
 
     @PostMapping("/{id}/update")
-    ModelAndView updateProduct(@PathVariable Integer id,@ModelAttribute("updateProduct") Product updateProduct) {
+    ModelAndView updateProduct(
+    		@PathVariable Integer id,
+    		@RequestParam("price") Long price,
+    		@RequestParam("title") String title, 
+    		@RequestParam("content") String content,
+    		@RequestParam("categoryId") Integer categoryId,
+    		@RequestParam("thumbnail") MultipartFile multipartFile
+    ) throws IOException {
+    	
+    	Path staticPath = Paths.get("src/main/resources/static");
+        Path imagePath = Paths.get("img");
+        // Kiểm tra tồn tại hoặc tạo thư mục /static/images
+        if (!Files.exists(CURRENT_FOLDER.resolve(staticPath).resolve(imagePath))) {
+            Files.createDirectories(CURRENT_FOLDER.resolve(staticPath).resolve(imagePath));
+        }
+        Path file = CURRENT_FOLDER.resolve(staticPath).resolve(imagePath).resolve(multipartFile.getOriginalFilename());
+        try (OutputStream os = Files.newOutputStream(file)) {
+            os.write(multipartFile.getBytes());
+        }
+    	
+        Category category = new Category();
+    	category.setId(categoryId);
         Product toUpdateProduct = productRepository.findProductById(id);
-        toUpdateProduct.setTitle(updateProduct.getTitle());
-        toUpdateProduct.setThumbnail(updateProduct.getThumbnail());
-        toUpdateProduct.setContent(updateProduct.getContent());
-        toUpdateProduct.setPrice(updateProduct.getPrice());
-        toUpdateProduct.setCategory(updateProduct.getCategory());
+        toUpdateProduct.setTitle(title);
+        toUpdateProduct.setThumbnail(imagePath.resolve(multipartFile.getOriginalFilename()).toString());
+        toUpdateProduct.setContent(content);
+        toUpdateProduct.setPrice(price);
+        toUpdateProduct.setCategory(category);
         productRepository.save(toUpdateProduct);
         return new ModelAndView("redirect:" + "/admin/products");
     }

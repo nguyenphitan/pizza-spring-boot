@@ -6,7 +6,6 @@ public class Item extends Product {
 	private long prices;
 	
 	public Item() {
-		
 	}
 
 	public int getQuantity() {

@@ -28,6 +28,24 @@ html {
 	margin-right: 16px;
 }
 
+
+.t-add-area a {
+	display: inline-block;
+	min-width: 150px;
+	border: none;
+	font-size: 1.8rem;
+	text-decoration: none;
+	color: #fff;
+	padding: 8px 4px;
+	margin-left: 16px;
+	border-radius: 4px;
+	background-color: var(--primary-color);
+}
+
+.t-add-area a:hover {
+	background-color: #005226;
+}
+
 /* header */
 .header{
     height:115px;
@@ -442,6 +460,143 @@ html {
     -webkit-line-clamp: 1;
 
 }
+
+.t-m-w-134 {
+	min-width: 134px !important;
+}
+
+.t-m-top-30 {
+	margin-top: 30px !important;
+}
+
+.t-top-8 {
+	margin-top: 8px !important;
+}
+
+.t-flex {
+	display: flex;
+	align-items: center;
+}
+
+.t-right-16 {
+	margin-right: 16px; 
+}
+
+.t-right-50 {
+	margin-right: 50px;
+}
+.t-no-click {
+	pointer-events: none;
+}
+
+.t-div-function {
+	width: 64px;
+	height: 36px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	position: relative;
+}
+
+.t-active {
+	border: 1px solid var(--primary-color);
+	border-radius: 4px;
+}
+
+.t-function-box {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	background: #fff;
+	z-index: 1;
+	width: 150px;
+	text-align: center;
+	border: 1px solid var(--primary-color);
+	border-radius: 4px;
+	display: none;
+}
+
+.t-function-box a {
+	display: block;
+	padding: 4px 2px;
+	text-decoration: none;
+	color: unset;
+	border-radius: 4px;
+}
+
+.t-function-box a:hover {
+	background-color: var(--primary-color);
+	color: #fff;
+}
+
+.t-add-area {
+	margin-top: 50px;
+	text-align: right;
+}
+
+.t-add-area a {
+	display: inline-block;
+	min-width: 150px;
+	border: none;
+	font-size: 1.8rem;
+	text-decoration: none;
+	color: #fff;
+	padding: 8px 4px;
+	margin-left: 16px;
+	border-radius: 4px;
+	background-color: var(--primary-color);
+}
+
+.t-add-area a:hover {
+	background-color: #005226;
+}
+
+.t-hide {
+	display: none !important;
+}
+
+.t-relative {
+	position: relative;
+}
+
+.t-absolute {
+	position: absolute;
+}
+
+.t-outline-none {
+	outline: none !important;
+}
+
+.t-title-1 {
+	width: 250px;
+	display:inline-block;
+}
+
+.t-title-2 {
+	width:80px;
+	display:inline-block; 
+	text-align: right;
+}
+.t-text-right {
+	text-align: right;	
+}
+
+.t-inline-block {
+	display: inline-block;
+}
+
+.t-w-100 {
+	width: 100px !important;
+}
+
+.t-m-right-150 {
+	margin-right: 150px;
+}
+.t-hide {
+	display: none !important;
+}
 .navbar_cart-item__price{
     font-size: 1.6rem;
     font-weight: bold;
@@ -753,7 +908,7 @@ img{
     color: rgba(17, 17, 17, 0.9);
     margin: auto;
     margin-right: 55px;
-    width: 85px;
+    width: 110px;
 }
 .product-cart__price-old{
     font-size: 1.8rem;

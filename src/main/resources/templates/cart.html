@@ -219,12 +219,43 @@
                         </div>
                     </div>         
                 </div>
-                <div class="product-pay" style="padding-bottom: 20px;">
+                <div class="product-pay" style="padding-bottom: 8px;">
                     <span class="product-pay__title">Tổng tiền:</span>
-                    <span class="product-pay__price t-total-price" th:text="${totalPrice}"></span> <span class="product-pay__price">đ</span>
+                    <span class="product-pay__price" th:text="${totalPrice}"></span> <strong class="product-pay__price">.0 đ</strong>
                 </div>
+                <!-- Begin select pay method -->
                 <div class="product-pay" style="display: block; text-align: right; padding-top: 0;">
-                    <div style="text-align: left; display: inline-block;">
+                	
+                	<!-- Handle discount -->
+	               	<div class="t-inline-block t-top-8">
+						<span style="margin-left: 30px; font-style: italic; color: red">
+							<span>( Mua thêm</span> 
+							<span class="t-need" th:text="${valueToNextDiscount}"></span>
+							<span>để được giảm</span>
+							<span th:text="${nextDiscount}"></span>
+							<span>% )</span>	
+						</span>													
+						<span style="color: blue;">
+							<strong>Giảm giá:</strong> 
+							<strong th:text="${currentDiscount}"></strong>
+							<strong>%</strong>
+						</span>
+					</div>
+					<div class="t-inline-block t-top-8" style="color: black">
+						<strong>Trừ:</strong>
+						<strong>-</strong>
+						<strong th:text="${discountValue}"></strong>
+						<strong>đ</strong>
+					</div>
+					<div class="t-top-8">
+						<strong>Thành tiền:</strong> 
+						<strong class="t-total-price" th:text="${realCart}"></strong>
+						<strong>.0 đ</strong>
+					</div>
+	               	<!-- End handle discount -->
+	                
+                
+                    <div class="t-m-top-30" style="text-align: left; display: inline-block;">
                     	<span class="product-pay__title">Chọn phương thức thanh toán:</span> <br>
 	                   	<div class="t-flex-center">
 	                   		<input class="t-right-16" style="width: 20px; height: 20px;" id="pay-offline" type="radio" name="paymethod" checked> <label for="pay-offline">Thanh toán khi nhận hàng</label> <br> 
@@ -234,6 +265,9 @@
 	                   	</div>
                     </div>
                 </div>
+                <!-- End select pay method -->
+                
+                
                 <div class="product-btn">
                     <a href="./" class="product-btn__return">
                         <i class="fas fa-arrow-left"></i>

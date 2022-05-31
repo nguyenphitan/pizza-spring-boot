@@ -50,7 +50,7 @@
                     	<!-- logined -->
                     	<div class="header-account_login" th:if="${session.fullname}">
                     		<i class="far fa-user header-account_login-icon"></i>
-                            <a href="#" class="header-account-text" th:text="${session.fullname}"></a>
+                            <a th:href="@{/auth/account/{id}(id=${session.account.id})}" class="header-account-text" th:text="${session.fullname}"></a>
                         </div>
                         
                         <!-- if not login -->
@@ -98,6 +98,11 @@
                             <li class="navbar-list_item">
                                 <a th:href="@{/admin/bill}" class="navbar-list_item-link" style="background-color: #005226;">
                                     <span class="navbar-list_item-text">Quản lý hóa đơn</span>
+                                </a>
+                            </li>
+                            <li class="navbar-list_item">
+                                <a href="/admin-discount" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Quản lí mã giảm giá</span>
                                 </a>
                             </li>
                             <li class="navbar-list_item" th:unless="${session.roleAccount == 'SELLER'}">
@@ -172,7 +177,7 @@
                         <tr th:each="orderDetail : ${orderDetails}" th:if="${orderDetail.orderAccountId == orderAccount.id}">
                             <td></td>
                             <td class="bill-product-detail">    
-                                <img th:src="${orderDetail.productThumbnail}" class="bill-product-detail-img" style="max-width:100px"/>
+                                <img th:src="@{'../' + ${orderDetail.productThumbnail} }" class="bill-product-detail-img" style="max-width:100px"/>
                                 <span th:text="${orderDetail.productTitle}" style="width:450px;display:inline-block;padding-left:20px;"></span>
                                 <span th:text="${orderDetail.orderQuantity}" style="width:150px;display:inline-block;text-align:center"></span>
                                 <span th:text="${orderDetail.productPrice + ' đ'}" style="display:inline-block;padding-left:50px;"></span>
