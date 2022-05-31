@@ -18,6 +18,7 @@ public class OrderAccount {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	private int accountId;
 	private String accountFullname;
 	private String accountPhone;
 	private String accountEmail;

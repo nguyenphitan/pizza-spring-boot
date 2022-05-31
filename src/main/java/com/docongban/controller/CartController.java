@@ -215,6 +215,7 @@ public class CartController {
 			items = cartService.getItemProduct(item_list);
 			 
 			OrderAccount orderAccount = new OrderAccount();
+			orderAccount.setAccountId(accountSession.getId());
 			orderAccount.setAccountFullname(accountSession.getFullname());
 			orderAccount.setAccountPhone(accountSession.getPhone());
 			orderAccount.setAccountEmail(accountSession.getEmail());

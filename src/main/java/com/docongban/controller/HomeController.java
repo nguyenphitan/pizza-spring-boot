@@ -71,6 +71,10 @@ public class HomeController {
 		List<Category> categoris = categoryRepository.findAll();
 		model.addAttribute("categoris", categoris);
 		
+		//get banner
+		List<Banner> banners = bannerRepository.getViewBanner();
+		model.addAttribute("banners", banners);
+		
 		//get all product by category id
 		model.addAttribute("products", productService.getAllProductByCategoryId(id));
 		
@@ -87,6 +91,10 @@ public class HomeController {
 		//get all category
 		List<Category> categoris = categoryRepository.findAll();
 		model.addAttribute("categoris", categoris);
+		
+		//get banner
+		List<Banner> banners = bannerRepository.getViewBanner();
+		model.addAttribute("banners", banners);
 		
 		model.addAttribute("keyword", keyword);
 		

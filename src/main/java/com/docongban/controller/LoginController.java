@@ -1,10 +1,15 @@
 package com.docongban.controller;
 
+
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,14 +20,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.docongban.entity.Account;
 import com.docongban.entity.Category;
+import com.docongban.entity.OrderAccount;
+import com.docongban.entity.OrderDetail;
 import com.docongban.jwt.JwtTokenProvider;
 import com.docongban.payload.RegisterRequest;
 import com.docongban.payload.UpdateAccountRequest;
 import com.docongban.repository.AccountRepository;
 import com.docongban.repository.CategoryRepository;
+import com.docongban.repository.OrderAccountRepository;
+import com.docongban.repository.OrderDetailRepository;
 import com.docongban.service.AccountService;
 import com.docongban.service.AuthService;
 
@@ -39,6 +50,12 @@ public class LoginController {
 	@Autowired(required = true)
 	AccountService accountService;
 
+	@Autowired
+	OrderAccountRepository orderAccountRepository;
+	
+	@Autowired
+	OrderDetailRepository orderDetailRepository;
+	
 	@Autowired
 	AuthService authService;
 
@@ -187,5 +204,45 @@ public class LoginController {
 
 		return "redirect:/auth/login";
 	}
+
+	
+	@GetMapping("/history/{id}")
+	public ModelAndView purchaseHistory(Model model, @PathVariable int id) {
+		ModelAndView modelAndView = new ModelAndView("history");
+		
+		//get all category.
+		List<Category> categoris = categoryRepository.findAll();
+		model.addAttribute("categoris", categoris);
+		
+		DecimalFormat df = new DecimalFormat(",###");
+
+        List<OrderAccount> orderAccounts = orderAccountRepository.findOrderAccountByAccountId(id);
+        List<OrderDetail> orderDetails = orderDetailRepository.findAll();
+        List<String> totalPrice = new ArrayList<>();
+
+        for (OrderAccount oc : orderAccounts) {
+            long total = 0;
+            for (OrderDetail od : orderDetails) {
+                if (oc.getId() == od.getOrderAccountId()) {
+                    total += od.getProductPrice()*od.getOrderQuantity();
+                }
+            }
+            totalPrice.add(df.format(total));
+        }
+
+        modelAndView.addObject("orderAccounts", orderAccounts);
+        modelAndView.addObject("orderDetails", orderDetails);
+        modelAndView.addObject("totalPrice", totalPrice);
+		
+		return modelAndView;
+	}	
+	
+	@Transactional
+    @GetMapping("/history/delete/{id}")
+    public String  checkComplete(@PathVariable int id, HttpServletRequest request) {
+        orderAccountRepository.deleteById(id);
+        orderDetailRepository.deleteByOrderAccountId(id);
+        return "redirect:" + request.getHeader("Referer");
+    }
 
 }
