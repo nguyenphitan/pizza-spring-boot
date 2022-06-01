@@ -1,7 +1,5 @@
 package com.docongban.controller.admin;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.docongban.entity.Account;
-import com.docongban.entity.Timekeeping;
 import com.docongban.payload.PayrollResponse;
-import com.docongban.repository.TimekeepingRepository;
-import com.docongban.service.admin.SellerService;
+import com.docongban.service.admin.PayrollService;
 
 /**
  * Admin tính lương nhân viên
@@ -24,12 +19,8 @@ import com.docongban.service.admin.SellerService;
 @RestController
 @RequestMapping("/admin/payroll")
 public class AdminPayrollController {
-	
 	@Autowired
-	TimekeepingRepository timekeepingRepository;
-	
-	@Autowired
-	SellerService sellerService;
+	private PayrollService payrollService;
 	
 	/*
 	 * Hiển thị trang tính lương
@@ -39,31 +30,8 @@ public class AdminPayrollController {
 	@GetMapping
 	public ModelAndView payrollPage() {
 		ModelAndView modelAndView = new ModelAndView("admin/payroll");
-		// Danh sách nhân viên + danh sách ngày làm việc:
-		List<PayrollResponse> payrolls = new ArrayList<PayrollResponse>();
-		
-		// 1. Lấy ra tất cả id của nhân viên:
-		List<Account> sellers = sellerService.getAllSellers();
-		
-		// 2. Duyệt từng id của nhân viên trong bằng chấm công 
-		// -> lấy ra các ngày làm việc của nhân viên đó.
-		// -> Dữ liệu nhân được sẽ có dạng: (thông tin nhân viên, list các ngày làm việc)
-		List<Timekeeping> timekeepings = timekeepingRepository.findAll();
-		
-		for(Account seller : sellers) {
-			List<Date> dates = new ArrayList<Date>();
-			Integer totalDate = 0;
-			for(Timekeeping timekeeping : timekeepings) {
-				if( seller.getId() == timekeeping.getAccountId() ) {
-					dates.add(timekeeping.getDate());
-					totalDate++;
-				}
-			}
-			payrolls.add(new PayrollResponse(seller, dates, totalDate));
-		}
-		
+		List<PayrollResponse> payrolls = payrollService.getAlls();
 		modelAndView.addObject("payrolls", payrolls);
-		
 		return modelAndView;
 	}
 	

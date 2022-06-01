@@ -1,7 +1,5 @@
 package com.docongban.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -13,9 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.docongban.entity.Banner;
-import com.docongban.entity.Category;
-import com.docongban.entity.Product;
 import com.docongban.repository.BannerRepository;
 import com.docongban.repository.CategoryRepository;
 import com.docongban.repository.ProductRepository;
@@ -46,60 +41,31 @@ public class HomeController {
 	
 	@GetMapping("/")
 	public String home(Model model, HttpServletRequest request) {
-		
-		//get all category
-		List<Category> categoris = categoryRepository.findAll();
-		model.addAttribute("categoris", categoris);
-		
-		//get banner
-		List<Banner> banners = bannerRepository.getViewBanner();
-//		model.addAttribute("banners", banners);
+		model.addAttribute("categoris", categoryRepository.findAll());
 		HttpSession session = request.getSession();
-		session.setAttribute("banners", banners);
-		
-		//get all product
-		List<Product> products = productRepository.findAll();
-		model.addAttribute("products", products);
+		session.setAttribute("banners", bannerRepository.getViewBanner());
+		model.addAttribute("products", productRepository.findAll());
 		
 		return "index";
 	}
 	
 	@GetMapping("/category/{id}")
 	public String productByCate(Model model, @PathVariable int id) {
-		
-		//get all category
-		List<Category> categoris = categoryRepository.findAll();
-		model.addAttribute("categoris", categoris);
-		
-		//get banner
-		List<Banner> banners = bannerRepository.getViewBanner();
-		model.addAttribute("banners", banners);
-		
-		//get all product by category id
+		model.addAttribute("categoris", categoryRepository.findAll());
+		model.addAttribute("banners", bannerRepository.getViewBanner());
 		model.addAttribute("products", productService.getAllProductByCategoryId(id));
-		
 		//get category by id (to show name int html)
 		model.addAttribute("category", categoryRepository.getById(id));
-		
 		return "category";
 	}
 	
 	//search
 	@GetMapping("/search")
 	public String search(Model model,@RequestParam("keyword") String keyword) {
-		
-		//get all category
-		List<Category> categoris = categoryRepository.findAll();
-		model.addAttribute("categoris", categoris);
-		
-		//get banner
-		List<Banner> banners = bannerRepository.getViewBanner();
-		model.addAttribute("banners", banners);
-		
+		model.addAttribute("categoris", categoryRepository.findAll());
+		model.addAttribute("banners", bannerRepository.getViewBanner());
 		model.addAttribute("keyword", keyword);
-		
 		model.addAttribute("products", productService.getAllProductBySearchName(keyword));
-		
 		return "search";
 	}
 	

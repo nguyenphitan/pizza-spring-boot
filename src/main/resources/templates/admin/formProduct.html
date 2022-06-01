@@ -146,7 +146,7 @@
     <div style="margin-bottom: 50px;" class="container">
         <div class="grid fix-wide" style="padding-top: 45px">
             <div class="container_header">
-                <span class="container_header-text">Quản lý tài khoản</span>
+                <span class="container_header-text">Quản lý sản phẩm</span>
             </div>
         </div>
 
@@ -177,7 +177,7 @@
                     <input class="t-input t-none-border" type="file" name="thumbnail" required/>
                 </div>
                 <button type="submit" class="btn-add">Thêm</button>
-                <button class="btn btn-success mt-20 btn-add" onclick='javascript:window.history.back()'>Hủy</button>
+                <button type="button" class="btn btn-success mt-20 btn-add" onclick='javascript:window.history.back()'>Hủy</button>
             </form>
             <form th:action="@{/admin/products/{id}/update(id=${updateProduct.id})}" enctype = "Multipart/form-data" th:object="${updateProduct}" th:if="${updateProduct}" method="post"
                   class="form-add">
@@ -207,7 +207,7 @@
                     <input class="t-input t-none-border" type="file" name="thumbnail" required/>
                 </div>
                 <button type="submit" class="btn-add">Cập nhật </button>
-                <button class="btn btn-success mt-20 btn-add" onclick='javascript:window.history.back()'>Hủy</button>
+                <button type="button" class="btn btn-success mt-20 btn-add" onclick='javascript:window.history.back()'>Hủy</button>
             </form>
         </div>
     </div>

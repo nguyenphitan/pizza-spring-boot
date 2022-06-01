@@ -1,10 +1,6 @@
 package com.docongban.controller.admin;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.docongban.entity.Category;
 import com.docongban.entity.Product;
 import com.docongban.repository.CategoryRepository;
 import com.docongban.repository.ProductRepository;
 import com.docongban.service.ProductService;
+import com.docongban.service.admin.AdminProductService;
 
 @RestController
 @RequestMapping("/admin/products")
 public class AdminProductController {
-	private static final Path CURRENT_FOLDER = Paths.get(System.getProperty("user.dir"));
 	
     @Autowired
     ProductRepository productRepository;
@@ -36,6 +31,9 @@ public class AdminProductController {
 
     @Autowired
     CategoryRepository categoryRepository;
+    
+    @Autowired
+    AdminProductService adminProductService;
 
     @GetMapping("")
     ModelAndView getAllProducts() {
@@ -48,10 +46,8 @@ public class AdminProductController {
     @GetMapping("/create")
     ModelAndView createProductView() {
         ModelAndView modelAndView = new ModelAndView("admin/formProduct");
-        List<Category> categories = categoryRepository.findAll();
-        Product newProduct = new Product();
-        modelAndView.addObject("categories", categories);
-        modelAndView.addObject("newProduct", newProduct);
+        modelAndView.addObject("categories", categoryRepository.findAll());
+        modelAndView.addObject("newProduct", new Product());
         return modelAndView;
     }
 
@@ -63,27 +59,7 @@ public class AdminProductController {
     		@RequestParam("categoryId") Integer categoryId,
     		@RequestParam("thumbnail") MultipartFile multipartFile
     	) throws IOException {
-    	
-    	Path staticPath = Paths.get("src/main/resources/static");
-        Path imagePath = Paths.get("img");
-        // Kiểm tra tồn tại hoặc tạo thư mục /static/images
-        if (!Files.exists(CURRENT_FOLDER.resolve(staticPath).resolve(imagePath))) {
-            Files.createDirectories(CURRENT_FOLDER.resolve(staticPath).resolve(imagePath));
-        }
-        Path file = CURRENT_FOLDER.resolve(staticPath).resolve(imagePath).resolve(multipartFile.getOriginalFilename());
-        try (OutputStream os = Files.newOutputStream(file)) {
-            os.write(multipartFile.getBytes());
-        }
-    	
-    	Category category = new Category();
-    	category.setId(categoryId);
-    	Product product = new Product();
-    	product.setCategory(category);
-    	product.setContent(content);
-    	product.setPrice(price);
-    	product.setTitle(title);
-    	product.setThumbnail(imagePath.resolve(multipartFile.getOriginalFilename()).toString());
-        productRepository.save(product);
+    	adminProductService.create(price, title, content, categoryId, multipartFile);
         return new ModelAndView("redirect:" + "/admin/products");
     }
 
@@ -96,12 +72,9 @@ public class AdminProductController {
     @GetMapping("/{id}/update")
     ModelAndView updateProductView(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView("admin/formProduct");
-        List<Category> categories = categoryRepository.findAll();
-        Product newProduct = new Product();
-        Product foundProduct = productRepository.findProductById(id);
-        modelAndView.addObject("categories", categories);
-        modelAndView.addObject("newProduct", newProduct);
-        modelAndView.addObject("updateProduct", foundProduct);
+        modelAndView.addObject("categories", categoryRepository.findAll());
+        modelAndView.addObject("newProduct", new Product());
+        modelAndView.addObject("updateProduct", productRepository.findProductById(id));
         return modelAndView;
     }
 
@@ -114,27 +87,7 @@ public class AdminProductController {
     		@RequestParam("categoryId") Integer categoryId,
     		@RequestParam("thumbnail") MultipartFile multipartFile
     ) throws IOException {
-    	
-    	Path staticPath = Paths.get("src/main/resources/static");
-        Path imagePath = Paths.get("img");
-        // Kiểm tra tồn tại hoặc tạo thư mục /static/images
-        if (!Files.exists(CURRENT_FOLDER.resolve(staticPath).resolve(imagePath))) {
-            Files.createDirectories(CURRENT_FOLDER.resolve(staticPath).resolve(imagePath));
-        }
-        Path file = CURRENT_FOLDER.resolve(staticPath).resolve(imagePath).resolve(multipartFile.getOriginalFilename());
-        try (OutputStream os = Files.newOutputStream(file)) {
-            os.write(multipartFile.getBytes());
-        }
-    	
-        Category category = new Category();
-    	category.setId(categoryId);
-        Product toUpdateProduct = productRepository.findProductById(id);
-        toUpdateProduct.setTitle(title);
-        toUpdateProduct.setThumbnail(imagePath.resolve(multipartFile.getOriginalFilename()).toString());
-        toUpdateProduct.setContent(content);
-        toUpdateProduct.setPrice(price);
-        toUpdateProduct.setCategory(category);
-        productRepository.save(toUpdateProduct);
+    	adminProductService.update(id, price, title, content, categoryId, multipartFile);
         return new ModelAndView("redirect:" + "/admin/products");
     }
 }

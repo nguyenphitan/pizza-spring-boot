@@ -1,6 +1,5 @@
 package com.docongban.controller.admin;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -14,14 +13,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.docongban.entity.Account;
-import com.docongban.entity.Discount;
-import com.docongban.entity.OrderAccount;
-import com.docongban.entity.OrderDetail;
 import com.docongban.repository.AccountRepository;
 import com.docongban.repository.OrderAccountRepository;
 import com.docongban.repository.OrderDetailRepository;
 import com.docongban.service.admin.AdminAccountService;
-import com.docongban.service.admin.DiscountService;
+import com.docongban.service.admin.AdminService;
 import com.docongban.service.admin.SellerService;
 
 @RestController
@@ -45,44 +41,12 @@ public class AdminController {
     SellerService sellerService;
     
     @Autowired
-    private DiscountService discountService;
+    private AdminService adminService;
 
     @GetMapping("/bill")
     public ModelAndView getBill() {
         ModelAndView modelAndView = new ModelAndView("admin/bill");
-
-        List<Discount> discounts = discountService.getAlls();
-
-        List<OrderAccount> orderAccounts = orderAccountRepository.findAll();
-        List<OrderDetail> orderDetails = orderDetailRepository.findAll();
-        List<Double> totalPrice = new ArrayList<>();
-
-        for (OrderAccount oc : orderAccounts) {
-            Double total = 0D;
-            for (OrderDetail od : orderDetails) {
-                if (oc.getId() == od.getOrderAccountId()) {
-                    total += (od.getProductPrice() * od.getOrderQuantity());
-                }
-            }
-            for(int i = 0 ; i < discounts.size() ; i++) {
-				Double nextValue = discounts.get(i).getValue();
-				if( total < nextValue ) {
-					if( i > 0 ) {
-						total -= (total * discounts.get(i-1).getDiscount()/100);
-						break;						
-					}
-					else {
-						break;
-					}
-				}
-			}
-            totalPrice.add(total);
-        }
-
-        modelAndView.addObject("orderAccounts", orderAccounts);
-        modelAndView.addObject("orderDetails", orderDetails);
-        modelAndView.addObject("totalPrice", totalPrice);
-
+        adminService.getAllBills(modelAndView);
         return modelAndView;
     }
 

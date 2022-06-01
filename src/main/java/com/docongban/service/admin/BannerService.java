@@ -1,8 +1,9 @@
 package com.docongban.service.admin;
 
-import org.springframework.stereotype.Service;
+import java.io.IOException;
 
-@Service
+import org.springframework.web.multipart.MultipartFile;
+
 public interface BannerService {
-
+	void uploadBanner(MultipartFile multipartFile, Integer bannerId) throws IOException;
 }

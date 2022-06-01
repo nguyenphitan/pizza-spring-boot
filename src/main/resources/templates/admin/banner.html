@@ -164,9 +164,10 @@
                 <tr style="background-color: rgba(31, 163, 101, 0.4);">
                     <th scope="col" class="bill-index">STT</th>
                     <th scope="col" class="bill-information">Ảnh</th>
-                    <th scope="col" class="bill-order-date">Trạng thái</th>
-                    <th scope="col" class="bill-order-date">Sửa</th>
-                    <th scope="col" class="bill-order-date">Xóa</th>
+                    <th scope="col" class="bill-order-date" style="width: 150px!important">Trạng thái</th>
+                    <th scope="col" class="bill-order-date" style="width: 150px!important">Hiển thị</th>
+                    <th scope="col" class="bill-order-date" style="width: 150px!important">Sửa</th>
+                    <th scope="col" class="bill-order-date" style="width: 150px!important">Xóa</th>
                 </tr>
                 </thead>
                 <tbody class="table-bill-title" th:each="banner,iterStat : ${banners}">
@@ -177,8 +178,12 @@
                        <!--  <span style="width:250px;display:inline-block" th:text="${banner.image}"></span> -->
                     </td>
                     <td>
+                        <div class="flex justify-center">
+                            <div th:text="${banner.usedStatus}" style="font-weight: 700"></div>
+                        </div>
+                    </td>
+                    <td>
                         <div class="flex" style="flex-direction: column; align-items: center;">
-                        	<div th:text="${banner.usedStatus}" style="font-weight: 700; margin-bottom: 30px;"></div>
                         
                             <a th:href="@{/admin/banner/{id}/usedstatus(id=${banner.id})}" class="btn-link" th:if="${banner.usedStatus=='NONE'}">
                                 <button class="btn btn-success" style="background-color: #005226">

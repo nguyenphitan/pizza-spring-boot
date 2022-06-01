@@ -23,8 +23,7 @@ public class AdminCategoryController {
     @GetMapping("/category")
     public ModelAndView getCategories() {
         ModelAndView modelAndView = new ModelAndView("admin/category");
-        List<Category> categories = categoryService.getAllCategories();
-        modelAndView.addObject("categories", categories);
+        modelAndView.addObject("categories", categoryService.getAllCategories());
         return modelAndView;
     }
 

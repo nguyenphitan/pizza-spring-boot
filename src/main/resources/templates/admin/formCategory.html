@@ -145,7 +145,7 @@
   <div style="margin-bottom: 50px;" class="container">
     <div class="grid fix-wide" style="padding-top: 45px">
       <div class="container_header">
-        <span class="container_header-text" >Thêm danh mục</span>
+        <span class="container_header-text" >Quản lý danh mục</span>
       </div>
     </div>
 
@@ -157,7 +157,7 @@
           <input type="text" class="create-input" id="nameCategory" name="name" required/>
         </div>
         <button type="submit" class="btn-add">Thêm</button>
-        <button class="btn btn-success mt-20 btn-add" onclick='javascript:window.history.back()'>Hủy</button>
+        <button type="button" class="btn btn-success mt-20 btn-add t-cancel">Hủy</button>
       </form>
       <form th:action="@{/admin/category/{id}/update(id=${updateCategory.id})}" method="post" class="create-category-form" th:object="${updateCategory}" th:if="${updateCategory}">
         <div class="input-wrapper">
@@ -165,7 +165,7 @@
           <input type="text" class="create-input" id="updateCategoryName" name="updateCategoryName" th:filed="*{name}" th:value="*{name}" required/>
         </div>
         <button type="submit" class="btn-add">Cập nhật</button>
-        <button class="btn btn-success mt-20 btn-add" onclick='javascript:window.history.back()'>Hủy</button>
+        <button type="button" class="btn btn-success mt-20 btn-add t-cancel">Hủy</button>
       </form>
     </div>
   </div>
@@ -284,7 +284,14 @@
   </div>
 </div>
 
-<script th:src="@{/js/account.js}"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.t-cancel').click(function () {
+			window.location.href='http://localhost:8088/admin/category';
+		})
+	})
+
+</script>
 
 </body>
 </html>
