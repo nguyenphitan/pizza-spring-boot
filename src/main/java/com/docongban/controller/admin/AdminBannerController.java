@@ -118,4 +118,6 @@ public class AdminBannerController {
 		
 		return "/admin/banner/view";
 	}
+	
+	
 }
