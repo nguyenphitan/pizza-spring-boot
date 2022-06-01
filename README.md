@@ -211,6 +211,18 @@
 - Admin có thể xóa nhân viên bằng cách nhấn nút: Xóa nhân viên.
 ![image](https://user-images.githubusercontent.com/62367845/171404505-8742b57c-0fe4-4e42-b951-5511970f5e9d.png)
 
+### 6.5. Thống kê doanh thu.
+- Admin xem thống kê doanh thu theo tháng.
+- Chọn tháng muốn xem thống kê.
+![image](https://user-images.githubusercontent.com/62367845/171404837-540e2f00-6e8e-43a2-8777-5fbb902ddd63.png)
 
+### 6.6. Chấm công nhân viên.
+- Admin xem bảng chấm công -> chấm công nhân viên.
+![image](https://user-images.githubusercontent.com/62367845/171405060-63a23390-622b-4134-9df4-ece37df7a1d8.png)
 
+### 6.7. Tính lương.
+- Admin tính lương cho nhân viên.
+- Đánh dấu trả lương cho nhân viên.
+![image](https://user-images.githubusercontent.com/62367845/171405417-c9371057-f18f-4a0a-9d0b-e3026490a488.png)
+![image](https://user-images.githubusercontent.com/62367845/171405485-52272de1-3887-41db-b8ad-8ea48af70a21.png)
 
