@@ -95,3 +95,12 @@
 ![image](https://user-images.githubusercontent.com/62367845/171392898-da2d0a1e-586a-4e46-887e-267e0bdef4a1.png)
 
 
+### 4. Các màn hình demo.
+## 4.1. Đăng ký tài khoản.
+- Người dùng vào trang chủ -> đăng ký tài khoản -> nhập thông tin tài khoản -> nhấn đăng ký.
+![image](https://user-images.githubusercontent.com/62367845/171393569-92ebe2e4-244e-4531-88c7-c9cce93b86f9.png)
+
+## 4.2. Đăng nhập.
+- Người dùng vào trang chủ -> đăng nhập -> nhập tài khoản, mật khẩu -> nhấn đăng nhập.
+![image](https://user-images.githubusercontent.com/62367845/171393923-dbf03a5d-26c5-4590-b334-5f82d654edf6.png)
+
