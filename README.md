@@ -4,8 +4,8 @@
 
 - Front-end: 
 	* HTML/CSS
-	* Javascrip
-	* Bootstrap
+	* Javascrip ES6
+	* Bootstrap 5
 	* Jquery
 - Back-end: 
 	* Java Spring boot
@@ -23,7 +23,7 @@
 
 # IDE
 
-* Esclip 
+* Eclipse 
 * MYSQL Workbench
 
 # 1. Mô tả dự án.
@@ -74,8 +74,9 @@
 	+ Viết báo cáo.
 
 - Đỗ Công Ban:
-	+ Dựng base giao diện.
-	+ Đăng nhập, đăng ký.
+	+ Dựng giao diện.
+	+ Đăng nhập, đăng xuất.
+	+ Đăng ký.
 	+ Lọc sản phẩm.
 	+ Tìm kiếm sản phẩm.
 	+ Quản lý hóa đơn
