@@ -26,34 +26,72 @@
 * Esclip 
 * MYSQL Workbench
 
-### Uer session:
+### 1. Mô tả dự án.
+- Hệ thống quản lý bán hàng cho một cửa hàng bán bánh Pizza.
+(*) Các chức năng:
+- Khách hàng: 
+	+ Đăng ký tài khoản, đăng nhập, đăng xuất.
+	+ Chỉnh sửa thông tin cá nhân.
+	+ Xem menu.
+	+ Tìm kiếm món ăn theo tên.
+	+ Lọc sản phẩm theo danh mục.
+	+ Thêm giỏ hàng, thanh toán giỏ hàng.
+	+ Thanh toán qua ví điện từ hoặc thanh toán khi nhận hàng.
+	+ Xem lịch sử mua hàng, hủy đơn hàng.
+	+ Chat với admin qua Zalo.
 
-* Home Page
-* Product by Category
-* Login/Logout
-* Register
-* Update profile
-* Zalo chat box
-* Search product by name
-* Cart
-* Check out offline or by bank
-* Purchasing history
-* Cancel order
+- Nhân viên:
+	+ Gồm có các chức năng như khách hàng.
+	+ Quản lý danh mục sản phẩm.
+	+ Quản lý sản phẩm.
+	+ Quản lý banner.
+	+ Quản lý hóa đơn.
+	
+- Admin:
+	+ Gồm có các chức năng của nhân viên.
+	+ Quản lý mã giảm giá.
+	+ Quản lý tài khoản.
+	+ Quản lý nhân viên.
+	+ Chấm công nhân viên.
+	+ Tính lương nhân viên.
+	+ Thống kê doanh thu theo tháng.
 
-### Seller session:
+### 2. Nhiệm vụ - đóng góp của các thành viên trong team.
+- Nguyễn Phi Tân: 
+	+ Quản lý tài khoản.
+	+ Quản lý nhân viên.
+	+ Quản lý mã giảm giá.
+	+ Thống kê doanh thu.
+	+ Chấm công nhân viên.
+	+ Tính lương nhân viên.
+	+ Phân quyền: ADMIN, Nhân viên, Khách hàng.
+	+ Sử dụng token định danh người dùng.
+	+ Mã hóa mật khẩu bằng sercret key.
+	+ Liên kết ví điện tử.
+	+ Quản lý code của team, merge code.
+	+ Test code.
+	+ Fix bug.
+	+ Viết báo cáo.
 
-* All function of User session
-* Category manager
-* Product manager
-* Banner slider manager
-* Bill manager
+- Đỗ Công Ban:
+	+ Dựng base giao diện.
+	+ Đăng nhập, đăng ký.
+	+ Lọc sản phẩm.
+	+ Tìm kiếm sản phẩm.
+	+ Quản lý hóa đơn
+	+ Quản lý banner.
+	+ Quản lý giỏ hàng.
+	+ Chỉnh sửa thông tin cá nhân
+	+ Xem lịch sử mua hàng, hủy đơn hàng.
+	+ Tích hợp chat qua Zalo cho hệ thống.
+	+ Viết báo cáo.
 
-### Admin session:
+- Phan Hoàng Nguyên:
+	+ Quản lý danh mục sản phẩm.
+	+ Quản lý sản phẩm.
 
-* All function of Seller session
-* Discount manager
-* Personnel manager
-* Account manager
-* Salary control
-* Time keeping
-* Revenue total
+
+### 3. Thiết kế hệ thống.
+![image](https://user-images.githubusercontent.com/62367845/171392898-da2d0a1e-586a-4e46-887e-267e0bdef4a1.png)
+
+
