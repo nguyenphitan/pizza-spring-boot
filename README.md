@@ -143,6 +143,10 @@
 - Tại trang thông tin cá nhân -> Xem lịch sử mua hàng: Xem các đơn hàng đã mua - Hủy các đơn hàng chưa được giao.
 ![image](https://user-images.githubusercontent.com/62367845/171398178-79607d76-929d-4fe9-b343-acdcfe10dadf.png)
 
+### 4.9. Chat qua Zalo với ADMIN.
+- Khách hàng nhấn vào box chat bên phải màn hình -> chat qua Zalo với của hàng.
+![image](https://user-images.githubusercontent.com/62367845/171402536-36b9b799-ffa9-4969-b3fc-c262eb16b4e4.png)
+
 
 # 5. Các màn hình của Nhân Viên.
 ### 5.1. Trang chủ của nhân viên. (có thêm mục quản lý gian hàng)
@@ -179,5 +183,34 @@
 
 - Thêm mới banner.
 ![image](https://user-images.githubusercontent.com/62367845/171401734-5e1d72a9-af0d-4beb-92f0-4f6f2b31e9dc.png)
+
+
+# 6. Các màn hình của ADMIN.
+### 6.1. Trang quản lí của ADMIN.
+![image](https://user-images.githubusercontent.com/62367845/171402858-8bcf0598-3e52-41cf-9b39-2d9e9a8e45f8.png)
+
+### 6.2. Quản lý mã giảm giá.
+![image](https://user-images.githubusercontent.com/62367845/171402988-050cedde-9de3-4d71-9797-71b485b49b7f.png)
+
+- Thêm mới mã giảm giá.
+![image](https://user-images.githubusercontent.com/62367845/171403134-de3f3591-bd7a-4af2-8179-9be22afb6013.png)
+
+- Sửa mã giảm giá.
+![image](https://user-images.githubusercontent.com/62367845/171403382-bd0baefe-b647-4d16-9df7-864ae47da93a.png)
+
+- Xóa mã giảm giá.
+![image](https://user-images.githubusercontent.com/62367845/171403273-732c98fb-b849-4f20-a7e1-c27d94353b6a.png)
+
+### 6.3. Quản lý tài khoản.
+- Admin xem danh sách các tài khoản: khách hàng, nhân viên.
+- Admin cấp tài khoản nhân viên -> Nhấn nút thêm nhân viên.
+![image](https://user-images.githubusercontent.com/62367845/171404146-e7716e35-3c59-4186-92c5-309ba3c64daf.png)
+
+### 6.4. Quản lý nhân viên.
+- Xem danh sách các nhân viên của cửa hàng.
+- Admin có thể xóa nhân viên bằng cách nhấn nút: Xóa nhân viên.
+![image](https://user-images.githubusercontent.com/62367845/171404505-8742b57c-0fe4-4e42-b951-5511970f5e9d.png)
+
+
 
 
