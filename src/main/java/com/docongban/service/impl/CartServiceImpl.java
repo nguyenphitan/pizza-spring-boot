@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.docongban.entity.Account;
 import com.docongban.entity.Category;
@@ -149,7 +148,7 @@ public class CartServiceImpl implements CartService {
 
 	// Add to cart
 	@Override
-	public RedirectView addToCart(Model model, int id, HttpSession session) {
+	public Boolean addToCart(Model model, int id, HttpSession session) {
 		// get all category
 		List<Category> categoris = categoryRepository.findAll();
 		model.addAttribute("categoris", categoris);
@@ -167,7 +166,7 @@ public class CartServiceImpl implements CartService {
 			session.setAttribute("item-list", itemList);
 			session.setAttribute("cartSize", itemList.size());
 			session.setMaxInactiveInterval(60 * 60 * 24);
-			return new RedirectView("/");
+			return true;
 		} else {
 			boolean exist = false;
 			for (Item i : item_list) {
@@ -191,7 +190,7 @@ public class CartServiceImpl implements CartService {
 		session.setAttribute("item-list", item_list);
 		session.setAttribute("cartSize", item_list.size());
 
-		return new RedirectView("/");
+		return true;
 	}
 
 	@Override
@@ -268,7 +267,7 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public void removeProductCart(Model model, int id, HttpSession session) {
+	public Integer removeProductCart(Model model, int id, HttpSession session) {
 		// get all category
 		List<Category> categoris = categoryRepository.findAll();
 		model.addAttribute("categoris", categoris);
@@ -278,10 +277,11 @@ public class CartServiceImpl implements CartService {
 			for (Item i : item_list) {
 				if (i.getId() == id) {
 					item_list.remove(item_list.indexOf(i));
-					break;
+					return 1;
 				}
 			}
 		}
+		return 0;
 	}
 
 	@Override

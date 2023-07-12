@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.docongban.entity.Item;
 import com.docongban.payload.CartResponse;
@@ -23,7 +22,7 @@ public interface CartService {
 	long getTotalCart(ArrayList<Item> itemList);
 	
 	// add to cart
-	RedirectView addToCart(Model model, int id, HttpSession session);
+	Boolean addToCart(Model model, int id, HttpSession session);
 	
 	// get all cart
 	void getAllCarts(ModelAndView modelAndView, HttpServletRequest request);
@@ -35,7 +34,7 @@ public interface CartService {
 	void quantityIncCart(Model model, int id, HttpSession session);
 	
 	// remove
-	void removeProductCart(Model model, int id, HttpSession session);
+	Integer removeProductCart(Model model, int id, HttpSession session);
 	
 	// checkout
 	String checkOut(Model model, HttpSession session);

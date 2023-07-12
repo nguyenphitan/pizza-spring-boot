@@ -1422,3 +1422,18 @@ th, td{
     border-radius: 8px;
     cursor: pointer;
 }
+
+.abcRioButtonLightBlue {
+	width: 100% !important;
+	margin-top: 16px;
+	border-radius: 8px !important;
+}
+
+.abcRioButtonContentWrapper {
+	display: flex;
+	justify-content: center;
+}
+
+.abcRioButtonContents {
+	font-size: 16px !important;	
+}

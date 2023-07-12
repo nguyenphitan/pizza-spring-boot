@@ -208,13 +208,16 @@
                             <div class="product-cart__price-old" th:text="${item.price} + ' đ'"></div>
                             
                             <!--<div class="product-cart__count"><%=c.getQuantity()%></div>-->
-                            <a th:href="@{/cart/quantity-dec/{id}(id=${item.id})}" class="product-cart__btn_left"><i class="fas fa-angle-left"></i></a> 
+                            <span th:text="${item.id}" style="display: none;"></span>
+                            <a class="product-cart__btn_left"><i style="pointer-events: none;" class="fas fa-angle-left"></i></a> 
                             <input type="text" name="quantity" th:value="${item.quantity}" class="product-cart__quantity" readonly>
-                            <a th:href="@{/cart/quantity-inc/{id}(id=${item.id})}" class="product-cart__btn_right"><i class="fas fa-angle-right"></i></a> 
+                            <span th:text="${item.id}" style="display: none;"></span>
+                            <a class="product-cart__btn_right"><i style="pointer-events: none;" class="fas fa-angle-right"></i></a> 
                             
                             <div class="product-cart__price" th:text="${item.prices + ' đ'}"></div>
-                            <a th:href="@{/cart/removeProductCart/{id}(id=${item.id})}" class="product-cart__delete">
-                                <i class="fas fa-trash-alt"></i>
+                            <span th:text="${item.id}" style="display: none;"></span>
+                            <a class="product-cart__delete">
+                                <i class="fas fa-trash-alt" style="pointer-events: none;"></i>
                             </a>
                         </div>
                     </div>         
@@ -398,9 +401,9 @@
         </footer>
         <!-- End footer -->
         <div class="footer__copyright">
-            <span class="footer__copyright-text">Copyright © 2021 The Pizza Company. Cloned by BanDC</span>
+            <span class="footer__copyright-text">Copyright © 2021 The Pizza Company.  </span>
         </div>
-        <div class="zalo-chat-widget" data-oaid="524847969944307860" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="0" data-width="" data-height=""></div>
+        <div class="zalo-chat-widget" data-oaid="468835239890888102" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="0" data-width="" data-height=""></div>
     </div>
 
     <script th:src="@{/js/main.js}"></script>

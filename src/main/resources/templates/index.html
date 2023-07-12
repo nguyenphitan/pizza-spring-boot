@@ -221,7 +221,7 @@
             <div class="grid fix-wide">
                 <div class="row">
                     <div class="col l-3" th:each="product : ${products}">
-                        <a th:href="@{/cart/addToCart/{id}(id=${product.id}) }" class="product-item">
+                        <a class="product-item">
                             <div class="product-item-show">
                                 <img th:src="${product.thumbnail}" th:alt="${product.title}" class="product-item__img"/>
                                 <div class="product-item__name" th:text="${product.title}"></div>
@@ -232,8 +232,9 @@
                                     <span class="product-item__wrapper-price-text">Giá chỉ từ</span>
                                     <span class="product-item__wrapper-price-number" th:text="${product.price} + ' đ'"></span>
                                 </div>
-                                <div class="product-item__wrapper-button">
-                                    <span class="product-item__wrapper-button-text">Mua ngay</span>
+                                <span th:text="${product.id}" class="product-id" style="display: none;"></span>
+                                <div class="product-item__wrapper-button add-to-cart" style="cursor: pointer;">
+                                    <span class="product-item__wrapper-button-text" style="pointer-events: none;">Thêm ngay</span>
                                     <i class="fas fa-arrow-right product-item__wrapper-button-btn"></i>
                                 </div>
                             </div>
@@ -354,14 +355,15 @@
         </footer>
         <!-- End footer -->
         <div class="footer__copyright">
-            <span class="footer__copyright-text">Copyright © 2021 The Pizza Company. Cloned by BanDC</span>
+            <span class="footer__copyright-text">Copyright © 2021 The Pizza Company.  </span>
         </div>
         
         
-        <div class="zalo-chat-widget" data-oaid="524847969944307860" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="0" data-width="" data-height=""></div>
+        <div class="zalo-chat-widget" data-oaid="468835239890888102" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="0" data-width="" data-height=""></div>
     </div>
 
     <script th:src="@{/js/main.js}"></script>
+    <script th:src="@{/js/cart.js}"></script>
     
     <script src="https://sp.zalo.me/plugins/sdk.js"></script>
 
