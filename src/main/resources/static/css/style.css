@@ -1437,3 +1437,30 @@ th, td{
 .abcRioButtonContents {
 	font-size: 16px !important;	
 }
+
+.footer__block-mail {
+	border: none;
+	display: block;
+	height: auto;
+	padding: 0;
+}
+
+.footer__block-mail input {
+	display: block;
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	padding: 12px;
+	border-radius: 24px;
+	width: 100%;
+}
+
+.footer__block-mail input#mailAttachment {
+	border: none;
+}
+
+.footer__block-res {
+	display: block;
+}
+
+.footer__block-mail-send:hover {
+	text-decoration: underline;
+}
