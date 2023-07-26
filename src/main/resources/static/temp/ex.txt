@@ -1,0 +1,54 @@
+Liên kết ví điện từ:
++ chọn ngân hàng (phải có tài khoản ngân hàng) -> đăng nhập tài khoản ngân hàng 
+-> nhập thông tin vào trang liên kết -> đăng ký liên kết. 
+
++ Liên kết ví điện tử -> lưu id user vào
+
+
+
++ Nhấn chọn thanh toán qua ví điện tử -> kiểm tra xem khác hàng đã liên kết chưa
+-> Nếu chưa -> Đi tới trang liên kết ví điện tử -> Đăng ký -> Quay trở lại trang thanh toán -> Tạo hóa đơn -> Tiến hành thanh toán (Transaction)
+-> Nếu đã liên kết -> Tạo bill -> Tiến hành thanh toán (Transaction)
+
+
+
+- Tạo chức năng upload file CSV và đăng ký sản phẩm đồng loạt (encoding của file CSV là SHIFT_JIS)"
+- how to upload file csv with encoding shift_jis spring boot
+
+
+- Tạo trang admin quản lí sản phẩm: 
++ Hiển thị danh sách hóa đơn
+
++ Khách hàng đặt hàng thành công -> tạo hóa đơn 
++ Xem lại chỗ bảng hóa đơn (có khi phải tách bảng)
+
+
++ Viết lại code của CartServiceImpl (có quá nhiều code dùng đi dùng lại -> viết thành hàm)
+
+
++ Quản lý hóa đơn
++ Viết hết các service về base nếu có thể. (các controller nếu có thể)
+
+
+- Quản lý nhân viên:
+     + Thêm: admin thêm role cho user thành nhân viên
+     + Cập nhật thông tin nhân viên
+     + Xóa nhân viên: admin xóa role nhân viên quay trở về role là user
+
++ BUG:
+Tổng số tiền thanh toán hóa đơn chưa trừ discount - OK
+
+
++ Tài liệu về AOP
++ Tầng controller - modelAndView
++ Tầng Service - trả về dữ liệu thông qua dto
++ Tầng Repository - trả về những object mapping với db
+
+
+
+
+
+
+
+
+

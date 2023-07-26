@@ -1,6 +1,7 @@
 package com.docongban.service.impl;
 
 import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,10 @@ public class EmailServiceImpl implements EmailService {
 	private JavaMailSender emailSender;
 
 	@Value("${admin.email}")
-	private static String ADMIN_EMAIL;
+	private String adminEmail;
 
 	@Value("${apply.content-mail}")
-	private static String CONTENT_MAIL;
+	private String contentMail;
 
 	/**
 	 * Send mail: text.
@@ -58,28 +59,14 @@ public class EmailServiceImpl implements EmailService {
 		MimeMessage message = emailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-//		FileSystemResource fileResource = new FileSystemResource(request.getFileAttachment());
-//		String fileName = file.getFilename();
+		FileSystemResource attachmentFile = new FileSystemResource(request.getPathAttachmentFile());
 
 		helper.setFrom(request.getEmailAddress());
-		helper.setTo(ADMIN_EMAIL);
+		helper.setTo(adminEmail);
 		helper.setSubject(request.getMailTitle());
-		helper.setText(CONTENT_MAIL);
-		helper.addAttachment(request.getFileAttachment().getOriginalFilename(), request.getFileAttachment());
+		helper.setText(contentMail);
+		helper.addAttachment(attachmentFile.getFilename(), attachmentFile);
 
 		emailSender.send(message);
 	}
-	
-//	private void getFile(MultipartFile multipartFile) throws IOException {
-//		Path staticPath = Paths.get("src/main/resources/static");
-//        Path imagePath = Paths.get("attachment");
-//        // Kiểm tra tồn tại hoặc tạo thư mục /static/attachment
-//        if (!Files.exists(Constants.CURRENT_FOLDER.resolve(staticPath).resolve(imagePath))) {
-//            Files.createDirectories(Constants.CURRENT_FOLDER.resolve(staticPath).resolve(imagePath));
-//        }
-//        Path file = Constants.CURRENT_FOLDER.resolve(staticPath).resolve(imagePath).resolve(multipartFile.getOriginalFilename());
-//        try (OutputStream os = Files.newOutputStream(file)) {
-//            os.write(multipartFile.getBytes());
-//        }
-//	}
 }

@@ -46,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	            .disable();
     	http
            .authorizeRequests() 
-           		.antMatchers("/api/v1/auth/**", "/api/v1/mail/**").permitAll();
+           		.antMatchers("/api/v1/auth/**", "/api/v1/mail/**", "/api/v1/file/**").permitAll();
     	http
     		.authorizeRequests()
     			.antMatchers(

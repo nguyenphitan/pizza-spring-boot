@@ -1,7 +1,6 @@
 package com.docongban.controller;
 
 import javax.mail.MessagingException;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -44,11 +43,9 @@ public class SendMailController {
 	@PostMapping("/mail_attachment")
 	public ResponseEntity<?> sendMailWithAttachment(@RequestBody SendMailAttachmentRequest request)
 			throws MessagingException {
-		
 		// Convert request to Dto
-		
 		emailService.sendMailWithAttachment(request);
-		return ResponseEntity.ok(null);
+		return ResponseEntity.ok(1);
 	}
 
 }

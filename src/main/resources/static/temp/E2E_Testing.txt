@@ -1,0 +1,17 @@
+E2E Testing:
+
++ Test web navigation (đường dẫn web)
++ Test DOM querying
++ Writing assertions
+
+
+Write a real test:
+1. Visit a web page.
+2. Query for an element.
+3. Interact with that element.
+4. Assert about the content on the page.
+
+
+
+
+

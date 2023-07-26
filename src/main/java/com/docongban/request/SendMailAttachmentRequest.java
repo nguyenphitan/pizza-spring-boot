@@ -1,7 +1,5 @@
 package com.docongban.request;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import lombok.Data;
 
 @Data
@@ -15,6 +13,6 @@ public class SendMailAttachmentRequest {
 	
 	private String phoneNumber;
 	
-	private MultipartFile fileAttachment;
+	private String pathAttachmentFile;
 	
 }
