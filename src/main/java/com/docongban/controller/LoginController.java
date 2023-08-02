@@ -1,11 +1,15 @@
 package com.docongban.controller;
 
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -65,6 +69,11 @@ public class LoginController {
 	public String checkLogin(Model model, @RequestParam("phone") String phone,
 			@RequestParam("password") String password, HttpServletRequest request) throws Exception {
 		return authService.checkLogin(model, phone, password, request);
+	}
+	
+	@PostMapping("/verify/{idToken}")
+	public ResponseEntity<?> verifyToken(@PathVariable("idToken") String token) throws GeneralSecurityException, IOException {
+		return ResponseEntity.ok(authService.verifyToken(token));
 	}
 
 	@GetMapping("/logout")

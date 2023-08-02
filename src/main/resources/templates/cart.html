@@ -208,13 +208,16 @@
                             <div class="product-cart__price-old" th:text="${item.price} + ' đ'"></div>
                             
                             <!--<div class="product-cart__count"><%=c.getQuantity()%></div>-->
-                            <a th:href="@{/cart/quantity-dec/{id}(id=${item.id})}" class="product-cart__btn_left"><i class="fas fa-angle-left"></i></a> 
+                            <span th:text="${item.id}" style="display: none;"></span>
+                            <a class="product-cart__btn_left"><i style="pointer-events: none;" class="fas fa-angle-left"></i></a> 
                             <input type="text" name="quantity" th:value="${item.quantity}" class="product-cart__quantity" readonly>
-                            <a th:href="@{/cart/quantity-inc/{id}(id=${item.id})}" class="product-cart__btn_right"><i class="fas fa-angle-right"></i></a> 
+                            <span th:text="${item.id}" style="display: none;"></span>
+                            <a class="product-cart__btn_right"><i style="pointer-events: none;" class="fas fa-angle-right"></i></a> 
                             
                             <div class="product-cart__price" th:text="${item.prices + ' đ'}"></div>
-                            <a th:href="@{/cart/removeProductCart/{id}(id=${item.id})}" class="product-cart__delete">
-                                <i class="fas fa-trash-alt"></i>
+                            <span th:text="${item.id}" style="display: none;"></span>
+                            <a class="product-cart__delete">
+                                <i class="fas fa-trash-alt" style="pointer-events: none;"></i>
                             </a>
                         </div>
                     </div>         
@@ -364,6 +367,10 @@
                                 <a href="tel:1900633606" class="footer__block-option-phone">1900 633 606 </a>
                                 (9:30-21:30)
                             </span>
+                            <br>
+                            <div class="footer__block-res">
+                                <img th:src="@{/img/bocongthuong.png}" class="footer__block-bct"></img>
+                            </div>
                         </div>
                     </div>
                     <div class="col l-3">
@@ -380,16 +387,17 @@
                                     <i class="fab fa-youtube"></i>
                                 </a>
                             </div>
-                            <h3 class="footer__block-title-social">đăng ký thành viên qua địa chỉ email</h3>
+                            <h3 class="footer__block-title-social">Ứng tuyển nhân viên</h3>
                             <div class="footer__block-mail">
-                                <input type="email" placeholder="Nhập địa chỉ email" name="" id="" class="footer__block-mail-input">
+                                <input type="text" placeholder="Họ và tên" name="fullName" id="fullName" class="footer__block-mail-input"> <br>
+                                <input type="text" placeholder="Số điện thoại" name="phoneNumber" id="phoneNumber" class="footer__block-mail-input"> <br>
+                                <input type="email" placeholder="Nhập địa chỉ email" name="emailAddress" id="emailAddress" class="footer__block-mail-input"> <br>
+                                <input type="text" placeholder="Tiêu đề" name="mailTitle" id="mailTitle" class="footer__block-mail-input"> <br>
+                                <input type="file" placeholder="Hồ sơ cá nhân(CV)" name="mailAttachment" id="mailAttachment" class="footer__block-mail-input"> <br>
                                 <div class="footer__block-mail-send">
-                                    <span>GỬI</span>
+                                    <span>Ứng tuyển</span>
                                     <i class="fas fa-arrow-right"></i>
                                 </div>
-                            </div>
-                            <div class="footer__block-res">
-                                <img th:src="@{/img/bocongthuong.png}" class="footer__block-bct"></img>
                             </div>
                         </div>
                     </div>
@@ -398,13 +406,14 @@
         </footer>
         <!-- End footer -->
         <div class="footer__copyright">
-            <span class="footer__copyright-text">Copyright © 2021 The Pizza Company. Cloned by BanDC</span>
+            <span class="footer__copyright-text">Copyright © 2021 The Pizza Company.  </span>
         </div>
-        <div class="zalo-chat-widget" data-oaid="524847969944307860" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="0" data-width="" data-height=""></div>
+        <div class="zalo-chat-widget" data-oaid="468835239890888102" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="0" data-width="" data-height=""></div>
     </div>
 
     <script th:src="@{/js/main.js}"></script>
     <script th:src="@{/js/cart.js}"></script>
+    <script th:src="@{/js/sendMail.js}"></script>
     <script src="https://sp.zalo.me/plugins/sdk.js"></script>
 
 </body>

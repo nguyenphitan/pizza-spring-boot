@@ -1,0 +1,37 @@
+PS C:\Users\ADMIN\OneDrive\Máy tính\HDV\HDV\backend> npm run start:dev
+
+> ig-mern@1.0.0 start:dev
+> nodemon server.js
+
+[nodemon] 2.0.20
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `node server.js`
+App running on port 8080...
+MongooseServerSelectionError: connect ECONNREFUSED 127.0.0.1:27017
+    at NativeConnection.Connection.openUri (C:\Users\ADMIN\OneDrive\Máy tính\HDV\HDV\backend\node_modules\mongoose\lib\connection.js:825:32)
+    at C:\Users\ADMIN\OneDrive\Máy tính\HDV\HDV\backend\node_modules\mongoose\lib\index.js:409:10
+    at C:\Users\ADMIN\OneDrive\Máy tính\HDV\HDV\backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:41:5
+    at new Promise (<anonymous>)
+    at promiseOrCallback (C:\Users\ADMIN\OneDrive\Máy tính\HDV\HDV\backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:40:10)
+    at Mongoose._promiseOrCallback (C:\Users\ADMIN\OneDrive\Máy tính\HDV\HDV\backend\node_modules\mongoose\lib\index.js:1262:10)    
+    at Mongoose.connect (C:\Users\ADMIN\OneDrive\Máy tính\HDV\HDV\backend\node_modules\mongoose\lib\index.js:408:20)
+    at Object.<anonymous> (C:\Users\ADMIN\OneDrive\Máy tính\HDV\HDV\backend\server.js:26:6)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10) {
+  reason: TopologyDescription {
+    type: 'Unknown',
+    servers: Map(1) { 'localhost:27017' => [ServerDescription] },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 10000,
+    localThresholdMS: 15,
+    setName: null,
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}

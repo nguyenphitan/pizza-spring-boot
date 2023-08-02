@@ -78,9 +78,5 @@
 	auto()
 	
 	
-	//Scroll type pizza
-	
-	
-	
-	//Change active when scroll
+
 

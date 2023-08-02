@@ -1,5 +1,8 @@
 package com.docongban.service;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,6 +27,16 @@ public interface AuthService {
 	String checkLogin(Model model, String phone, String password, HttpServletRequest request) throws Exception;
 	
 	String handleLogin(String phone, String password, HttpServletRequest request);
+	
+	/**
+	 * Verify token from google login.
+	 * 
+	 * @param token String
+	 * @return true/false
+	 * @throws IOException 
+	 * @throws GeneralSecurityException 
+	 */
+	Boolean verifyToken(String token) throws GeneralSecurityException, IOException;
 	
 	// Logout
 	void handleLogout(HttpServletRequest request, HttpServletResponse response);

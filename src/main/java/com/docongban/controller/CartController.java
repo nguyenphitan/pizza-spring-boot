@@ -4,13 +4,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.docongban.service.CartService;
 
@@ -22,9 +24,9 @@ public class CartController {
 	CartService cartService;
 	
 	//add to cart
-	@GetMapping("/addToCart/{id}")
-	public RedirectView getProductByIdToCart(Model model, @PathVariable int id, HttpSession session) {
-		return cartService.addToCart(model, id, session);
+	@PostMapping("/addToCart/{id}")
+	public ResponseEntity<?> getProductByIdToCart(Model model, @PathVariable int id, HttpSession session) {
+		return ResponseEntity.ok(cartService.addToCart(model, id, session));
 	}
 	
 	// get all cart
@@ -35,22 +37,21 @@ public class CartController {
 		return modelAndView;
 	}
 	
-	@GetMapping("/quantity-dec/{id}")
-	public String quantityDecCart(Model model,  @PathVariable int id, HttpSession session) {
+	@PostMapping("/quantity-dec/{id}")
+	public ResponseEntity<?> quantityDecCart(Model model,  @PathVariable int id, HttpSession session) {
 		cartService.quantityDecCart(model, id, session);
-		return "redirect:/cart";
+		return ResponseEntity.ok(id);
 	}
 	
-	@GetMapping("/quantity-inc/{id}")
-	public String quantityIncCart(Model model,  @PathVariable int id, HttpSession session) {
+	@PostMapping("/quantity-inc/{id}")
+	public ResponseEntity<?> quantityIncCart(Model model,  @PathVariable int id, HttpSession session) {
 		cartService.quantityIncCart(model, id, session);
-		return "redirect:/cart";
+		return ResponseEntity.ok(id);
 	}
 	
-	@GetMapping("/removeProductCart/{id}")
-	public String removeProductCart(Model model,  @PathVariable int id, HttpSession session) {
-		cartService.removeProductCart(model, id, session);
-		return "redirect:/cart";
+	@DeleteMapping("/removeProductCart/{id}")
+	public ResponseEntity<?> removeProductCart(Model model,  @PathVariable int id, HttpSession session) {
+		return ResponseEntity.ok(cartService.removeProductCart(model, id, session));
 	}
 	
 	@GetMapping("/check-out")

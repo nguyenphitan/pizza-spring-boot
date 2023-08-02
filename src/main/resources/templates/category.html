@@ -13,6 +13,7 @@
     <link rel="stylesheet" th:href="@{/fonts/fontawesome-free-5.15.4-web/css/all.min.css}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
     
@@ -207,7 +208,7 @@
             <div class="grid fix-wide">
                 <div class="row">
                     <div class="col l-3" th:each="product : ${products}">
-                        <a th:href="@{/cart/addToCart/{id}(id=${product.id}) }" class="product-item">
+                        <a class="product-item">
                             <div class="product-item-show">
                                 <img th:src="'../' + ${product.thumbnail}" th:alt="${product.title}" class="product-item__img"/>
                                 <div class="product-item__name" th:text="${product.title}"></div>
@@ -218,10 +219,10 @@
                                     <span class="product-item__wrapper-price-text">Giá chỉ từ</span>
                                     <span class="product-item__wrapper-price-number" th:text="${product.price}"></span>
                                 </div>
-                                <div class="product-item__wrapper-button">
-                                    <span class="product-item__wrapper-button-text">Mua ngay</span>
+                                <span th:text="${product.id}" class="product-id" style="display: none;"></span>
+                                <div class="product-item__wrapper-button add-to-cart" style="cursor: pointer;">
+                                    <span class="product-item__wrapper-button-text" style="pointer-events: none;">Thêm ngay</span>
                                     <i class="fas fa-arrow-right product-item__wrapper-button-btn"></i>
-
                                 </div>
                             </div>
                         </a>
@@ -307,6 +308,10 @@
                                 <a href="tel:1900633606" class="footer__block-option-phone">1900 633 606 </a>
                                 (9:30-21:30)
                             </span>
+                            <br>
+                            <div class="footer__block-res">
+                                <img th:src="@{/img/bocongthuong.png}" class="footer__block-bct"></img>
+                            </div>
                         </div>
                     </div>
                     <div class="col l-3">
@@ -323,16 +328,17 @@
                                     <i class="fab fa-youtube"></i>
                                 </a>
                             </div>
-                            <h3 class="footer__block-title-social">đăng ký thành viên qua địa chỉ email</h3>
+                            <h3 class="footer__block-title-social">Ứng tuyển nhân viên</h3>
                             <div class="footer__block-mail">
-                                <input type="email" placeholder="Nhập địa chỉ email" name="" id="" class="footer__block-mail-input">
+                                <input type="text" placeholder="Họ và tên" name="fullName" id="fullName" class="footer__block-mail-input"> <br>
+                                <input type="text" placeholder="Số điện thoại" name="phoneNumber" id="phoneNumber" class="footer__block-mail-input"> <br>
+                                <input type="email" placeholder="Nhập địa chỉ email" name="emailAddress" id="emailAddress" class="footer__block-mail-input"> <br>
+                                <input type="text" placeholder="Tiêu đề" name="mailTitle" id="mailTitle" class="footer__block-mail-input"> <br>
+                                <input type="file" placeholder="Hồ sơ cá nhân(CV)" name="mailAttachment" id="mailAttachment" class="footer__block-mail-input"> <br>
                                 <div class="footer__block-mail-send">
-                                    <span>GỬI</span>
+                                    <span>Ứng tuyển</span>
                                     <i class="fas fa-arrow-right"></i>
                                 </div>
-                            </div>
-                            <div class="footer__block-res">
-                                <img th:src="@{/img/bocongthuong.png}" class="footer__block-bct"></img>
                             </div>
                         </div>
                     </div>
@@ -341,12 +347,14 @@
         </footer>
         <!-- End footer -->
         <div class="footer__copyright">
-            <span class="footer__copyright-text">Copyright © 2021 The Pizza Company. Cloned by BanDC</span>
+            <span class="footer__copyright-text">Copyright © 2021 The Pizza Company.  </span>
         </div>
-        <div class="zalo-chat-widget" data-oaid="524847969944307860" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="0" data-width="" data-height=""></div>
+        <div class="zalo-chat-widget" data-oaid="468835239890888102" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="0" data-width="" data-height=""></div>
     </div>
 
     <script th:src="@{/js/main.js}"></script>
+    <script th:src="@{/js/cart.js}"></script>
+    <script th:src="@{/js/sendMail.js}"></script>
     <script src="https://sp.zalo.me/plugins/sdk.js"></script>
 
 </body>
